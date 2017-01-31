@@ -3,86 +3,86 @@ class RestTests {
   constructor(){
 
     // Test communication with the server
-    // through the Kitten and Owner objects
+    // through the Students and Employees objects
 
     var mem = {}, tests = [
       // Clean the database
       () => {
-        Kitten.delete('find/{name:/Pelle.*/}',next);
+        Student.delete('find/{name:/Pelle.*/}',next);
       },
       () => {
-        Owner.delete('find/{name:/Kalle.*/}',next);
+        Employee.delete('find/{name:/Kalle.*/}',next);
       },
-      // Tests with Kitten
+      // Tests with Student
       () => {
-        Kitten.create({
+        Student.create({
           username:"pesv",
           password:"1234",
           name:"Pelle Svanslös",
           age:8
         },next);
       },
-      (kitten) => {
-        log('Kitten created',kitten);
-        Kitten.find('find/{name:/Pelle.*/}',next);
+      (student) => {
+        log('Students created',student);
+        Student.find('find/{name:/Pelle.*/}',next);
       },
-      (kittens) => {
-        log('All kittens named Pelle',kittens);
-        mem.kitten = kittens[0];
-        Kitten.update(kittens[0]._id,{age:11},next);
+      (students) => {
+        log('All students named Pelle',students);
+        mem.student = students[0];
+        Student.update(students[0]._id,{age:11},next);
       },
       (result) => {
-        log("Updating kitten Pelle", result);
-        Kitten.find(mem.kitten._id,next);
+        log("Updating students Pelle", result);
+        Student.find(mem.student._id,next);
       },
-      (kitten) => {
-        log("The updated Pelle",kitten);
+      (student) => {
+        log("The updated Pelle",student);
         next();
       },
-      // Test with owner
+      // Test with employees
       () => {
-        Owner.create({
+        Employee.create({
           username: "kallecool",
           password: "1234",
           name:"Kalle Kattälskare",
           age:75,
           phoneNumber:'+46-040-312255',
-          kittens:[mem.kitten._id],
+          students:[mem.student._id],
         },next);
       },
-      (owner) => {
-        log('Owner created',owner);
-        Kitten.update(mem.kitten._id,{owner:owner._id},next);
+      (employee) => {
+        log('Employees created',employee);
+        Student.update(mem.student._id,{employee:employee._id},next);
       },
       (result) => {
-        log("Added the owner to Pelle...",result);
-        Kitten.find(mem.kitten._id,next);
+        log("Added the employees to Pelle...",result);
+        Student.find(mem.student._id,next);
       },
-      (kitten) => {
-        log("Now Pelle knows about his owners",kitten);
-        Owner.find('find/{name:/Kalle.*/}',next);
+      (student) => {
+        log("Now Pelle knows about his employees",student);
+        Employee.find('find/{name:/Kalle.*/}',next);
       },
-      (owners) => {
-        log('All owners named Kalle',owners);
-        mem.owner = owners[0];
-        Owner.update(owners[0]._id,{age:80},next);
+      (employees) => {
+        log('All employees named Kalle',employees);
+        mem.employee = employees[0];
+        Employee.update(employees[0]._id,{age:80},next);
       },
       (result) => {
-        log("Updating owner Kalle", result);
-        Owner.find(mem.owner._id,next);
+        log("Updating employees Kalle", result);
+        Employee.find(mem.employee._id,next);
       },
-      (owner) => {
-        log("The updated Kalle",owner);
+      (employee) => {
+        log("The updated Kalle",employee);
         next();
         // DO NOT RUN THE DELETE TESTS
-        // Owner.delete(owner._id,next);
+        // Employees.delete(employees._id,next);
       },
       /*(result) => {
-        log("Deleting owner Kalle",result);
-        Kitten.delete(mem.kitten._id,next);
+        log("Deleting employees Kalle",result);
+        Student.delete(mem.students._id,next);
       },
       (result) => {
-        log("Deleting kitten Pelle",result);
+        log("Deleting students Pelle",result);
       }*/
     ];
 
@@ -106,8 +106,8 @@ class RestTests {
       console.log(explanation,result);
       logMem.push({explanation: explanation, result: result});
     }
-
-
+	
+	
     // Output
     function testOutput(){
       $('body').template('header',{appName: 'REST tests'});

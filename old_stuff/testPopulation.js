@@ -1,3 +1,4 @@
+console.log("testPopulation.js loaded");
 module.exports = function(Kitten,Owner){
 
   var k1 = new Kitten({name:"Pelle Svanslös",age:1});

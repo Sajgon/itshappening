@@ -1,80 +1,80 @@
 // Create som new rest entitites
 // (also see rest-entity.class.js)
-var Kitten = new RestEntity('kitten');
-var Owner = new RestEntity('owner');
+var Student = new RestEntity('student');
+var Employee = new RestEntity('employee');
 
 // Test communication with the server
-// through the Kitten and Owner objects
+// through the Students and Employees objects
 
 var mem = {}, tests = [
   // Clean the database
   () => {
-    Kitten.delete('find/{name:/Pelle.*/}',next);
+    Student.delete('find/{name:/Pelle.*/}',next);
   },
   () => {
-    Owner.delete('find/{name:/Kalle.*/}',next);
+    Employee.delete('find/{name:/Kalle.*/}',next);
   },
-  // Tests with Kitten
+  // Tests with Student
   () => {
-    Kitten.create({name:"Pelle Svanslös",age:8},next);
+    Student.create({name:"Pelle Svanslös",age:8},next);
   },
-  (kitten) => {
-    console.log('Kitten created',kitten);
-    Kitten.find('find/{name:/Pelle.*/}',next);
+  (student) => {
+    console.log('Students created',student);
+    Student.find('find/{name:/Pelle.*/}',next);
   },
-  (kittens) => {
-    console.log('All kittens named Pelle',kittens);
-    mem.kitten = kittens[0];
-    Kitten.update(kittens[0]._id,{age:11},next);
+  (students) => {
+    console.log('All students named Pelle',students);
+    mem.student = students[0];
+    Student.update(students[0]._id,{age:11},next);
   },
   (result) => {
-    console.log("Updating kitten Pelle", result);
-    Kitten.find(mem.kitten._id,next);
+    console.log("Updating students Pelle", result);
+    Student.find(mem.student._id,next);
   },
-  (kitten) => {
-    console.log("The updated Pelle",kitten);
+  (student) => {
+    console.log("The updated Pelle",student);
     next();
   },
-  // Test with owner
+  // Test with Employees
   () => {
-    Owner.create({
+    Employee.create({
       name:"Kalle Kattälskare",
       age:75,
       phoneNumber:'+46-040-312255',
-      kittens:[mem.kitten._id],
+      students:[mem.student._id],
     },next);
   },
-  (owner) => {
-    console.log('Owner created',owner);
-    Kitten.update(mem.kitten._id,{owner:owner._id},next);
+  (employee) => {
+    console.log('Employee created',employee);
+    Student.update(mem.student._id,{employee:employee._id},next);
   },
   (result) => {
-    console.log("Added the owner to Pelle...",result);
-    Kitten.find(mem.kitten._id,next);
+    console.log("Added the employees to Pelle...",result);
+    Student.find(mem.student._id,next);
   },
-  (kitten) => {
-    console.log("Now Pelle knows about his owners",kitten);
-    Owner.find('find/{name:/Kalle.*/}',next);
+  (student) => {
+    console.log("Now Pelle knows about his employees",student);
+    Employee.find('find/{name:/Kalle.*/}',next);
   },
-  (owners) => {
-    console.log('All owners named Kalle',owners);
-    mem.owner = owners[0];
-    Owner.update(owners[0]._id,{age:80},next);
-  },
-  (result) => {
-    console.log("Updating owner Kalle", result);
-    Owner.find(mem.owner._id,next);
-  },
-  (owner) => {
-    console.log("The updated Kalle",owner);
-    Owner.delete(owner._id,next);
+  (employees) => {
+    console.log('All Employees named Kalle',employees);
+    mem.employee = employees[0];
+    Employee.update(employees[0]._id,{age:80},next);
   },
   (result) => {
-    console.log("Deleting owner Kalle",result);
-    Kitten.delete(mem.kitten._id,next);
+    console.log("Updating employees Kalle", result);
+    Employee.find(mem.employee._id,next);
+  },
+  (employee) => {
+    console.log("The updated Kalle",employee);
+    Employee.delete(employee._id,next);
   },
   (result) => {
-    console.log("Deleting kitten Pelle",result);
+    console.log("Deleting employees Kalle",result);
+    Student.delete(mem.student._id,next);
+  },
+  (result) => {
+    console.log("Deleting students Pelle",result);
   }
 ];
 

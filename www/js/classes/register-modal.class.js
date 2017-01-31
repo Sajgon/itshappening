@@ -31,7 +31,7 @@ class RegisterModal extends Modal {
         type: 'select',
         var: 'role',
         placeholder: "Välj typ",
-        options: ['Owner','Kitten']
+        options: ['Student','Teacher']
       },
       {
         label: 'Namn',

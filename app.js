@@ -9,7 +9,7 @@ require('mongoosefromclass')(mongoose);
 // Make some things global
 global.mongoose = mongoose;
 global.sha1 = sha1;
-global.userRoles = ['Kitten','Owner'];
+global.userRoles = ['Student','Employee'];
 global.passwordSalt = "shouldBeHardToGuess132638@@@@x";
 
 // Stop mongoose from using an old promise library
@@ -24,8 +24,8 @@ var classesToLoad = {
   Restrouter: true,
   Session: 'module',
   User: 'module',
-  Kitten: 'module',
-  Owner: 'module'
+  Student: 'module',
+  Employee: 'module'
 };
 for(let className in classesToLoad){
   let pathName = './modules/' + className.toLowerCase() + '.class';
@@ -60,8 +60,8 @@ app.use((req,res,next)=>{
 });
 
 // Create restroutes to selected classes/mongoose models
-new Restrouter(app,Kitten);
-new Restrouter(app,Owner);
+new Restrouter(app,Student);
+new Restrouter(app,Employee);
 new Loginhandler(app);
 
 // A path to get user roles
@@ -81,3 +81,6 @@ mongoose.connection.once('open',function(){
     console.log('Express app listening on port 3000!');
   });
 });
+
+
+

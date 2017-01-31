@@ -44,9 +44,6 @@ module.exports = class User {
           }
         });
       });
-
     });
-
   }
-
 }
