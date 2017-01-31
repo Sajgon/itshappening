@@ -1,10 +1,11 @@
 module.exports = class Restrouter {
 
-  constructor(expressApp,_class,populate,entityName){
+  constructor(expressApp,_class,populate,entityName,access){
 
     // populate is optional:
-    // use if want to mongoose to populate properties
-    // on GET queries
+    // use if we want mongoose to populate properties
+    // on GET queries and DOESN'T  want to specify a
+    // populate method in our class (like in owner.class and kitten.class)
 
     // entityName is optional:
     // * you must use it if you are using traditional mongoose
@@ -12,9 +13,36 @@ module.exports = class Restrouter {
     // * you can also use if you want to set a different name
     //  than the class name for the rest route
 
+    // access is optional:
+    // use if we want to restrict access to post, get, update, delete
+    // based on user/user role and our own logic and DON'T want to
+    // specify this in our class with postAccess, getAccess, putAccess
+    // and deleteAccess methods (like in owner.class)
+
     this.app = expressApp;
-    this.populate = populate;
     this._class = _class;
+    this.populate = populate;
+    this.access = access;
+
+    // Alternatively get populate and access properties
+    // from the class definition
+    if(_class.orgClass){
+      let p = _class.orgClass.prototype;
+      this.populate = populate || (p.populate && p.populate());
+      this.access = access || ({
+        post: p.postAccess,
+        get: p.getAccess,
+        put: p.putAccess,
+        delete: p.deleteAccess
+      });
+      // Delete these methods so that they don't become part of the
+      // mongoose model - we have already moved them to properties above
+      let del = ["populate","postAccess","getAccess","putAccess","deleteAccess"];
+      del.forEach((d)=>{ delete p[d]; });
+    }
+
+    // Set this.access to an empty object if still not defined
+    this.access = this.access || {};
 
     // get the class name
     var className = _class.name;
@@ -41,16 +69,22 @@ module.exports = class Restrouter {
 
   post(){
 
-    // Since "this" will change inside routes
-    var _class = this._class, that = this;
-
     // Create a new instance
-    this.app.post(this.baseRoute,function(req,res){
-      var instance = new _class(req.body);
-      instance.save(function(err,result){
-        if(err){res.json(err);}
+    this.app.post(this.baseRoute,(req,res)=>{
+      if(!this.rights(req,res)){return;}
+      var instance = new this._class(req.body);
+      instance.save((err,result)=>{
+        if(err){
+          if(err.constructor === Error){
+            // mongoose should wrap the error
+            // (from pre save etc) but doesn't
+            err = JSON.parse((err+'').substring(6));
+          }
+          this.json(res,err);
+          return;
+        }
         // find again so we can populate it
-        that.respond('findOne',{_id:result._id},res);
+        this.respond('findOne',{_id:result._id},res);
       });
     });
 
@@ -63,39 +97,40 @@ module.exports = class Restrouter {
     if(this.populate){
       m.populate(this.populate);
     }
-    m.exec(function(err,result){
-      res.json(err || result);
+    m.exec((err,result)=>{
+      this.json(res,err,result);
     });
   }
 
 
   get(){
 
-    // Since "this" will change inside routes
-    var _class = this._class, that = this;
-
     // All instances
-    this.app.get(this.baseRoute,function(req,res){
-      that.respond('find',{},res);
+    this.app.get(this.baseRoute,(req,res)=>{
+      if(!this.rights(req,res)){return;}
+      this.respond('find',{},res);
     });
 
     // Find an instance using a mongo query object
-    this.app.get(this.baseRoute + 'find/*',function(req,res){
+    this.app.get(this.baseRoute + 'find/*',(req,res)=>{
+      if(!this.rights(req,res)){return;}
       var searchStr = decodeURIComponent(req.url.split('/find/')[1]);
       var searchObj;
       eval('searchObj = ' + searchStr);
-      that.respond('find',searchObj,res);
+      this.respond('find',searchObj,res);
     });
 
     // One instance by id
-    this.app.get(this.baseRoute + ':id',function(req,res){
-      that.respond('findOne',{_id:req.params.id},res);
+    this.app.get(this.baseRoute + ':id',(req,res)=>{
+      if(!this.rights(req,res)){return;}
+      this.respond('findOne',{_id:req.params.id},res);
     });
 
     // Call the method of an instance
-    this.app.get(this.baseRoute + ':id/:method',function(req,res){
-      _class.findOne({_id:req.params.id},function(err,result){
-        res.json(err || {returns:result[req.params.method]()});
+    this.app.get(this.baseRoute + ':id/:method',(req,res)=>{
+      if(!this.rights(req,res)){return;}
+      this._class.findOne({_id:req.params.id},(err,result)=>{
+        this.json(res,err,{returns:result[req.params.method]()});
       });
     });
   }
@@ -103,23 +138,22 @@ module.exports = class Restrouter {
 
   put(){
 
-    // Since "this" will change inside routes
-    var _class = this._class;
-
     // Update several instances using a mongo query object
-    this.app.put(this.baseRoute + 'find/*',function(req,res){
+    this.app.put(this.baseRoute + 'find/*',(req,res)=>{
+      if(!this.rights(req,res)){return;}
       var searchStr = decodeURIComponent(req.url.split('/find/')[1]);
       var searchObj;
       eval('searchObj = ' + searchStr);
-      _class.update(searchObj,req.body,{multi:true},function(err,result){
-        res.json(err || result);
+      this._class.update(searchObj,req.body,{multi:true},(err,result)=>{
+        this.json(res,err,result);
       });
     });
 
     // Update one instance by id
-    this.app.put(this.baseRoute + ':id',function(req,res){
-      _class.update({_id:req.params.id},req.body,function(err,result){
-        res.json(err || result);
+    this.app.put(this.baseRoute + ':id',(req,res)=>{
+      if(!this.rights(req,res)){return;}
+      this._class.update({_id:req.params.id},req.body,(err,result)=>{
+        this.json(res,err,result);
       });
     });
 
@@ -128,26 +162,58 @@ module.exports = class Restrouter {
 
   delete(){
 
-    // Since "this" will change inside routes
-    var _class = this._class;
-
     // Delete several instances using a mongo query object
-    this.app.delete(this.baseRoute + 'find/*',function(req,res){
+    this.app.delete(this.baseRoute + 'find/*',(req,res)=>{
+      if(!this.rights(req,res)){return;}
       var searchStr = decodeURIComponent(req.url.split('/find/')[1]);
       var searchObj;
       eval('searchObj = ' + searchStr);
-      _class.remove(searchObj,function(err,result){
-        res.json(err || result);
+      this._class.remove(searchObj,(err,result)=>{
+        this.json(res,err,result);
       });
     });
 
     // Delete one instance by id
-    this.app.delete(this.baseRoute + ':id',function(req,res){
-      _class.remove({_id:req.params.id},function(err,result){
-        res.json(err || result);
+    this.app.delete(this.baseRoute + ':id',(req,res)=>{
+      if(!this.rights(req,res)){return;}
+      this._class.remove({_id:req.params.id},(err,result)=>{
+        this.json(res,err,result);
       });
     });
 
+  }
+
+  jsonCleaner(toClean){
+    // clean away or transform properties
+    return JSON.stringify(toClean._doc || toClean,(key,val)=>{
+      // remove __v
+      if(key == "__v"){ return; }
+      // set password to "[secret]"
+      if(key == "password"){ return "[secret]"; }
+      // unchanged properties
+      return val;
+    });
+  }
+
+
+  json(res,err,response){
+    // set status to 403 if error
+    if(err){ res.statusCode = 403; }
+    // send the response
+    res.end(this.jsonCleaner(err || response));
+  }
+
+
+  rights(req,res){
+    // check if the user has rights to access this route
+    var restrictor = this.access[req.method.toLowerCase()];
+    if(typeof restrictor == "function"){
+      if(!restrictor(req.session.content.user,req)){
+        this.json(res,{errors:'access not allowed'});
+        return false;
+      }
+    }
+    return true;
   }
 
 

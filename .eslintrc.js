@@ -1,12 +1,4 @@
 module.exports = {
-    "globals": {
-        "$":true,
-        "jQuery":true,
-        "RestEntity":true,
-        "restEntityFactory": true,
-        "hljs":true,
-        "mongoose":true
-    },
     "env": {
         "browser": true,
         "commonjs": true,
@@ -20,6 +12,7 @@ module.exports = {
     "rules": {
         "no-console": 0,
         "no-unused-vars": 0,
+        "no-undef":0,
         "no-trailing-spaces": 1
     }
 };
