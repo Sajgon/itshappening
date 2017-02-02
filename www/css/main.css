@@ -1,6 +1,12 @@
 /* Move body content down, because of fixed navbar */
 body {
-  padding-top: 70px;
+  padding-top: 70px; /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cb60b3+0,c146a1+22,00bee0+51,db36a4+100 */
+background: #cb60b3; /* Old browsers */
+background: -moz-linear-gradient(top,  #cb60b3 0%, #c146a1 22%, #00bee0 51%, #db36a4 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #cb60b3 0%,#c146a1 22%,#00bee0 51%,#db36a4 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #cb60b3 0%,#c146a1 22%,#00bee0 51%,#db36a4 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cb60b3', endColorstr='#db36a4',GradientType=0 ); /* IE6-9 */
+
 }
 
 /* Modal vertical center align */
@@ -60,3 +66,59 @@ body {
     background-color: rgb(217, 83, 79);
     border-color: rgb(212, 63, 58);
 }
+
+.rubrik{
+  padding:40px;
+  color:purple;
+  text-align: center;
+  background-color: #F0F8FF;
+  border:1px solid purple;
+}
+
+.mainContent > .row > .headline, .footerContent{
+  margin:0;
+  padding:0;
+}
+
+.formContent{
+  border:1px solid purple;
+  margin-top: 5px;
+  background-color: #F0F8FF;
+}
+
+.formContent > .row{
+  margin-top:7px;
+}
+
+.divider{
+  border-bottom: 2px dotted purple;
+  margin-bottom: 5px;
+}
+
+label{
+  margin-top:7px;
+}
+
+.user{
+  padding:10px;
+  padding-right:0;
+}
+
+.btn{
+  float:right;
+  margin: 0 10px 10px 10px;
+}
+
+.createAcc{
+  float:right;
+}
+
+
+
+
+
+
+
+
+
+
