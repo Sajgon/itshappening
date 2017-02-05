@@ -4,7 +4,7 @@ module.exports = class Student extends User {
   schema(){
     return Object.assign({},super.schema(),{
       name: {type: String, required: true},
-      age: {type: Number, min:0, max:30, required:true},
+      personal: {type: Number, min:199001010000, max:202001010000, required:true},
       employee: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Employee'

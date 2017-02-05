@@ -27,6 +27,7 @@ var classesToLoad = {
   Student: 'module',
   Employee: 'module'
 };
+
 for(let className in classesToLoad){
   let pathName = './modules/' + className.toLowerCase() + '.class';
   let required = require(pathName);
