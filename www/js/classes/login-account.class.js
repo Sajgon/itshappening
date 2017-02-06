@@ -66,5 +66,7 @@ class createAccount {
         hljs.highlightBlock(block);
       });
     }
+
   }
+
 }

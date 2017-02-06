@@ -27,17 +27,7 @@ function start(){
   // Wait for DOM ready
   $(()=>{
 	  
-	var loggedIn = 
-	isLoggedIn(function(loggedIn){
-		 console.log(loggedIn);
-		if(!loggedIn){
-			// user NOT LOGGED IN
-			createAccountView();
-		}else{
-			// user LOGGED in
-			loggedinView();
-		}
-	});  
+	isLoggedIn();  
 	
     // Create the main navbar
     new MainNavbar();
@@ -48,16 +38,30 @@ function start(){
   });
 }
 
+
+
+
 function isLoggedIn(){
 	Login.find(function(result){
-		console.log(result)
 		if(result.status == "logged in"){
-			return true;
+			processLogin(true);
+		}else{
+			processLogin(false);
 		}
-		
-		return false;
 	});
 }
+
+
+function processLogin(loggedIn){
+	if(loggedIn){
+		// user LOGGED in
+		window.location.href = "main_page.html";
+	}else{
+		// user NOT LOGGED IN
+		createAccountView();	
+	}
+}
+
 
 function logOut(){
 	Login.delete("",function(result){console.log(result)})
@@ -96,12 +100,25 @@ function createAccountView(){
 		var newAccount = new createAccount(mailadrs, userpass, personal, usertype, "test", "test");
 		console.log(newAccount);
 	});
+	
+	$("#loginAccountBtn").click(function(){
+		console.log("Login account button pressed.");
+		
+		var username = $("#mail").val();
+		var userpassword = $("#password").val();
+		var usertype = $("input[name=usertype]:checked").val();
+
+		Loginhandler.find({
+			username: username,
+			password: userpassword
+		}, userFind);
+		
+		function userFind(result){
+			console.log("result");
+			console.log(result);
+		}
+	});
 }
-
-
-
-
-
 
 
 
