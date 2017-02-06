@@ -1,3 +1,4 @@
+console.log("user.class.js loaded");
 module.exports = class User {
 
   schema(){

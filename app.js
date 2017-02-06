@@ -76,7 +76,7 @@ app.use(express.static('www'));
 
 // Connect to mongoDB
 // and when that is done start the express server
-mongoose.connect('mongodb://localhost/kittendb');
+mongoose.connect('mongodb://localhost/itshappeningdb');
 mongoose.connection.once('open',function(){
   app.listen(3000, function () {
     console.log('Express app listening on port 3000!');

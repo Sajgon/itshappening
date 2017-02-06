@@ -1,10 +1,11 @@
-console.log("students file loaded");
+console.log("students.class.js loaded");
 module.exports = class Student extends User {
 
   schema(){
     return Object.assign({},super.schema(),{
-      name: {type: String, required: true},
-      personal: {type: Number, min:199001010000, max:202001010000, required:true},
+      fname: {type: String, required: true},
+      lname: {type: String, required: true},
+      personal: {type: Number, min:190001010000, max:202001010000, required:true},
       employee: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Employee'

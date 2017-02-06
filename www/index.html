@@ -3,6 +3,7 @@
 <head>
   <title>itshappening</title>
   <meta charset="utf8">
+  <meta name="viewport" content="width=device-width, initial scale=1.0">
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="css/main.css">
@@ -17,6 +18,7 @@
   <script src="js/classes/login-modal.class.js"></script>
   <script src="js/classes/register-modal.class.js"></script>
   <script src="js/classes/form-helpers.class.js"></script>
+  <script src="js/classes/create-account.class.js"></script>
   <script src="js/classes/rest-tests.class.js"></script>
   <script>var loadTemplate = false;</script>
   <script src="js/main.js"></script>
@@ -33,7 +35,7 @@
         <div class="col-xs-12 divider"></div>
         <div class="col-xs-12 formContent">
 		
-			<div id="firstView" class="row">
+			<div id="firstView" class="row firstView">
 				<div class="col-xs-12">
 					<h4>Välkommen! Vänligen välj nedan hur du vill gå vidare.</h4>
 				</div>
@@ -41,14 +43,14 @@
 				<button id="viewNewAccountFormBtn" class="btn btn-success btn-sm col-xs-4">Skapa Nytt Konto</button>
 			</div>
 			
-			<div id="formInputs">
+			<div id="formInputs" class="formProcess">
 				<h3 id="formTitle"></h3>
 				<div class="row">
 					<div class="col-xs-2">
 						<label for="mail"> Mail </label>
 					</div>
 					<div class="col-xs-5">
-						<input name="mail" id="mail" type="text" class="form-control" placeholder="Mail"/>
+						<input name="mail" id="mail" type="text" class="form-control" value="testmail@mail.com" placeholder="Mail"/>
 					</div>
 					<div class="col-xs-5"></div>
 				</div>
@@ -58,7 +60,7 @@
 					  <label for="mail">Lösenord </label>
 					</div>
 					  <div class="col-xs-5">
-					  <input name="password" id="password" type="text" class="form-control" placeholder="Password"/>
+					  <input name="password" id="password" type="text" class="form-control" value="pass" placeholder="Password"/>
 					  </div>
 					  <div class="col-xs-5"></div>
 				</div>
@@ -68,14 +70,14 @@
 					  <label for="personal">Personnummer </label>
 					</div>
 					<div class="col-xs-5">
-					  <input name="personal" id="personalInput" type="text" class="form-control" placeholder="personnummer"/>
+					  <input name="personal" id="personalInput" type="text" class="form-control" value="199901011515" placeholder="personnummer"/>
 					 </div>
 					<div class="col-xs-4"></div>
 				</div>
 				
 				<div class="row">
 					<span class="col-xs-2 user">
-					  <input type="radio" name="usertype" value="student">
+					  <input type="radio" name="usertype" value="student" checked>
 					  <span> Student </span>
 					</span>
 					<span class="col-xs-3 user">
