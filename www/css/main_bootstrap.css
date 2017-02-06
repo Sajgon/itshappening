@@ -1,0 +1,36 @@
+
+
+.navbar{
+	background-color :#062f4f;
+}
+.sidebar .sidebar-nav.navbar-collapse{
+	background-color: #08487a;
+
+}
+.sidebar ul li {
+  border-bottom: 1px solid #08487a;
+
+}
+.sidebar ul li:hover{
+color :white;
+}
+.sidebar ul li a.active {
+  background-color: #08487a;
+}	
+
+
+.navbar-brand{
+	font-family: 'Fjalla One', sans-serif;
+}
+a{
+	color: white;
+}
+
+body {
+    background-color: #08487a;
+}
+
+.navbar-default .navbar-brand {
+    color: #FFF;
+}
+
