@@ -107,11 +107,20 @@ label{
   float:right;
 }
 
-#formInputs, #personal, #loginAccountBtn, #newAccountBtn {
+#formInputs, #personal, #loginAccountBtn, #newAccountBtn, .firstView {
 	display: none;
 }
 
+.firmProcess > .row {
+  display: none;
+}
 
+@media only screen and (max-width: 450) {
+  .container {
+    width: 0;
+    font-size: 48px;
+  }
+}
 
 
 
