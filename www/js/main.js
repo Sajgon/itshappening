@@ -67,7 +67,7 @@ function processLogin(loggedIn){
 	}else{
 		// user NOT LOGGED IN
 		if(pageName == "main_page"){
-			window.location.href = "main_page.html";	
+			window.location.href = "index.html";	
 		}else if(pageName == "index"){
 			// nothing happens
 			createAccountView();
