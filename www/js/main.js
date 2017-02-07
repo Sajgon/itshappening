@@ -47,6 +47,7 @@ function loggedIn(result){
 function isLoggedIn(){
 	Login.find(function(result){
 		if(result.status == "logged in"){
+			console.log(result.status);
 			processLogin(true);
 		}else{
 			processLogin(false);
@@ -59,17 +60,17 @@ function processLogin(loggedIn){
 	if(loggedIn){
 		// user LOGGED in
 		if(pageName == "index"){
-			
-			//window.location.href = "main_page.html";	
+			window.location.href = "main_page.html";	
 		}else if(pageName == "main_page"){
 			// nothing happens
 		}
 	}else{
 		// user NOT LOGGED IN
-		if(pageName == "index"){
+		if(pageName == "main_page"){
 			window.location.href = "main_page.html";	
-		}else if(pageName == "main_page"){
-			// nothing 
+		}else if(pageName == "index"){
+			// nothing happens
+			createAccountView();
 		}	
 	}
 }
