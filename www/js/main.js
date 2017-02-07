@@ -128,5 +128,12 @@ function createAccountView(){
 
 
 
+$( "#skapautbildningbtn" ).click(function() {
+  console.log('hej');
+});
+
+
+
+
 
 

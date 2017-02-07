@@ -104,3 +104,8 @@ next();
   };
 })();
 
+
+
+$( "#skapautbildningbtn" ).click(function() {
+  console.log('hej');
+});
