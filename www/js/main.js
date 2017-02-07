@@ -173,9 +173,17 @@ $( "#bytlosenordbtn" ).click(function() {
   console.log("Byt Lösenord");
 });
 $( "#redigerauppgifterbtn" ).click(function() {
-  console.log("Reigera Uppgifter");
+  console.log("Redigera Uppgifter");
 });
 
+
+
+$("#logoutbtn").click(function(){
+logOut();
+isLoggedIn();
+
+
+});
 });
 
 
