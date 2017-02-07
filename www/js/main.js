@@ -59,7 +59,8 @@ function processLogin(loggedIn){
 	if(loggedIn){
 		// user LOGGED in
 		if(pageName == "index"){
-			window.location.href = "main_page.html";	
+			
+			//window.location.href = "main_page.html";	
 		}else if(pageName == "main_page"){
 			// nothing happens
 		}
@@ -75,7 +76,9 @@ function processLogin(loggedIn){
 
 
 function logOut(){
-	Login.delete("",function(result){console.log(result)})
+	Login.delete("",function(result){
+		console.log(result)
+	})
 }
 
 function createAccountView(){
@@ -140,7 +143,6 @@ function createAccountView(){
 		}
 	});
 }
-
 
 
 $( "#skapautbildningbtn" ).click(function() {

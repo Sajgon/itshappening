@@ -56,7 +56,8 @@
     <!-- Custom Theme JavaScript -->
     <script src="/dist/js/sb-admin-2.js"></script>
 
-  <script src="js/main.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/main-page.js"></script>
 
 </head>
 
@@ -180,9 +181,11 @@
                 <div class="panel panel-default col-xs-12 col-sm-8 paddingfix">
                       <div class="panel-heading ">
                       <div class="row">
-                        <h3 class="panel-title col-xs-8"><div class="form-group"><label for="usr">Titel:</label>
-                        <input type="text">
-                    </div></h3>
+                        <h3 class="panel-title col-xs-8">
+							<div class="form-group"><label for="postTitle">Titel</label>
+								<input type="text" name="postTitle" id="postTitle">
+							</div>
+						</h3>
                     <div class="btn-group col-xs-4" style="float: right">
                           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Action <span class="caret"></span>
@@ -191,15 +194,17 @@
                             <li><a href="#">Action</a></li>
                             <li><a href="#">Another action</a></li>
                             <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
                             <li><a href="#">Separated link</a></li>
                           </ul>
                         </div>
                       </div>
-                      <div class="panel-body innehall"><div class="form-group"><label for="usr">Innehåll:</label>
-                        <textarea class="form-control" id="exampleTextarea" rows="2"></textarea>
-                        <button type="button" style="float: right" class="btn btn-default skapabtn">Skapa</button>
-                    </div></div>
+						<div class="panel-body innehall">
+							<div class="form-group">
+								<label for="postContent">Innehåll</label>
+								<textarea name="postContent" id="postContent" class="form-control" id="exampleTextarea" rows="2"></textarea>
+								<button id="newPostBtn" type="button" style="float: right" class="btn btn-default skapabtn">Skapa</button>
+							</div>
+						</div>
 
                       <div class="panel-footer datum"><span>Datum</span><span style="float: right">Användarnamn</span></div>
                       </div>
