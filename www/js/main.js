@@ -152,9 +152,46 @@ function createAccountView(){
 }
 
 
-$( "#skapautbildningbtn" ).click(function() {
-  console.log('hej');
+$(document).ready(function() {
+$( "#allautbildningarbtn" ).click(function() {
+  console.log("Alla utbildningar");
 });
+
+$( "#minautbildningarbtn" ).click(function() {
+  console.log("Mina utbildningar");
+});
+$( "#skapautbildningbtn" ).click(function() {
+  console.log("Skapa Utbildning");
+});
+$( "#lararebtn" ).click(function() {
+  console.log("Lärare");
+});
+$( "#inlaggbtn" ).click(function() {
+  console.log("Inlägg");
+});
+$( "#visabokningarbtn" ).click(function() {
+  console.log("Visa Bokningar");
+});
+$( "#bokasalbtn" ).click(function() {
+  console.log("Boka Sal");
+});
+$( "#bytlosenordbtn" ).click(function() {
+  console.log("Byt Lösenord");
+});
+$( "#redigerauppgifterbtn" ).click(function() {
+  console.log("Redigera Uppgifter");
+});
+
+
+
+$("#logoutbtn").click(function(){
+logOut();
+isLoggedIn();
+
+
+});
+});
+
 
 
 
