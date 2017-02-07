@@ -39,7 +39,7 @@ class createAccount {
 					// report back to DOM/GUI
 					log("STUDENT NOT CREATED", student._error)
 					
-					if(student._error.errors.username.message){
+					if(student._error.errors.name.message){
 						if(student._error.errors.username.message == "Path `username` is not unique"){
 							$("#errorMessage").html("Användarnamnet är redan använt.");
 							$("#errorMessage").show();
