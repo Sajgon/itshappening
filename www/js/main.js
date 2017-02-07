@@ -106,15 +106,21 @@ function createAccountView(){
 		
 		var username = $("#mail").val();
 		var userpassword = $("#password").val();
-		var usertype = $("input[name=usertype]:checked").val();
+		// var usertype = $("input[name=usertype]:checked").val();
 
-		Loginhandler.find({
+		//Loginhandler.find({
+		/*Login.find({
 			username: username,
 			password: userpassword
-		}, userFind);
+		}, userFind);*/
+		
+		Login.create({
+			username: username,
+			password: userpassword
+		},userFind);
 		
 		function userFind(result){
-			console.log("result");
+			console.log("result login");
 			console.log(result);
 		}
 	});
