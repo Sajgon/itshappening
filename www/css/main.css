@@ -1,6 +1,6 @@
 /* Move body content down, because of fixed navbar */
 body {
-background-color: #337ab7 ;
+	background-color: #337ab7;
 }
 
 /* Modal vertical center align */
@@ -123,6 +123,7 @@ label{
   color: red;
   padding: 10px;
   display:none;
+  margin-top: 10px;
 }
 
 @media only screen and (max-width: 450) {
@@ -142,8 +143,5 @@ label{
 
   padding-right: 0 ;
 }
-
-
-
 
 

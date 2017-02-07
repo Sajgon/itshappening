@@ -37,8 +37,37 @@ $(function() {
 			console.log(post);
 		}
 	});
+	
+	// set username in top right corner
+	findOneStudent(sessionid, "username", "dropdownusername");
+	
 });
 
+
+function findOneStudent(studentId, requestType, action){
+
+	Student.find(studentId, function(result){
+		
+		result = result[0];
+		console.log(result);
+		if(requestType == "username"){
+			if(action == "dropdownusername"){
+				$("#drowndown-username").html(result.username);
+			}
+			return result.username;
+		}else if(requestType == "fname"){
+			return result.fname;
+		}else if(requestType == "lname"){
+			return result.lname;
+		}else if(requestType == "flname"){
+			return result.fname + " " + result.lname;
+		}else if(requestType == "personal"){
+			return result.personal;
+		}else if(requestType == "object"){
+			return result;
+		}
+	});
+}
 
 function findOnePost(){
 	NewsPost.find('5899d43204165a3660061eef',viewPosts);
@@ -50,8 +79,6 @@ function findOnePost(){
 
 
 function findAllAdminPosts(){
-	//NewsPost.find('*',viewPosts);
-    //NewsPost.find('*',viewPosts);
 	
 	NewsPost.find('find/{for_all:/true.*/}',viewPosts);
 	
@@ -65,14 +92,14 @@ function printPosts(posts){
 	if(posts.length){
 		for(var p = 0; p < posts.length; p++){
 			console.log(posts[p]);
-			console.log(posts[p].date_posted);
 			
+			username = findOneStudent(posts[p].postedby_id);
 			fulldate = humanDate(posts[p].date_posted);
 			
 			var post = '<div class="panel panel-default col-xs-12 col-sm-8 paddingfix">' +
 						'<div class="panel-heading"><h3 class="panel-title">'+posts[p].title+'</h3></div>' +
 						'<div class="panel-body innehall">'+posts[p].content+'</div>' +
-						'<div class="panel-footer datum"><span>'+fulldate+'</span><span style="float: right">'+fulldate+'</span></div>' +
+						'<div class="panel-footer datum"><span>'+fulldate+'</span><span style="float: right">'+username+'</span></div>' +
 						'</div>'
 			
 			$("#posts").append(post);

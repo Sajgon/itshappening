@@ -7,7 +7,7 @@ var Login = new RestEntity('login');
 var sessionid = "";
 
 // Some utility methods for forms
-var formHelpers = new FormHelpers();
+// var formHelpers = new FormHelpers();
 
 // Load html templates
 // (also see libs/template.jquery.js)
@@ -112,6 +112,7 @@ function createAccountView(){
 	
 	$("#newAccountBtn").click(function(){
 		console.log("Create account button pressed.");
+		$("#errorMessage").hide();
 		
 		var mailadrs = $("#mail").val();
 		var userpass = $("#password").val();
@@ -124,6 +125,7 @@ function createAccountView(){
 	
 	$("#loginAccountBtn").click(function(){
 		console.log("Login account button pressed.");
+		$("#errorMessage").hide();
 		
 		var username = $("#mail").val();
 		var userpassword = $("#password").val();
@@ -146,6 +148,9 @@ function createAccountView(){
 			
 			if(result.status == "logged in succesfully"){
 				window.location.href = "main_page.html";
+			}else if(result.status == "wrong credentials"){
+				$("#errorMessage").html("Användarnamnet eller lösenordet är fel.");
+				$("#errorMessage").show();
 			}
 		}
 	});
@@ -153,43 +158,39 @@ function createAccountView(){
 
 
 $(document).ready(function() {
-$( "#allautbildningarbtn" ).click(function() {
-  console.log("Alla utbildningar");
-});
+	$( "#allautbildningarbtn" ).click(function() {
+	  console.log("Alla utbildningar");
+	});
 
-$( "#minautbildningarbtn" ).click(function() {
-  console.log("Mina utbildningar");
-});
-$( "#skapautbildningbtn" ).click(function() {
-  console.log("Skapa Utbildning");
-});
-$( "#lararebtn" ).click(function() {
-  console.log("Lärare");
-});
-$( "#inlaggbtn" ).click(function() {
-  console.log("Inlägg");
-});
-$( "#visabokningarbtn" ).click(function() {
-  console.log("Visa Bokningar");
-});
-$( "#bokasalbtn" ).click(function() {
-  console.log("Boka Sal");
-});
-$( "#bytlosenordbtn" ).click(function() {
-  console.log("Byt Lösenord");
-});
-$( "#redigerauppgifterbtn" ).click(function() {
-  console.log("Redigera Uppgifter");
-});
+	$( "#minautbildningarbtn" ).click(function() {
+	  console.log("Mina utbildningar");
+	});
+	$( "#skapautbildningbtn" ).click(function() {
+	  console.log("Skapa Utbildning");
+	});
+	$( "#lararebtn" ).click(function() {
+	  console.log("Lärare");
+	});
+	$( "#inlaggbtn" ).click(function() {
+	  console.log("Inlägg");
+	});
+	$( "#visabokningarbtn" ).click(function() {
+	  console.log("Visa Bokningar");
+	});
+	$( "#bokasalbtn" ).click(function() {
+	  console.log("Boka Sal");
+	});
+	$( "#bytlosenordbtn" ).click(function() {
+	  console.log("Byt Lösenord");
+	});
+	$( "#redigerauppgifterbtn" ).click(function() {
+	  console.log("Redigera Uppgifter");
+	});
 
-
-
-$("#logoutbtn").click(function(){
-logOut();
-isLoggedIn();
-
-
-});
+	$("#logoutbtn").click(function(){
+		logOut();
+		isLoggedIn();
+	});
 });
 
 

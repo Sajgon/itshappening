@@ -28,6 +28,7 @@ a{
 
 body {
     background-color: #08487a;
+	color: #08487a;
 }
 
 .navbar-default .navbar-brand {
@@ -43,3 +44,6 @@ body {
 	margin-top: 10px;
 }
 
+.postForStyling{
+	line-height: 35px;
+}
