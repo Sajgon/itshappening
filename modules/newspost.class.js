@@ -8,6 +8,7 @@ module.exports = class NewsPost {
       title: {type: String, required: true},
       content: {type: String, required: true},
       date_posted: {type: Number, required: true},
+      postedby_id: {type: String, required: true}
     };
   }
 }

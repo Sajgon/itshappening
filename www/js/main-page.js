@@ -17,6 +17,8 @@ $(function() {
 			//console.log(student);
 			console.log("YEAAHAH");
 		}*/
+		console.log("session id:");
+		console.log(sessionid);
 		
 		epochDate = (new Date).getTime();
 		
@@ -25,6 +27,7 @@ $(function() {
 			title: postTitle,
 			content: postContent,
 			for_all: "true",
+			for_education_id: "none",
 			date_posted: epochDate,
 			postedby_id: sessionid
 		},postCreated);
@@ -62,6 +65,18 @@ function printPosts(posts){
 	if(posts.length){
 		for(var p = 0; p < posts.length; p++){
 			console.log(posts[p]);
+			console.log(posts[p].date_posted);
+			
+			fulldate = humanDate(posts[p].date_posted);
+			
+			var post = '<div class="panel panel-default col-xs-12 col-sm-8 paddingfix">' +
+						'<div class="panel-heading"><h3 class="panel-title">'+posts[p].title+'</h3></div>' +
+						'<div class="panel-body innehall">'+posts[p].content+'</div>' +
+						'<div class="panel-footer datum"><span>'+fulldate+'</span><span style="float: right">'+fulldate+'</span></div>' +
+						'</div>'
+			
+			$("#posts").append(post);
+			
 		}	
 	}
 }
