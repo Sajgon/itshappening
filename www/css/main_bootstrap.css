@@ -33,4 +33,13 @@ body {
 .navbar-default .navbar-brand {
     color: #FFF;
 }
+.paddingfix{
+  padding-left:0;
+
+  padding-right:0;
+}
+
+.skapabtn{
+	margin-top: 10px;
+}
 
