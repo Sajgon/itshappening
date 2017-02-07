@@ -39,7 +39,10 @@ function start(){
 }
 
 
-
+function loggedIn(result){
+	console.log(result);
+	processLogin(true);
+}
 
 function isLoggedIn(){
 	Login.find(function(result){
@@ -55,10 +58,18 @@ function isLoggedIn(){
 function processLogin(loggedIn){
 	if(loggedIn){
 		// user LOGGED in
-		window.location.href = "main_page.html";
+		if(pageName == "index"){
+			window.location.href = "main_page.html";	
+		}else if(pageName == "main_page"){
+			// nothing happens
+		}
 	}else{
 		// user NOT LOGGED IN
-		createAccountView();	
+		if(pageName == "index"){
+			window.location.href = "main_page.html";	
+		}else if(pageName == "main_page"){
+			// nothing 
+		}	
 	}
 }
 
@@ -122,6 +133,10 @@ function createAccountView(){
 		function userFind(result){
 			console.log("result login");
 			console.log(result);
+			
+			if(result.status == "logged in succesfully"){
+				window.location.href = "main_page.html";
+			}
 		}
 	});
 }

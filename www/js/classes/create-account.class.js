@@ -8,9 +8,7 @@ class createAccount {
 	
 	if(mail.length && pass.length && personal.length && fname.length && lname.length && usertype){
 		
-		function loggedIn(result){
-			console.log(result);
-		}
+		
 		
 		if(usertype == "student"){
 			
@@ -59,17 +57,6 @@ class createAccount {
     function log(explanation,result){
       console.log(explanation,result);
       logMem.push({explanation: explanation, result: result});
-    }
-	
-	
-    // Output
-    function testOutput(){
-      $('body').template('header',{appName: 'REST tests'});
-      $('body').template('restTestOutput',{results:logMem});
-      // syntax highlighting
-      $('pre code').each(function(i, block) {
-        hljs.highlightBlock(block);
-      });
     }
   }
 }
