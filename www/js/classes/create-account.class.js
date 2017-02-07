@@ -33,14 +33,14 @@ class createAccount {
 					Login.create({
 						username: mail,
 						password: pass
-					},loggedIn);
+					},isLoggedIn);
 				}
 				else {
 					// report back to DOM/GUI
 					log("STUDENT NOT CREATED", student._error)
 					
 					if(student._error.errors.name.message){
-						if(student._error.errors.username.message == "Path `username` is not unique"){
+						if(student._error.errors.name.message == "Path `username` is not unique"){
 							$("#errorMessage").html("Användarnamnet är redan använt.");
 							$("#errorMessage").show();
 						}
@@ -51,7 +51,6 @@ class createAccount {
 					
 				}
 			}
-			
 			
 		}else if(usertype = "teacher"){
 			console.log("Try create a teacher ..");

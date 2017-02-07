@@ -25,7 +25,8 @@ var classesToLoad = {
   Session: 'module',
   User: 'module',
   Student: 'module',
-  Employee: 'module'
+  Employee: 'module',
+  NewsPost: 'module'
 };
 
 for(let className in classesToLoad){
@@ -63,6 +64,7 @@ app.use((req,res,next)=>{
 // Create restroutes to selected classes/mongoose models
 new Restrouter(app,Student);
 new Restrouter(app,Employee);
+new Restrouter(app,NewsPost);
 new Loginhandler(app);
 
 // A path to get user roles

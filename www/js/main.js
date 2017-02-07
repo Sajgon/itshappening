@@ -2,7 +2,9 @@
 // (also see classes/rest-entity.class.js)
 var Student = new RestEntity('student');
 var Employee = new RestEntity('employee');
+var NewsPost = new RestEntity('newspost');
 var Login = new RestEntity('login');
+var sessionid = "";
 
 // Some utility methods for forms
 var formHelpers = new FormHelpers();
@@ -39,13 +41,17 @@ function start(){
 }
 
 
+// not used
 function loggedIn(result){
 	console.log(result);
 	processLogin(true);
 }
 
+
 function isLoggedIn(){
 	Login.find(function(result){
+		console.log(result);
+		sessionid = result.user._id;
 		if(result.status == "logged in"){
 			console.log(result.status);
 			processLogin(true);

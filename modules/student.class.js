@@ -23,5 +23,4 @@ module.exports = class Student extends User {
       : "I don't have a name";
     return greeting;
   }
-
 }
