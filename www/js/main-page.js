@@ -17,8 +17,7 @@ $(function() {
 			//console.log(student);
 			console.log("YEAAHAH");
 		}*/
-		console.log("session id:");
-		console.log(sessionid);
+		
 		
 		epochDate = (new Date).getTime();
 		
@@ -39,33 +38,37 @@ $(function() {
 	});
 	
 	// set username in top right corner
-	findOneStudent(sessionid, "username", "dropdownusername");
+	findOneStudent(sessionid, "username", function(username){
+		$("#drowndown-username").html(username);
+	});
 	
 });
 
 
-function findOneStudent(studentId, requestType, action){
+function findOneStudent(studentId, requestType, callback){
 
 	Student.find(studentId, function(result){
-		
-		result = result[0];
-		console.log(result);
-		if(requestType == "username"){
-			if(action == "dropdownusername"){
-				$("#drowndown-username").html(result.username);
-			}
-			return result.username;
+
+
+if(result){
+			if(requestType == "username"){
+			callback(result.username);
 		}else if(requestType == "fname"){
-			return result.fname;
+			callback(result.fname);
 		}else if(requestType == "lname"){
-			return result.lname;
+			callback(result.lname);
 		}else if(requestType == "flname"){
-			return result.fname + " " + result.lname;
+			callback(result.fname + " " + result.lname);
 		}else if(requestType == "personal"){
-			return result.personal;
+			callback(result.personal);
 		}else if(requestType == "object"){
-			return result;
+			callback(result);
 		}
+	}else{
+
+		callback(false);
+	}
+
 	});
 }
 
@@ -91,23 +94,99 @@ function findAllAdminPosts(){
 function printPosts(posts){
 	if(posts.length){
 		for(var p = 0; p < posts.length; p++){
-			console.log(posts[p]);
-			
-			username = findOneStudent(posts[p].postedby_id);
-			fulldate = humanDate(posts[p].date_posted);
-			
-			var post = '<div class="panel panel-default col-xs-12 col-sm-8 paddingfix">' +
-						'<div class="panel-heading"><h3 class="panel-title">'+posts[p].title+'</h3></div>' +
-						'<div class="panel-body innehall">'+posts[p].content+'</div>' +
-						'<div class="panel-footer datum"><span>'+fulldate+'</span><span style="float: right">'+username+'</span></div>' +
-						'</div>'
-			
-			$("#posts").append(post);
+			console.log(posts[p])
+			printPost(posts[p]);
 			
 		}	
 	}
 }
 
+function printPost(post){
+	//console.log("post", post);
+	// title = post.title;
+	// content = post.content;
+	// fulldate = humanDate(post.date_posted);
+
+	findOneStudent(post.postedby_id, "username", function(username) {
+
+					var postMessage = '<div class="panel panel-default col-xs-12 col-sm-8 paddingfix">' +
+								'<div class="panel-heading"><h3 class="panel-title">'+post.title+'</h3></div>' +
+								'<div class="panel-body innehall">'+post.content+'</div>' +
+								'<div class="panel-footer datum"><span>'+humanDate(post.date_posted)+'</span><span style="float: right">'+username+'</span></div>' +
+								'</div>'
+					
+					$("#posts").append(postMessage);
+
+			});
+};
 
 
 findAllAdminPosts();
+
+
+$(document).ready(function() {
+
+
+
+	$( "#allautbildningarbtn" ).click(function() {
+	  console.log("Alla utbildningar");
+
+	  $(".pageObj").hide();
+	});
+
+
+	$( "#minautbildningarbtn" ).click(function() {
+	  console.log("Mina utbildningar");
+	  $(".pageObj").hide();
+	});
+
+
+	$( "#skapautbildningbtn" ).click(function() {
+	  console.log("Skapa Utbildning");
+	  $(".pageObj").hide();
+	});
+
+
+	$( "#lararebtn" ).click(function() {
+	  console.log("Lärare");
+	  $(".pageObj").hide();
+
+	});
+
+
+	$( "#inlaggbtn" ).click(function() {
+	  console.log("Inlägg");
+	  $(".pageObj").hide();
+	});
+
+
+	$( "#visabokningarbtn" ).click(function() {
+	  console.log("Visa Bokningar");
+	  $(".pageObj").hide();
+	});
+
+
+	$( "#bokasalbtn" ).click(function() {
+	  console.log("Boka Sal");
+	  $(".pageObj").hide();
+	});
+
+
+	$( "#bytlosenordbtn" ).click(function() {
+	  console.log("Byt Lösenord");
+	  $(".pageObj").hide();
+	});
+
+
+	$( "#redigerauppgifterbtn" ).click(function() {
+	  console.log("Redigera Uppgifter");
+	  $(".pageObj").hide();
+	});
+
+
+	$("#logoutbtn").click(function(){
+		logOut();
+		isLoggedIn();
+	});
+});
+
