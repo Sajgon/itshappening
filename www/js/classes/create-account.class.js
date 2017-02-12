@@ -9,51 +9,54 @@ class createAccount {
 	if(mail.length && pass.length && personal.length && fname.length && lname.length && usertype){
 		
 		
+		// 
+		function accountCreated(student){
+			// the student is created or an error
+			// because the username is taken
+			if(!student._error){
+				// student is created what now?
+				// auto login?
+				log("RETURN SUCCESS", student)
+				Login.create({
+					username: mail,
+					password: pass
+				},isLoggedIn);
+			}
+			else {
+				// report back to DOM/GUI
+				log("STUDENT NOT CREATED", student._error)
+				
+				if(student._error.errors.name.message){
+					if(student._error.errors.name.message == "Path `username` is not unique"){
+						$("#errorMessage").html("Användarnamnet är redan använt.");
+						$("#errorMessage").show();
+					}
+				}else {
+					$("#errorMessage").html("Formuläret är fel inskrivet.");
+					$("#errorMessage").show();
+				}
+			}
+		}
 		
 		if(usertype == "student"){
-			
-			// try to create a new student
+			// try to create a new Student
 			Student.create({
 				username: mail,
 				password: pass,
 				fname: fname,
 				lname: lname,
 				personal: personal
-			},studentCreated);
-			
-			
-			// 
-			function studentCreated(student){
-				// the student is created or an error
-				// because the username is taken
-				if(!student._error){
-					// student is created what now?
-					// auto login?
-					log("RETURN SUCCESS", student)
-					Login.create({
-						username: mail,
-						password: pass
-					},isLoggedIn);
-				}
-				else {
-					// report back to DOM/GUI
-					log("STUDENT NOT CREATED", student._error)
-					
-					if(student._error.errors.name.message){
-						if(student._error.errors.name.message == "Path `username` is not unique"){
-							$("#errorMessage").html("Användarnamnet är redan använt.");
-							$("#errorMessage").show();
-						}
-					}else {
-						$("#errorMessage").html("Formuläret är fel inskrivet.");
-						$("#errorMessage").show();
-					}
-					
-				}
-			}
+			},accountCreated);
 			
 		}else if(usertype = "teacher"){
-			console.log("Try create a teacher ..");
+			// try to create a new Teacher
+			Employee.create({
+				username: mail,
+				password: pass,
+				fname: fname,
+				lname: lname,
+				personal: personal
+			},accountCreated);
 		}
 	}
 

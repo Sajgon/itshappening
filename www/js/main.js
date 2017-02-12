@@ -26,20 +26,19 @@ if(loadTemplate){
 
 // Start the app
 function start(){
-  // Wait for DOM ready
-  $(()=>{
-	  
-	
-	
-    // Create the main navbar
-    new MainNavbar();
-    // Run the rest tests
-	if(loadTemplate){
-		new RestTests();
-	}
-  });
+	isLoggedIn();
+  
+	// Wait for DOM ready
+	$(()=>{
+		// Run the rest tests
+		if(loadTemplate){
+			new MainNavbar();  // Create the main navbar
+			new RestTests();
+		}
+	});
 }
-isLoggedIn();  
+
+
 
 // not used
 function loggedIn(result){
@@ -82,86 +81,9 @@ function processLogin(loggedIn){
 }
 
 
-function logOut(){
-	Login.delete("",function(result){
-		console.log(result)
-	})
-}
-
-function createAccountView(){
-	
-	$(".firstView").show();
-	
-	$("#viewLoginFormBtn").click(function() {
-		$("#firstView").hide();
-		$("#formInputs").show();
-		$("#personal").hide();
-		$("#loginAccountBtn").show();
-		$("#newAccountBtn").hide();
-		$("#formTitle").html("Logga in");
-	});
-
-	$("#viewNewAccountFormBtn").click(function() {
-		$("#firstView").hide();
-		$("#formInputs").show();
-		$("#personal").show();
-		$("#loginAccountBtn").hide();
-		$("#newAccountBtn").show();
-		$("#formTitle").html("Skapa Konto");
-	});
-	
-	$("#newAccountBtn").click(function(){
-		console.log("Create account button pressed.");
-		$("#errorMessage").hide();
-		
-		var mailadrs = $("#mail").val();
-		var userpass = $("#password").val();
-		var personal = $("#personalInput").val();
-		var usertype = $("input[name=usertype]:checked").val();
-		
-		var newAccount = new createAccount(mailadrs, userpass, personal, usertype, "test", "test");
-		console.log(newAccount);
-	});
-	
-	$("#loginAccountBtn").click(function(){
-		console.log("Login account button pressed.");
-		$("#errorMessage").hide();
-		
-		var username = $("#mail").val();
-		var userpassword = $("#password").val();
-		// var usertype = $("input[name=usertype]:checked").val();
-
-		//Loginhandler.find({
-		/*Login.find({
-			username: username,
-			password: userpassword
-		}, userFind);*/
-		
-		Login.create({
-			username: username,
-			password: userpassword
-		},userFind);
-		
-		function userFind(result){
-			console.log("result login");
-			console.log(result);
-			
-			if(result.status == "logged in succesfully"){
-				window.location.href = "main_page.html";
-			}else if(result.status == "wrong credentials"){
-				$("#errorMessage").html("Användarnamnet eller lösenordet är fel.");
-				$("#errorMessage").show();
-			}
-		}
-	});
-}
 
 
-function findStudentByUsername(username){
-Student.find('find/{username:/'+username+'/}', function(result){
-	console.log(result);
-});
-};
+
 
 
 

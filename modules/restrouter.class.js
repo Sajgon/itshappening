@@ -185,14 +185,16 @@ module.exports = class Restrouter {
 
   jsonCleaner(toClean){
     // clean away or transform properties
-    return JSON.stringify(toClean._doc || toClean,(key,val)=>{
-      // remove __v
-      if(key == "__v"){ return; }
-      // set password to "[secret]"
-      if(key == "password"){ return "[secret]"; }
-      // unchanged properties
-      return val;
-    });
+	if(toClean){
+		return JSON.stringify(toClean._doc || toClean,(key,val)=>{
+		  // remove __v
+		  if(key == "__v"){ return; }
+		  // set password to "[secret]"
+		  if(key == "password"){ return "[secret]"; }
+		  // unchanged properties
+		  return val;
+		});
+	}
   }
 
 
