@@ -248,6 +248,11 @@ $(document).ready(function() {
 		logOut();
 		isLoggedIn();
 	});
+	$( "#kontaktbtn" ).click(function() {
+	  console.log("Kontakt sida");
+	  $(".pageObj").hide();
+	  $("#kontaktPage").show();
+	});
 });
 
 
