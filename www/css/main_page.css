@@ -2,3 +2,6 @@ a > p {
 	color:black;
 	word-wrap:break-word;
 }
+.pageObj{
+	display: none;
+}

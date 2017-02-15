@@ -2,6 +2,9 @@
 
 
 $(function() {
+
+	$("#rowSkapaInlagg").show();
+		$("#posts").show();
 	$("#newPostBtn").click(function(){
 		
 		var postTitle = $("#postTitle").val();
@@ -55,9 +58,10 @@ $(function() {
 	}
 });
 	
-function findAllStudents(){
+function findAllStudents(callback){
 	Student.find('find/{fname:/.*/}', function(result){
 		console.log(result);
+		callback(result);
 	});
 }
 	
@@ -186,7 +190,12 @@ function findStudentByUsername(username){
 
 $(document).ready(function() {
 
+	$("#inlaggBtn").click(function(){
+		$(".pageObj").hide();
+		$("#rowSkapaInlagg").show();
+		$("#posts").show();
 
+	});
 
 	$( "#allautbildningarbtn" ).click(function() {
 	  console.log("Alla utbildningar");
@@ -204,12 +213,38 @@ $(document).ready(function() {
 	$( "#skapautbildningbtn" ).click(function() {
 	  console.log("Skapa Utbildning");
 	  $(".pageObj").hide();
+	  $("#rowSkapaUtbildning").show();
+
 	});
 
 
 	$( "#lararebtn" ).click(function() {
 	  console.log("Lärare");
 	  $(".pageObj").hide();
+
+	});
+	$( "#studentbtn" ).click(function() {
+	  console.log("Student");
+	  $(".pageObj").hide();
+	  $("#rowStudenter").show();
+
+	  findAllStudents(function(students){
+	  	console.log(students);
+
+	  	var studentList = "<tr><th>Förnamn</th><th>Efternamn</th><th>Personnummer</th><th>Användarnamn</th></tr>";
+
+	  	for(var i = 0; i < students.length; i++){
+	  		studentList += "<tr>";
+	  		studentList += "<td>"+students[i].fname+"</td>";
+	  		studentList += "<td>"+students[i].lname+"</td>";
+	  		studentList += "<td>"+students[i].personal+"</td>";
+	  		studentList += "<td>"+students[i].username+"</td>";
+	  		studentList += "</tr>";
+	  	};
+	  	$("#studentstable").append(studentList);
+	  });
+
+
 
 	});
 
