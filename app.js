@@ -9,7 +9,7 @@ require('mongoosefromclass')(mongoose);
 // Make some things global
 global.mongoose = mongoose;
 global.sha1 = sha1;
-global.userRoles = ['Student','Employee'];
+global.userRoles = ['Student','Employee', 'Admin'];
 global.passwordSalt = "shouldBeHardToGuess132638@@@@x";
 
 // Stop mongoose from using an old promise library
@@ -26,7 +26,8 @@ var classesToLoad = {
   User: 'module',
   Student: 'module',
   Employee: 'module',
-  NewsPost: 'module'
+  NewsPost: 'module',
+  Education: 'module'
 };
 
 for(let className in classesToLoad){
@@ -65,6 +66,7 @@ app.use((req,res,next)=>{
 new Restrouter(app,Student);
 new Restrouter(app,Employee);
 new Restrouter(app,NewsPost);
+new Restrouter(app,Education);
 new Loginhandler(app);
 
 // A path to get user roles
