@@ -3,6 +3,7 @@
 var Student = new RestEntity('student');
 var Employee = new RestEntity('employee');
 var NewsPost = new RestEntity('newspost');
+var Education = new RestEntity('education');
 var Login = new RestEntity('login');
 var sessionid = "";
 

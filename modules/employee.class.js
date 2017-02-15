@@ -30,7 +30,7 @@ module.exports = class Employee extends User {
     }
 
     // only allow a Owner to update her/himself - not other owners
-    if(user && user.role == "Emoployee" &&  searchOrId == user._id){
+    if(user && user.role == "Employee" &&  searchOrId == user._id){
       return true;
     }
 

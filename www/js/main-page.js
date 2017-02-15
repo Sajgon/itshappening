@@ -150,6 +150,8 @@ function printPosts(posts){
 			console.log(posts[p])
 			printPost(posts[p]);
 		}	
+	}else {
+		$("#noposts").html("You have no posts!");
 	}
 }
 
@@ -308,6 +310,15 @@ $(document).ready(function() {
 	  console.log("Kontakt sida");
 	  $(".pageObj").hide();
 	  $("#kontaktPage").show();
+	});
+
+	$("#newEducationBtn").click(function() {
+		var educationId = $("#educationId").val();
+		var educationName = $("#educationName").val();
+		var educationStart = new Date($("#educationStart").val()).getTime();
+		var educationEnd = new Date($("#educationEnd").val()).getTime();
+		var newEducation = new createEducation(educationId, educationName, educationStart, educationEnd, sessionid);
+		console.log(newEducation);
 	});
 });
 
