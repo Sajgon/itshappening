@@ -62,11 +62,10 @@ body {
 }
 
 .rubrik{
-  padding:10px;
-  color:purple;
-  text-align: center;
-  background-color: #F0F8FF;
-  border:1px solid purple;
+  display: block;
+    margin: auto;
+    width: 70%;
+    
 }
 
 .mainContent > .row > .headline, .footerContent{
