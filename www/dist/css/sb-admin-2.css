@@ -242,7 +242,7 @@ table.dataTable thead .sorting:after {
 }
 .panel-green > .panel-heading {
   border-color: #5cb85c;
-  color: white;
+  color: #212121;
   background-color: #5cb85c;
 }
 .panel-green > a {

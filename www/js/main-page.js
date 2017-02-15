@@ -65,9 +65,10 @@ function findAllStudents(callback){
 	});
 }
 	
-function findAllEmployees(){
+function findAllEmployees(callback){
 	Employee.find('find/{fname:/.*/}', function(result){
 		console.log(result);
+		callback(result);
 	});
 }
 	
@@ -222,31 +223,51 @@ $(document).ready(function() {
 	  console.log("Lärare");
 	  $(".pageObj").hide();
 
+		$("#rowLarare").show();
+
+		  findAllEmployees(function(employee){
+		  	console.log(employee);
+
+		  	var employeeList = "<tr><th>Förnamn</th><th>Efternamn</th><th>Personnummer</th><th>Användarnamn</th></tr>";
+
+		  	for(var i = 0; i < employee.length; i++){
+		  		employeeList += "<tr>";
+		  		employeeList += "<td>"+employee[i].fname+"</td>";
+		  		employeeList += "<td>"+employee[i].lname+"</td>";
+		  		employeeList += "<td>"+employee[i].personal+"</td>";
+		  		employeeList += "<td>"+employee[i].username+"</td>";
+		  		employeeList += "</tr>";
+		  	};
+		  	$("#employeestable").empty().append(employeeList);
+		  });
+
+
+
 	});
 	$( "#studentbtn" ).click(function() {
 	  console.log("Student");
 	  $(".pageObj").hide();
 	  $("#rowStudenter").show();
 
-	  findAllStudents(function(students){
-	  	console.log(students);
+		  findAllStudents(function(students){
+		  	console.log(students);
 
-	  	var studentList = "<tr><th>Förnamn</th><th>Efternamn</th><th>Personnummer</th><th>Användarnamn</th></tr>";
+		  	var studentList = "<tr><th>Förnamn</th><th>Efternamn</th><th>Personnummer</th><th>Användarnamn</th></tr>";
 
-	  	for(var i = 0; i < students.length; i++){
-	  		studentList += "<tr>";
-	  		studentList += "<td>"+students[i].fname+"</td>";
-	  		studentList += "<td>"+students[i].lname+"</td>";
-	  		studentList += "<td>"+students[i].personal+"</td>";
-	  		studentList += "<td>"+students[i].username+"</td>";
-	  		studentList += "</tr>";
-	  	};
-	  	$("#studentstable").append(studentList);
-	  });
+		  	for(var i = 0; i < students.length; i++){
+		  		studentList += "<tr>";
+		  		studentList += "<td>"+students[i].fname+"</td>";
+		  		studentList += "<td>"+students[i].lname+"</td>";
+		  		studentList += "<td>"+students[i].personal+"</td>";
+		  		studentList += "<td>"+students[i].username+"</td>";
+		  		studentList += "</tr>";
+		  	};
+		  	$("#studentstable").empty().append(studentList);
+		  });
 
 
 
-	});
+		});
 
 
 	$( "#inlaggbtn" ).click(function() {

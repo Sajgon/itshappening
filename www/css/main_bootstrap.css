@@ -1,21 +1,26 @@
 
 
-.navbar{
-	background-color :#062f4f;
+.navbar.navbar-default{
+	background-image: url("../images/old-weathered-wood-texture.jpg");
+	background-size:cover;  
+
+            /* Workaround for some mobile browsers */
+            min-height:100%;   
+
 }
 .sidebar .sidebar-nav.navbar-collapse{
-	background-color: #08487a;
+	background-color: #242424;
 
 }
 .sidebar ul li {
-  border-bottom: 1px solid #08487a;
+  border-bottom: 1px solid #242424;
 
 }
 .sidebar ul li:hover{
-color :white;
+color : #020202;
 }
 .sidebar ul li a.active {
-  background-color: #08487a;
+  background-color: #020202;
 }	
 
 
@@ -23,17 +28,14 @@ color :white;
 	font-family: 'Fjalla One', sans-serif;
 }
 a{
-	color: white;
+	color: #ffffff;
 }
 
 body {
-    background-color: #08487a;
-	color: #08487a;
+    background-color: #242424;
+	color: #212121;
 }
 
-.navbar-default .navbar-brand {
-    color: #FFF;
-}
 .paddingfix{
   padding-left:0;
 
@@ -55,4 +57,19 @@ body {
 	margin-top: 5px;
 	max-height: 40px;
 	cursor: pointer;
+}
+.btn-primary.btn-outline {
+  color: #212121;
+}
+
+
+.btn-primary.btn-outline:hover,
+.btn-success.btn-outline:hover,
+.btn-info.btn-outline:hover,
+.btn-warning.btn-outline:hover,
+.btn-danger.btn-outline:hover {
+  color: #020202;
+}
+.toprow{
+	height: 500px;
 }
