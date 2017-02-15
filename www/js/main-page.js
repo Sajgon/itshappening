@@ -71,6 +71,13 @@ function findAllEmployees(callback){
 		callback(result);
 	});
 }
+
+function findAllEducations(callback){
+	Education.find('find/{admin:/.*/}', function(result){
+		console.log(result);
+		callback(result);
+	});
+}
 	
 function findOneStudent(studentId, requestType, callback){
 
@@ -202,8 +209,27 @@ $(document).ready(function() {
 
 	$( "#allautbildningarbtn" ).click(function() {
 	  console.log("Alla utbildningar");
-
 	  $(".pageObj").hide();
+	  $("#rowEducations").show();
+
+
+	  findAllEducations(function(educations){
+		  	console.log(educations);
+
+		  	var educationList = "<tr><th>Utbildningskod</th><th>Utbildningsnamn</th><th>Startar</th><th>Slutar</th></tr>";
+	console.log(educations.length);
+		  	for(var i = 0; i < educations.length; i++){
+		  		educationList += "<tr>";
+		  		educationList += "<td>"+educations[i].education_code+"</td>";
+		  		educationList += "<td>"+educations[i].education_name+"</td>";
+		  		educationList += "<td>"+educations[i].start+"</td>";
+		  		educationList += "<td>"+educations[i].end+"</td>";
+		  		educationList += "</tr>";
+		  	};
+		  	$("#educationtable").empty().append(educationList);
+		  });
+
+
 	});
 
 
@@ -217,6 +243,10 @@ $(document).ready(function() {
 	  console.log("Skapa Utbildning");
 	  $(".pageObj").hide();
 	  $("#rowSkapaUtbildning").show();
+
+
+
+
 
 	});
 
