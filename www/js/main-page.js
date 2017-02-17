@@ -78,7 +78,8 @@ function findAllEducations(callback){
 		callback(result);
 	});
 }
-	
+
+// find one student with student ID
 function findOneStudent(studentId, requestType, callback){
 
 	Student.find(studentId, function(result){

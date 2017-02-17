@@ -36,76 +36,36 @@ function start(){
 	}
   });
 }
-isLoggedIn();  
-
-// not used
-function loggedIn(result){
-	console.log(result);
-	processLogin(true);
-}
 
 
-function isLoggedIn(){
-	Login.find(function(result){
-		console.log(result);
-		sessionid = result.user._id;
-		if(result.status == "logged in"){
-			console.log(result.status);
-			processLogin(true);
-		}else{
-			processLogin(false);
-		}
-	});
-}
-
-
-function processLogin(loggedIn){
-	if(loggedIn){
-		// user LOGGED in
-		if(pageName == "index"){
-			window.location.href = "main_page.html";	
-		}else if(pageName == "main_page"){
-			// nothing happens
-		}
-	}else{
-		// user NOT LOGGED IN
-		if(pageName == "main_page"){
-			window.location.href = "index.html";	
-		}else if(pageName == "index"){
-			// nothing happens
-			createAccountView();
-		}	
-	}
-}
-
-
-function logOut(){
-	Login.delete("",function(result){
-		console.log(result)
-	})
-}
-
-
-function createAccountView(){
-	
-	$(".firstView").show();
-	
-	$("#viewLoginFormBtn").click(function() {
-		$("#firstView").hide();
+function viewLoginAccount(){
+	$("#firstView").hide();
 		$("#formInputs").show();
 		$("#personal").hide();
 		$("#loginAccountBtn").show();
 		$("#newAccountBtn").hide();
 		$("#formTitle").html("Logga in");
-	});
+}
 
-	$("#viewNewAccountFormBtn").click(function() {
-		$("#firstView").hide();
+function viewCreateAccount(){
+	$("#firstView").hide();
 		$("#formInputs").show();
 		$("#personal").show();
 		$("#loginAccountBtn").hide();
 		$("#newAccountBtn").show();
 		$("#formTitle").html("Skapa Konto");
+}
+
+function firstIndexView(){
+	
+	$(".firstView").show();
+	
+	$("#viewLoginFormBtn").click(function() {
+		viewLoginAccount();
+	});
+
+	$("#viewNewAccountFormBtn").click(function() {
+		viewCreateAccount();
 	});
 	
 	$("#newAccountBtn").click(function(){
@@ -127,50 +87,100 @@ function createAccountView(){
 		
 		var username = $("#mail").val();
 		var userpassword = $("#password").val();
-		var usertype = $("input[name=usertype]:checked").val();
-
-		//Loginhandler.find({
-		/*Login.find({
-			username: username,
-			password: userpassword
-		}, userFind);*/
+		//var usertype = $("input[name=usertype]:checked").val();
 		
-		Login.create({
-			username: username,
-			password: userpassword
-		},userFind);
+		tryLogin(username, userpassword);
 		
-		function userFind(result){
-			console.log("result login");
-			console.log(result);
-			
-			/*
-			console.log("usertypes");
-			console.log(usertype);
-			console.log(result.user.role);
-			*/
-			
-			//if(usertype == result.user.role){
-				if(result.status == "logged in succesfully"){
-					window.location.href = "main_page.html";
-				}else if(result.status == "wrong credentials"){
-					$("#errorMessage").html("Användarnamnet eller lösenordet är fel.");
-					$("#errorMessage").show();
-				}
-			//}
-		}
 	});
 }
 
 
-function findStudentByUsername(username){
-	Student.find('find/{username:/'+username+'/}', function(result){
+function findStudentByUsername(username, callback){
+	console.log("finding student: ", username);
+	Student.find('find/{username:"'+username+'"}', function(result){
 		console.log(result);
+		callback(result);
+	});
+};
+
+function findEmployeeByUsername(username, callback){
+	Employee.find('find/{username:"'+username+'"}', function(result){
+		callback(result);
 	});
 };
 
 
+function tryLogin(usrn, pass){
+	
+	
+	function tryCreateSession(usrn, pass){
+		console.log("trying to create a session...");
+		Login.create({
+			username: usrn,
+			password: pass
+		},userFind);		
+	}
 
+	function userFind(result){
+		console.log("result login");
+		console.log(result);
+		
+		/*
+		console.log("usertypes");
+		console.log(usertype);
+		console.log(result.user.role);
+		*/
+		
+		//if(usertype == result.user.role){
+			if(result.status == "logged in succesfully"){
+				window.location.href = "main_page.html";
+			}else if(result.status == "wrong credentials"){
+				$("#errorMessage").html("Användarnamnet eller lösenordet är fel.");
+				$("#errorMessage").show();
+			}
+		//}
+	}
+	
+	// First try to find the username in Students
+	findStudentByUsername(usrn, function(result){
+		console.log("get student username:");
+		console.log(result);
+		user = result[0];
+		if(user){
+			tryCreateSession(usrn, pass);
+		}else{
+			// Second try to find the username in employees
+			findEmployeeByUsername(usrn, function(result){
+				console.log("get employee username:");
+				user = result[0];
+				console.log(user);
+				
+				if(user){
+					console.log("username found...");
+					if(user.verified == true){
+						console.log("You are verified, now try create a session..");
+						tryCreateSession(usrn, pass);
+					}else if(user.verified == false){
+						console.log("You are not verified");
+						if(user.pendingVerification == true){
+							$("#errorMessage").html("Vänligen vänta på att en administratör godkänner ditt konto.");
+							$("#errorMessage").show();
+							viewLoginAccount();
+						}else if(user.pendingVerification == false){
+							$("#errorMessage").html("Tyvärr har ditt konto blivit nekad av administratör.");
+							$("#errorMessage").show();
+						}
+					}
+				}else{
+					$("#errorMessage").html("Tyvärr är ditt användarnamn fel.");
+					$("#errorMessage").show();
+				}
+				
+			});
+		}
+	});
+
+}
 
 
 

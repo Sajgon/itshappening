@@ -16,20 +16,17 @@ class createAccount {
 			if(!student._error){
 				// student is created what now?
 				// auto login?
-				console.log("HERE")
-				log("RETURN SUCCESS", student)
-				Login.create({
-					username: mail,
-					password: pass
-				},isLoggedIn);
+				log("RETURN SUCCESS", student);
+				
+				tryLogin(mail, pass);
 			}
 			else {
 				// report back to DOM/GUI
-				log("STUDENT NOT CREATED", student._error)
+				log("USER NOT CREATED", student._error)
 				
-				if(student._error && student._error.errors && student._error.errors.name && student._error.errors.name.message){
-					if(student._error.errors.name.message == "Path `username` is not unique"){
-						$("#errorMessage").html("Användarnamnet är redan använt.");
+				if(student._error && student._error.errors && student._error.errors.username && student._error.errors.username.message){
+					if(student._error.errors.username.message == "Path `username` is not unique"){
+						$("#errorMessage").html("Användarnamnet är upptaget.");
 						$("#errorMessage").show();
 					}
 				}else {
@@ -56,7 +53,10 @@ class createAccount {
 				password: pass,
 				fname: fname,
 				lname: lname,
-				personal: personal
+				personal: personal,
+				verified: false,
+				pendingVerification: true,
+				admin: false
 			},accountCreated);
 		}
 	}

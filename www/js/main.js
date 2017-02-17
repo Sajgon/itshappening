@@ -52,7 +52,7 @@ function isLoggedIn(){
 	Login.find(function(result){
 		console.log(result);
 		sessionid = result.user._id;
-		if(result.status == "logged in"){
+if(result.status == "logged in"){
 			console.log(result.status);
 			processLogin(true);
 		}else{
@@ -71,12 +71,13 @@ function processLogin(loggedIn){
 			// nothing happens
 		}
 	}else{
+		
 		// user NOT LOGGED IN
 		if(pageName == "main_page"){
 			window.location.href = "index.html";	
 		}else if(pageName == "index"){
 			// nothing happens
-			createAccountView();
+			firstIndexView();
 		}	
 	}
 }

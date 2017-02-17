@@ -6,6 +6,9 @@ module.exports = class Employee extends User {
       fname: {type: String, required: true},
       lname: {type: String, required: true},
       personal: {type: Number, min:190001010000, max:202001010000, required:true},
+	  verified: {type: Boolean, required: true},
+	  pendingVerification: {type: Boolean, required: true},
+	  admin: {type: Boolean, required: true},
       students: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Student'
