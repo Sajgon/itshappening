@@ -37,9 +37,11 @@ module.exports = class Loginhandler {
       var username = req.body.username;
       var password = sha1(req.body.password + global.passwordSalt);
       var entities = global.userRoles;
+      console.log("TRYING TO LOG IN  CHECKING FOR USER IN",entities);
       var foundUser, foundEntity, checkedEntities = 0;
       // look for user in all different entitities
       entities.forEach((entity)=>{
+        console.log("CHECKING NOW IN ENTITY",entity);
         global[entity].findOne({
           username:username,
           password:password

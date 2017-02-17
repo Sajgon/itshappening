@@ -9,7 +9,7 @@ require('mongoosefromclass')(mongoose);
 // Make some things global
 global.mongoose = mongoose;
 global.sha1 = sha1;
-global.userRoles = ['Student','Employee', 'Admin'];
+global.userRoles = ['Student','Employee'];
 global.passwordSalt = "shouldBeHardToGuess132638@@@@x";
 
 // Stop mongoose from using an old promise library

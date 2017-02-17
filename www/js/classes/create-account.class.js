@@ -16,6 +16,7 @@ class createAccount {
 			if(!student._error){
 				// student is created what now?
 				// auto login?
+				console.log("HERE")
 				log("RETURN SUCCESS", student)
 				Login.create({
 					username: mail,
@@ -26,7 +27,7 @@ class createAccount {
 				// report back to DOM/GUI
 				log("STUDENT NOT CREATED", student._error)
 				
-				if(student._error.errors.name.message){
+				if(student._error && student._error.errors && student._error.errors.name && student._error.errors.name.message){
 					if(student._error.errors.name.message == "Path `username` is not unique"){
 						$("#errorMessage").html("Användarnamnet är redan använt.");
 						$("#errorMessage").show();

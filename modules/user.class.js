@@ -22,6 +22,10 @@ module.exports = class User {
       var entities = global.userRoles;
       var foundUser, checkedEntities = 0;
       entities.forEach((entity)=>{
+
+        // REMOVE THIS IF WE CREATE AN Admin CLASS !!!
+        if(entity == "Admin"){entity = "Employee";}
+        
         global[entity].findOne({username:this.username},(err,found)=>{
           foundUser = foundUser || found;
           checkedEntities++;
