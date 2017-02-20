@@ -350,10 +350,12 @@ $(document).ready(function() {
 		// Time handler
 		var educationStartEpoch = new Date($("#educationStart").val()).getTime();
 		var educationEndEpoch = new Date($("#educationEnd").val()).getTime();
+		var startDate = epochToDate(educationStartEpoch);
+		var endDate = epochToDate(educationEndEpoch);
 		
 		
 		
-		var newEducation = new createEducation(educationId, educationName, educationStart, educationEnd, sessionid);
+		var newEducation = new createEducation(educationId, educationName, startDate, endDate, sessionid);
 		console.log(newEducation);
 	});
 });

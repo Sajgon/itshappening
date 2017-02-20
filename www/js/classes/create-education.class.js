@@ -10,7 +10,11 @@ class createEducation {
 
 	console.log(educationid.length, educationname.length, start.length, end.length, createdby.length);
 
-	if(educationid.length && educationname.length && start && end && createdby.length){
+	if(!educationid.length == 4){
+		var message = "Education ID must include 4 characters.";
+		$("#errMsg-skapautbildning").append(message);
+		$("#showErrMessage").show();
+	} else if(educationid.length && educationname.length && start && end && createdby.length){
 		
 		console.log("yes");
 		// 
