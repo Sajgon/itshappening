@@ -346,8 +346,13 @@ $(document).ready(function() {
 	$("#newEducationBtn").click(function() {
 		var educationId = $("#educationId").val();
 		var educationName = $("#educationName").val();
-		var educationStart = new Date($("#educationStart").val()).getTime();
-		var educationEnd = new Date($("#educationEnd").val()).getTime();
+		
+		// Time handler
+		var educationStartEpoch = new Date($("#educationStart").val()).getTime();
+		var educationEndEpoch = new Date($("#educationEnd").val()).getTime();
+		
+		
+		
 		var newEducation = new createEducation(educationId, educationName, educationStart, educationEnd, sessionid);
 		console.log(newEducation);
 	});

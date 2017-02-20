@@ -61,7 +61,6 @@ if(result.status == "logged in"){
 	});
 }
 
-
 function processLogin(loggedIn){
 	if(loggedIn){
 		// user LOGGED in

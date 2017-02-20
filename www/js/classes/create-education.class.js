@@ -5,7 +5,7 @@ class createEducation {
     // through the Students and Employees objects
 
     var mem = {}
-	console.log("here brah");
+	console.log("Called create education class.");
 	console.log(educationid, educationname, start, end, createdby);
 
 	console.log(educationid.length, educationname.length, start.length, end.length, createdby.length);
@@ -41,6 +41,10 @@ class createEducation {
 				admin: createdby
 			}, educationCreated);
 		}
+	}else{
+		var message = "Please submit the form correctly."
+		$("#errMsg-skapautbildning").append(message);
+		$("#showErrMessage").show();
 	}
 
     // Log
