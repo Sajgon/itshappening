@@ -120,6 +120,9 @@
                                     <a id="allautbildningarbtn" href="javascript:void(0)">Alla Utbildningar</a>
                                 </li>
                                 <li>
+                                    <a id="sokutbildningarbtn" href="javascript:void(0)">Sök Utbildning</a>
+                                </li>
+                                <li>
                                     <a id="minautbildningarbtn" href="javascript:void(0)">Mina Utbildningar</a>
                                 </li>
                             </ul>
@@ -333,11 +336,15 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12" >
-                        <table id="studentstable"></table>
+                            <div class="table-responsive">
+                                
+                                <table class="table" id ="studentstable">
+                              </table>
+                            </div>
                         </div>
-                    </div>
+                    
+                     </div>
                 </div>
-
 
                 <div id="rowLarare" class="pageObj">
                     <div class="row">
@@ -347,7 +354,7 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12" >
-                        <table id="employeestable"></table>
+                        <table class="table" id="employeestable"></table>
                         </div>
                     </div>
                 </div>
@@ -362,8 +369,45 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12" >
-                        <table id="educationtable"></table>
+                        <table class="table" id="educationtable"></table>
                         </div>
+                    </div>
+                </div>
+
+
+                    <div class="pageObj" id="searchfield">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-8">
+                            <h2>Sök Utbildning</h2>
+                            <div>
+                                <div class="input-group col-md-12">
+                                    <input type="text" class="form-control input-lg" placeholder="Sök utbildningsnamn" />
+                                    <span class="input-group-btn">
+                                        <button id="searchNameBtn" class="btn btn-info btn-lg" type="button">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                <div  class="input-group col-md-12">
+                                    <input id="idInputText" type="text" class="form-control input-lg" placeholder="Sök på utbildningsID" />
+                                    <span class="input-group-btn">
+                                        <button id="searchIdBtn" class="btn btn-info btn-lg" type="button">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+                    <div class="col-xs-12">
+                                
+                              
+                        <table class="table" id="searchOutput"> </table>
+                    </div>
                     </div>
                 </div>
                     

@@ -73,3 +73,7 @@ body {
 .toprow{
 	height: 500px;
 }
+
+.input-group{
+	margin: 10px;
+}
