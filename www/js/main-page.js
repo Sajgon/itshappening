@@ -359,9 +359,16 @@ $(document).ready(function() {
 	$("#newEducationBtn").click(function() {
 		var educationId = $("#educationId").val();
 		var educationName = $("#educationName").val();
-		var educationStart = new Date($("#educationStart").val()).getTime();
-		var educationEnd = new Date($("#educationEnd").val()).getTime();
-		var newEducation = new createEducation(educationId, educationName, educationStart, educationEnd, sessionid);
+		
+		// Time handler
+		var educationStartEpoch = new Date($("#educationStart").val()).getTime();
+		var educationEndEpoch = new Date($("#educationEnd").val()).getTime();
+		var startDate = epochToDate(educationStartEpoch);
+		var endDate = epochToDate(educationEndEpoch);
+		
+		
+		
+		var newEducation = new createEducation(educationId, educationName, startDate, endDate, sessionid);
 		console.log(newEducation);
 	});
 

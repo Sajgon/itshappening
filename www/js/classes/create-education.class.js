@@ -5,12 +5,16 @@ class createEducation {
     // through the Students and Employees objects
 
     var mem = {}
-	console.log("here brah");
+	console.log("Called create education class.");
 	console.log(educationid, educationname, start, end, createdby);
 
 	console.log(educationid.length, educationname.length, start.length, end.length, createdby.length);
 
-	if(educationid.length && educationname.length && start && end && createdby.length){
+	if(!educationid.length == 4){
+		var message = "Education ID must include 4 characters.";
+		$("#errMsg-skapautbildning").append(message);
+		$("#showErrMessage").show();
+	} else if(educationid.length && educationname.length && start && end && createdby.length){
 		
 		console.log("yes");
 		// 
@@ -41,6 +45,10 @@ class createEducation {
 				admin: createdby
 			}, educationCreated);
 		}
+	}else{
+		var message = "Please submit the form correctly."
+		$("#errMsg-skapautbildning").append(message);
+		$("#showErrMessage").show();
 	}
 
     // Log
