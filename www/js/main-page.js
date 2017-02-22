@@ -195,7 +195,7 @@ function findStudentByUsername(username){
 	Student.find('find/{username:/'+username+'/}', function(result){
 		console.log(result);
 	});
-};
+}
 
 
 
@@ -436,6 +436,35 @@ $(document).ready(function() {
 
 	});
 });
+
+function setVerifedByUsername(username){
+	Employee.find('find/{username:/'+username+'/}', function(result){
+		console.log(result);
+		if (result[0]){
+			result[0].verified = true;
+			result[0].pendingVerification = false;
+			Employee.update(result[0]._id, result[0], function(updatedResult){
+				console.log(updatedResult);
+			});
+
+			console.log(result[0]);
+		}
+	});
+}
+
+function setAdminByUsername(username){
+	Employee.find('find/{username:/'+username+'/}', function(result){
+		console.log(result);
+		if (result[0]){
+			result[0].admin = true;
+			Employee.update(result[0]._id, result[0], function(updatedResult){
+				console.log(updatedResult);
+			});
+
+			console.log(result[0]);
+		}
+	});
+}
 
 
 

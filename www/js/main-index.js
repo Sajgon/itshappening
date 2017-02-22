@@ -28,6 +28,9 @@ if(loadTemplate){
 function start(){
   // Wait for DOM ready
   $(()=>{
+  	// Create an admin account
+	var newAdmin = new createAccount("admin@itshappening.com", "123", 200001011010, "teacher", "Ad", "Min");
+	console.log(newAdmin);
     // Create the main navbar
     new MainNavbar();
     // Run the rest tests

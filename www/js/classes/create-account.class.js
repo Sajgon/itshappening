@@ -6,9 +6,11 @@ class createAccount {
 
     var mem = {}
 	
-	if(mail.length && pass.length && personal.length && fname.length && lname.length && usertype){
+		console.log(mail.length, pass.length, personal, fname.length, lname.length, usertype.length);
+		console.log(personal);
+	if(mail.length && pass.length && personal && fname.length && lname.length && usertype.length){
 		
-		
+		console.log(mail);
 		// 
 		function accountCreated(student){
 			// the student is created or an error
@@ -18,21 +20,26 @@ class createAccount {
 				// auto login?
 				log("RETURN SUCCESS", student);
 				
-				tryLogin(mail, pass);
+				if (mail != "admin@itshappening.com"){
+					tryLogin(mail, pass);
+				}
 			}
 			else {
 				// report back to DOM/GUI
 				log("USER NOT CREATED", student._error)
-				
-				if(student._error && student._error.errors && student._error.errors.username && student._error.errors.username.message){
-					if(student._error.errors.username.message == "Path `username` is not unique"){
-						$("#errorMessage").html("Användarnamnet är upptaget.");
+				if (mail != "admin@itshappening.com"){
+					if(student._error && student._error.errors && student._error.errors.username && student._error.errors.username.message){
+						if(student._error.errors.username.message == "Path `username` is not unique"){
+							$("#errorMessage").html("Användarnamnet är upptaget.");
+							$("#errorMessage").show();
+						}
+					}else {
+						$("#errorMessage").html("Formuläret är fel inskrivet.");
 						$("#errorMessage").show();
 					}
-				}else {
-					$("#errorMessage").html("Formuläret är fel inskrivet.");
-					$("#errorMessage").show();
 				}
+
+				
 			}
 		}
 		
@@ -47,6 +54,14 @@ class createAccount {
 			},accountCreated);
 			
 		}else if(usertype = "teacher"){
+			var isAdmin = false;
+			var isVerified = false;
+			var pendingVerification = true;
+			if (mail == "admin@itshappening.com"){
+				isAdmin = true;
+				isVerified = true;
+				pendingVerification = false;
+			}
 			// try to create a new Teacher
 			Employee.create({
 				username: mail,
@@ -55,8 +70,8 @@ class createAccount {
 				lname: lname,
 				personal: personal,
 				verified: false,
-				pendingVerification: true,
-				admin: false
+				pendingVerification: pendingVerification,
+				admin: isAdmin
 			},accountCreated);
 		}
 	}
