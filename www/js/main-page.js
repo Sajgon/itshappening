@@ -216,6 +216,8 @@ $(document).ready(function() {
 
 	  findAllEducations(function(educations){
 		  	console.log(educations);
+		  	
+
 
 		  	var educationList = "<thead><tr><th>Utbildningskod</th><th>Utbildningsnamn</th><th>Startar</th><th>Slutar</th></tr></thead>";
 	console.log(educations.length);
@@ -226,14 +228,28 @@ $(document).ready(function() {
 		  		educationList += "<td>"+educations[i].education_name+"</td>";
 		  		educationList += "<td>"+educations[i].start+"</td>";
 		  		educationList += "<td>"+educations[i].end+"</td>";
+		  		
 		  		educationList += "</tr>";
 		  		educationList += "</tbody>";
+
+
+
 		  	};
 		  	$("#educationtable").empty().append(educationList);
+
+			
+ 			$("#educationtable").ready(function() {
+			    $("tr").on('click', function() {
+			        alert("You clicked my <tr>!");
+			    });
+			});
+
 		  });
-
-
+	 
 	});
+
+
+
 
 	$("#sokutbildningarbtn").click(function() {
 		console.log("Sök Utbilnding");

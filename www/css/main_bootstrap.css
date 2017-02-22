@@ -61,7 +61,9 @@ body {
 .btn-primary.btn-outline {
   color: #212121;
 }
-
+.edTable table {
+    cursor: pointer;
+}
 
 .btn-primary.btn-outline:hover,
 .btn-success.btn-outline:hover,
