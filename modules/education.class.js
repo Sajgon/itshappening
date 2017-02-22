@@ -5,8 +5,8 @@ module.exports = class Education {
     return {
       education_code: {type: String, required: true},
       education_name: {type: String, required: true},
-      start: {type: Number, required: true},
-      end: {type: Number, required: true},
+      start: {type: String, required: true},
+      end: {type: String, required: true},
       admin: {type: String, required: true}
     };
   }
