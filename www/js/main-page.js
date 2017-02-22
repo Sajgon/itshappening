@@ -223,7 +223,7 @@ $(document).ready(function() {
 	console.log(educations.length);
 		  	for(var i = 0; i < educations.length; i++){
 		  		educationList += "<tbody>";
-		  		educationList += "<tr>";
+		  		educationList += "<tr id="+educations[i].education_code+">";
 		  		educationList += "<td>"+educations[i].education_code+"</td>";
 		  		educationList += "<td>"+educations[i].education_name+"</td>";
 		  		educationList += "<td>"+educations[i].start+"</td>";
@@ -238,9 +238,14 @@ $(document).ready(function() {
 		  	$("#educationtable").empty().append(educationList);
 
 			
- 			$("#educationtable").ready(function() {
+ 			$("#educationtable ").ready(function() {
 			    $("tr").on('click', function() {
-			        alert("You clicked my <tr>!");
+			       
+			       var educationCodeId = $(this).attr('id');
+			       console.log(educationCodeId);
+
+			      getEducationByCode(educationCodeId);
+
 			    });
 			});
 
@@ -460,6 +465,19 @@ function setAdminByUsername(username){
 			Employee.update(result[0]._id, result[0], function(updatedResult){
 				console.log(updatedResult);
 			});
+
+			console.log(result[0]);
+		}
+	});
+}
+
+function getEducationByCode(code){
+	Education.find('find/{education_code:/'+code+'/}', function(result){
+		console.log(result);
+		if (result[0]){
+			$(".pageObj").hide();
+			$("#educationDetail").show();
+			$("#educationTitle").html(result[0].education_name);
 
 			console.log(result[0]);
 		}
