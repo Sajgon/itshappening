@@ -28,7 +28,7 @@ module.exports = class Employee extends User {
     var searchOrId = req.url.split('employee/')[1];
 
     // allow an Admin to update all Owners
-    if(user && user.role == "Admin"){
+    if(user && user.admin == true){
       return true;
     }
 
