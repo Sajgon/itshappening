@@ -8,12 +8,18 @@ class createEducation {
 	console.log("Called create education class.");
 	console.log(educationid, educationname, start, end, createdby);
 
-	console.log(educationid.length, educationname.length, start.length, end.length, createdby.length);
-
-	if(!educationid.length == 4){
+	
+	if(!educationid.length == 5){
 		var message = "Education ID must include 4 characters.";
 		$("#errMsg-skapautbildning").append(message);
 		$("#showErrMessage").show();
+
+	}else if(start > end){
+
+		var message = "Starttiden måste vara före sluttiden.";
+		$("#errMsg-skapautbildning").append(message);
+		$("#showErrMessage").show();
+		
 	} else if(educationid.length && educationname.length && start && end && createdby.length){
 		
 		console.log("yes");
@@ -32,7 +38,7 @@ class createEducation {
 				
 			}
 		}
-		if (educationid.length == 5){
+		
 			Education.create({
 				education_code: educationid,
 				education_name: educationname,
@@ -44,7 +50,7 @@ class createEducation {
 				students: [],
 				admin: createdby
 			}, educationCreated);
-		}
+		
 	}else{
 		var message = "Please submit the form correctly."
 		$("#errMsg-skapautbildning").append(message);
