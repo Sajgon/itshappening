@@ -396,6 +396,50 @@ $(document).ready(function() {
 
 	$("#searchNameBtn").click(function(){
 		console.log("Söker efter Namn");
+
+		$("#searchOutput").empty();
+		var nameInputText = $("#nameInputText").val();
+		console.log(nameInputText);
+		Education.find('find/{education_name:/.*/}',viewEducationByName);
+
+
+			
+			function viewEducationByName(education){
+				console.log(education);
+
+				var educationList = "<thead><tr><th>UtbildningsID</th><th>Utbildningsnamn</th><th>Startar</th><th>Slutar</th></tr></thead>";
+				var found = false;
+
+		  	for(var i = 0; i < education.length; i++){
+		  		console.log(nameInputText, education[i].education_name);
+				if(nameInputText == education[i].education_name){
+					educationList += "<tbody>";
+			  		educationList += "<tr>";
+			  		educationList += "<td>"+education[i].education_code+"</td>";
+			  		educationList += "<td>"+education[i].education_name+"</td>";
+			  		educationList += "<td>"+education[i].start+"</td>";
+			  		educationList += "<td>"+education[i].end+"</td>";
+			  		educationList += "</tr>";
+			  		educationList += "</tbody>";
+			  		found=true;
+
+			  		break;
+				}
+		
+		  		
+		  	}
+
+		  	if(found==true){
+  				$("#searchOutput").empty().append(educationList);
+		  	}else{
+		  		console.log("hittar ingen utbildning")
+		  	}
+		
+				
+			}
+
+
+
 	});
 
 	$("#searchIdBtn").click(function(){
