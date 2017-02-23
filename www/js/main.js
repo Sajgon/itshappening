@@ -68,7 +68,7 @@ function processLogin(loggedIn){
 	if(loggedIn){
 		// user LOGGED in
 		if(pageName == "index"){
-			window.location.href = "main_page.html";	
+			window.location.href = "/";	
 		}else if(pageName == "main_page"){
 			// nothing happens
 		}
@@ -76,7 +76,7 @@ function processLogin(loggedIn){
 		
 		// user NOT LOGGED IN
 		if(pageName == "main_page"){
-			window.location.href = "index.html";	
+			window.location.href = "/login";	
 		}else if(pageName == "index"){
 			// nothing happens
 			firstIndexView();

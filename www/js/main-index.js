@@ -136,7 +136,7 @@ function tryLogin(usrn, pass){
 		
 		//if(usertype == result.user.role){
 			if(result.status == "logged in succesfully"){
-				window.location.href = "main_page.html";
+				window.location.href = "/";
 			}else if(result.status == "wrong credentials"){
 				$("#errorMessage").html("Användarnamnet eller lösenordet är fel.");
 				$("#errorMessage").show();

@@ -4,6 +4,7 @@ var bodyparser = require('body-parser');
 var cookieparser = require('cookie-parser');
 var sha1 = require('sha1');
 var mongoose = require('mongoose');
+var path = require('path');
 require('mongoosefromclass')(mongoose);
 
 // Make some things global
@@ -74,9 +75,27 @@ app.get('/rest/user-roles',(req,res)=>{
   res.json(global.userRoles);
 });
 
+// Special routes
+app.get('/login',function(req,res){
+  res.sendFile(path.join(__dirname,'www','index.html'));
+});
+app.get('/register',function(req,res){
+  res.sendFile(path.join(__dirname,'www','index.html'));
+});
+app.get('/',function(req,res){
+  res.sendFile(path.join(__dirname,'www','main_page.html'));
+});
+
 // Point to a folder where we have static files
 // (our frontend code)
 app.use(express.static('www'));
+
+// If no file found in the www folder
+app.get('*',function(req,res){
+  res.sendFile(path.join(__dirname,'www','main_page.html'));
+});
+
+
 
 // Connect to mongoDB
 // and when that is done start the express server

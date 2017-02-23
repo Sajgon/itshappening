@@ -203,17 +203,29 @@ function findStudentByUsername(username){
 }
 
 
+var routesToRegister = {};
+
+function addRoute(url,func){
+  routesToRegister[url] = func;
+}
+
+function registerAllRoutes(){
+	new Router(routesToRegister);
+} 
+
+
 
 $(document).ready(function() {
 
-	$("#inlaggBtn").click(function(){
+	addRoute('/',function(){
+		console.log("HEJ");
 		$(".pageObj").hide();
 		$("#rowSkapaInlagg").show();
 		$("#posts").show();
 
 	});
 
-	$( "#allautbildningarbtn" ).click(function() {
+	addRoute('/alla-utbildningar',function() {
 	  console.log("Alla utbildningar");
 	  $(".pageObj").hide();
 	  $("#rowEducations").show();
@@ -385,12 +397,6 @@ $(document).ready(function() {
 	});
 
 
-	$( "#inlaggbtn" ).click(function() {
-	  console.log("Inlägg");
-	  $(".pageObj").hide();
-	});
-
-
 	$( "#visabokningarbtn" ).click(function() {
 	  console.log("Visa Bokningar");
 	  $(".pageObj").hide();
@@ -532,6 +538,11 @@ $(document).ready(function() {
 			}
 
 	});
+
+
+	// DO THIS AFTER ALL addRoutes !!!
+	registerAllRoutes();
+
 });
 
 function setVerifedByUsername(username){
