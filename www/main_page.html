@@ -129,14 +129,14 @@
                             <!-- /.nav-second-level -->
                         </li>
 
-                        <li>
+                        <li id="adminMenu">
                             <a href="javascript:void(0)"><i class="glyphicon glyphicon-user fa-fw"></i> ADMIN<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a id="skapautbildningbtn" href="javascript:void(0)">Skapa Utbildning</a>
                                 </li>
                                 <li>
-                                    <a id="adminebtn" href="javascript:void(0)">Admin</a>
+                                    <a id="adminsbtn" href="javascript:void(0)">Admins</a>
                                 </li>
                                 <li>
                                     <a id="lararebtn" href="javascript:void(0)">Lärare</a>
@@ -144,7 +144,6 @@
                                 <li>
                                     <a id="studentbtn" href="javascript:void(0)">Studenter</a>
                                 </li>
-                            
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -355,16 +354,35 @@
                 </div>
 
                 <div id="rowLarare" class="pageObj">
+					<!-- Title -->
                     <div class="row">
                         <div class="col-xs-12">
                           <h1  class="page-header">Lärare</h1>
                         </div>
                     </div>
-                    <div class="row">
+					
+					<!-- pendingVerification -->
+					<div class="row">
                         <div class="col-xs-12" >
-                        <table class="table" id="employeestable"></table>
+							<table class="table" id="pendingVerification-employeestable"></table>
                         </div>
                     </div>
+					
+					<!-- verified emplyees -->
+                    <div class="row">
+                        <div class="col-xs-12" >
+							<table class="table" id="verified-employeestable"></table>
+                        </div>
+                    </div>
+					
+					<!-- denied emplyees -->
+					<div class="row">
+                        <div class="col-xs-12" >
+							<table class="table" id="denided-employeestable"></table>
+                        </div>
+                    </div>
+					
+					
                 </div>
 
 

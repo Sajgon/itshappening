@@ -2,23 +2,21 @@ class createAccount {
 
   constructor(mail, pass, personal, usertype, fname, lname){
     // Test communication with the server
-    // through the Students and Employees objects
+    // through the users and Employees objects
 
     var mem = {}
 	
-		console.log(mail.length, pass.length, personal, fname.length, lname.length, usertype.length);
-		console.log(personal);
 	if(mail.length && pass.length && personal && fname.length && lname.length && usertype.length){
 		
-		console.log(mail);
 		// 
-		function accountCreated(student){
-			// the student is created or an error
-			// because the username is taken
-			if(!student._error){
-				// student is created what now?
+		function accountCreated(user){
+			
+			console.log(user);
+			
+			if(!user._error){
+				// user is created what now?
 				// auto login?
-				log("RETURN SUCCESS", student);
+				log("RETURN SUCCESS", user);
 				
 				if (mail != "admin@itshappening.com"){
 					tryLogin(mail, pass);
@@ -26,10 +24,10 @@ class createAccount {
 			}
 			else {
 				// report back to DOM/GUI
-				log("USER NOT CREATED", student._error)
+				log("USER NOT CREATED", user._error)
 				if (mail != "admin@itshappening.com"){
-					if(student._error && student._error.errors && student._error.errors.username && student._error.errors.username.message){
-						if(student._error.errors.username.message == "Path `username` is not unique"){
+					if(user._error && user._error.errors && user._error.errors.username && user._error.errors.username.message){
+						if(user._error.errors.username.message == "Path `username` is not unique"){
 							$("#errorMessage").html("Användarnamnet är upptaget.");
 							$("#errorMessage").show();
 						}
@@ -43,9 +41,9 @@ class createAccount {
 			}
 		}
 		
-		if(usertype == "student"){
-			// try to create a new Student
-			Student.create({
+		if(usertype == "user"){
+			// try to create a new user
+			user.create({
 				username: mail,
 				password: pass,
 				fname: fname,
@@ -69,7 +67,7 @@ class createAccount {
 				fname: fname,
 				lname: lname,
 				personal: personal,
-				verified: false,
+				verified: isVerified,
 				pendingVerification: pendingVerification,
 				admin: isAdmin
 			},accountCreated);

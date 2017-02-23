@@ -29,6 +29,9 @@ if(loadTemplate){
 function start(){
 	isLoggedIn();
   
+
+	
+  
 	// Wait for DOM ready
 	$(()=>{
 		// Run the rest tests
@@ -52,7 +55,7 @@ function isLoggedIn(){
 	Login.find(function(result){
 		console.log(result);
 		sessionid = result.user._id;
-if(result.status == "logged in"){
+	if(result.status == "logged in"){
 			console.log(result.status);
 			processLogin(true);
 		}else{
@@ -128,6 +131,53 @@ function epochToDate(epoch){
 
 
 
+
+function deleteAccountById(id){
+	
+	Student.find(id, findStudent);     
+	
+	function findStudent(student){
+		console.log(student);
+		if (student._id){
+			// Delete a student
+			Student.delete(student._id,accountDeleted);
+		}else{
+			// Look for an employee
+			Employee.find(id, findEmployee);   
+		}
+	}
+	
+	function findEmployee(employee){
+		console.log(employee);
+		if (employee._id){
+			// Delete a student
+			Employee.delete(employee._id, accountDeleted);
+		}else{
+			// _id not found.
+			console.log("The user ID you tried to delete does not exist.");
+		}
+	}
+	
+	function accountDeleted(result){
+		console.log("The account has been deleted succefully.");
+	}
+}
+
+function deleteAllStudents(){
+	findAllStudents(function(students){
+		for(var i = 0; i < students.length; i++){
+			deleteAccountById(students[i]._id);
+		}
+	});
+}
+
+function deleteAllEmployees(){
+	findAllEmployees(function(employees){
+		for(var i = 0; i < employees.length; i++){
+			deleteAccountById(employees[i]._id);
+		}
+	});
+}
 
 
 
