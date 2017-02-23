@@ -5,3 +5,7 @@ a > p {
 .pageObj{
 	display: none;
 }
+
+#adminMenu, #rowSkapaInlagg{
+	display: none;
+}
