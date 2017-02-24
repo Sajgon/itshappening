@@ -1,3 +1,9 @@
+
+
+
+
+
+
 // Create som new rest entitites
 // (also see rest-entity.class.js)
 var Student = new RestEntity('student');

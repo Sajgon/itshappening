@@ -9,3 +9,7 @@ a > p {
 #adminMenu, #rowSkapaInlagg{
 	display: none;
 }
+
+.panel-default > .row{
+	margin-bottom: 10px;
+}

@@ -20,7 +20,7 @@ class Router {
 
     // when clicking a link run the click handler
     $(document).on('click','a',function(e){
-      console.log("Event object",e);
+      // console.log("Event object",e);
       var aTag = $(this);
       self.clickHandler(aTag,e);
     });
@@ -32,7 +32,6 @@ class Router {
 
     // on initial load
     self.actOnRoute(location.pathname);
-
   }
 
   clickHandler(aTag,eventObj){

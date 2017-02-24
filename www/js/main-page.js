@@ -9,60 +9,57 @@ $(function() {
 		
 		isAdmin(sessionid, function(callback){
 			if(callback){
+				// ADMIN PERMISSION STUFF
 				$("#adminMenu").show();
 				$("#rowSkapaInlagg").show();
+
+                $("#newPostBtn").click(function(){
+
+                    var postTitle = $("#postTitle").val();
+                    var postContent = $("#postContent").val();
+
+                    epochDate = (new Date).getTime();
+
+                    // try to create a new student
+                    NewsPost.create({
+                        title: postTitle,
+                        content: postContent,
+                        for_all: "true",
+                        for_education_id: "none",
+                        date_posted: epochDate,
+                        postedby_id: sessionid
+                    },postCreated);
+
+                    function postCreated(post) {
+                        console.log("post");
+                        console.log(post);
+                    }
+                });
 			}else{
 				$("#adminMenu").empty();
 				$("#rowSkapaInlagg").empty();
 			}
 		});
-		
-	}
 
-	$("#rowSkapaInlagg").show();
-	$("#posts").show();
-
-	$("#newPostBtn").click(function(){
-		
-		var postTitle = $("#postTitle").val();
-		var postContent = $("#postContent").val();
-
-		epochDate = (new Date).getTime();
-		
-		// try to create a new student
-		NewsPost.create({
-			title: postTitle,
-			content: postContent,
-			for_all: "true",
-			for_education_id: "none",
-			date_posted: epochDate,
-			postedby_id: sessionid
-		},postCreated);
-		
-		function postCreated(post) {
-			console.log("post");
-			console.log(post);
-		}
-	});
-	
-	
-	if(sessionid){
-		// set username in top right corner
-		findOneStudent(sessionid, "username", function(username){
-			if(username){
-				$("#drowndown-username").html(username);
-			}else{
-				//search in emplyee
-				findOneEmployee(sessionid, "username", function(username){
-					if(username){
-						$("#drowndown-username").html(username)
-					}
-				});
-			}
-		});
+        // set username in top right corner
+        findOneStudent(sessionid, "username", function(username){
+            if(username){
+                $("#drowndown-username").html(username);
+            }else{
+                //search in emplyee
+                findOneEmployee(sessionid, "username", function(username){
+                    if(username){
+                        $("#drowndown-username").html(username)
+                    }
+                });
+            }
+        });
+        $("#posts").show();
 	}
 });
-	
+
+
+// FUNCTIONS BELOW
 function findAllStudents(callback){
 	Student.find('find/{fname:/.*/}', function(result){
 		//console.log(result);
@@ -135,29 +132,26 @@ function findOneEmployee(studentId, requestType, callback){
 	});
 }
 
-
-
-
-function findOnePost(){
+// get 1 post function
+function findOnePost(callback){
 	NewsPost.find('5899d43204165a3660061eef',viewPosts);
 	
 	function viewPosts(posts){
-		console.log(posts);
+        callback(posts);
 	}
 }
 
 
 function findAllAdminPosts(){
 	
-	NewsPost.find('find/{for_all:/true.*/}',viewPosts);
-	
-	function viewPosts(posts){
-		console.log(posts);
-		printPosts(posts)
-	}
+	NewsPost.find('find/{for_all:/true.*/}',printPosts);
+
 }
 
 function printPosts(posts){
+    console.log("Posts:");
+    console.log(posts);
+
 	if(posts.length){
 		for(var p = 0; p < posts.length; p++){
 			printPost(posts[p]);

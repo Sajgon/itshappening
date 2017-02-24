@@ -3,30 +3,17 @@
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
     <title>itshappening</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- MetisMenu CSS -->
-    <link href="/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> <!-- Bootstrap Core CSS -->
+    <link href="/vendor/metisMenu/metisMenu.min.css" rel="stylesheet"> <!-- MetisMenu CSS -->
+    <link href="/dist/css/sb-admin-2.css" rel="stylesheet"><!-- template CSS -->
+    <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> <!-- Custom icon Fonts -->
 
-    <!-- Custom CSS -->
-    <link href="/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/css/main_bootstrap.css" rel="stylesheet" type="text/css"> <!-- Editable css -->
 
-    <!-- Custom Fonts -->
-    <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- Editable css -->
-    <link href="/css/main_bootstrap.css" rel="stylesheet" type="text/css">
-
-    <!-- Editable css -->
-    <link href="/css/main_page.css" rel="stylesheet" type="text/css">
+    <link href="/css/main_page.css" rel="stylesheet" type="text/css"> <!-- Editable css -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,45 +21,40 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-        <!-- /#wrapper -->
 
+    <script>
+        var loadTemplate = false;
+        var pageName = "main_page";
+    </script>
 
-  <script>var loadTemplate = false;</script>
-  <script>var pageName = "main_page";</script>
+    <script src="js/libs/jquery.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="/vendor/metisMenu/metisMenu.min.js"></script>  <!-- Metis Menu Plugin JavaScript -->
+    <script src="/dist/js/sb-admin-2.js"></script> <!-- Custom Theme JavaScript -->
 
-  <script src="js/libs/jquery.js"></script>
-  <script src="bootstrap/js/bootstrap.min.js"></script>
-  <script src="js/classes/rest-entity.class.js"></script>
-  <script src="js/classes/main-navbar.class.js"></script>
+    <script src="js/classes/rest-entity.class.js"></script>
+    <script src="js/classes/create-education.class.js"></script>
+    <script src="js/classes/router.class.js"></script>
+
+    <script src="js/datehandler.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/main-page.js"></script>
+
+  <!--
+    <script src="js/classes/main-navbar.class.js"></script>
   <script src="js/classes/modal.class.js"></script>
   <script src="js/classes/login-modal.class.js"></script>
   <script src="js/classes/register-modal.class.js"></script>
   <script src="js/classes/form-helpers.class.js"></script>
-  <script src="js/classes/create-education.class.js"></script>
+
   <script src="js/classes/rest-tests.class.js"></script>
-  <script src="js/libs/template.jquery.js"></script>
-  <script src="js/classes/router.class.js"></script>
-
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="/vendor/metisMenu/metisMenu.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="/dist/js/sb-admin-2.js"></script>
-
-	
-	<script src="js/datehandler.js"></script>
-	<script src="js/main.js"></script>
-	<script src="js/main-page.js"></script>
+  <script src="js/libs/template.jquery.js"></script> -->
 
 </head>
 <body>
     <div id="wrapper">
 
         <!-- Navigation -->
-
-        
-
         <nav class="navbar navbar-default navbar-static-top defaultborder" role="navigation" style="margin-bottom: 0">
 
             <div class="navbar-header">
@@ -84,15 +66,10 @@
                 </button>
                 <a href="/"><img id="inlaggBtn" class="rubrik2" src="images/itshappeninglogo.png"></a>
             </div>
-            <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-            
-                    <!-- /.dropdown-tasks -->
-                </li>
-                <!-- /.dropdown -->
                     
-                <!-- /.dropdown -->
+                <!-- dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
                         <i class="fa fa-user fa-fw"></i><span id="drowndown-username">-</span> <i class="fa fa-caret-down"></i>
@@ -101,30 +78,24 @@
                         <li><a id="logoutbtn" href="javascript:void(0)"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
-                    <!-- /.dropdown-user -->
-
-                    <!-- /.dropdown-user -->
                 </li>
-                <!-- /.dropdown -->
             </ul>
-            <!-- /.navbar-top-links -->
 
             <div class="navbar-default sidebar defaultborder" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        
-                   
+
                         <li>
                             <a href="javascript:void(0)"><i class="fa fa-graduation-cap fa-fw"></i> UTBILDING<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a id="allautbildningarbtn" href="/alla-utbildningar">Alla Utbildningar</a>
+                                    <a href="/alla-utbildningar">Alla Utbildningar</a>
                                 </li>
                                 <li>
-                                    <a id="sokutbildningarbtn" href="/sok-utbildningar">Sök Utbildning</a>
+                                    <a href="/sok-utbildningar">Sök Utbildning</a>
                                 </li>
                                 <li>
-                                    <a id="minautbildningarbtn" href="/mina-utbildningar">Mina Utbildningar</a>
+                                    <a href="/mina-utbildningar">Mina Utbildningar</a>
                                 </li>
                             </ul>
                         </li>
@@ -133,16 +104,16 @@
                             <a href="javascript:void(0)"><i class="glyphicon glyphicon-user fa-fw"></i> ADMIN<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a id="skapautbildningbtn" href="/skapa-utbildning">Skapa Utbildning</a>
+                                    <a href="/skapa-utbildning">Skapa Utbildning</a>
                                 </li>
                                 <li>
-                                    <a id="adminsbtn" href="/admins">Admins</a>
+                                    <a href="/admins">Admins</a>
                                 </li>
                                 <li>
-                                    <a id="lararebtn" href="/larare">Lärare</a>
+                                    <a href="/larare">Lärare</a>
                                 </li>
                                 <li>
-                                    <a id="studentbtn" href="/studenter">Studenter</a>
+                                    <a href="/studenter">Studenter</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -151,16 +122,16 @@
                             <a href="javascript:void(0)"><i class="fa fa-calendar fa-fw"></i> SAL<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a id="visabokningarbtn" href="/bokningar">Visa Bokningar</a>
+                                    <a href="/bokningar">Visa Bokningar</a>
                                 </li>
                                 <li>
-                                    <a id="bokasalbtn" href="/boka-sal">Boka Sal</a>
+                                    <a href="/boka-sal">Boka Sal</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="javascript:void(0)"><i class="fa fa-wrench fa-fw"></i> KONTO<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> KONTO<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a  id="bytlosenordbtn" href="/byt-losenord">Byt Lösenord</a>
@@ -171,8 +142,8 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <li id="kontaktbtn">
-                            <a href="/kontakta-oss"><i class="glyphicon glyphicon-envelope fa-fw"></i> KONTAKT</a>
+                        <li>
+                            <a href="/kontakta-oss"><i class="glyphicon glyphicon-envelope"></i> KONTAKT</a>
                         </li>
                     </ul>
                 </div>
@@ -181,10 +152,11 @@
         </nav>
 
         <!-- Page Content -->
-
-
+        <!-- Page Content -->
+        <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
+                <!-- SKAPA INKÄGG -->
                 <div id="rowSkapaInlagg" class="row pageObj">
 					<div class="col-xs-12">
                         <h1  class="page-header">Skapa Inlägg</h1>
@@ -223,6 +195,8 @@
                     </div>
                 </div>
 
+                <!-- INLÄGG/förstasida -->
+                <!-- INLÄGG/förstasida -->
                 <div id="posts" class="row pageObj">
                     <div  class="col-xs-12">
                         <h1  class="page-header">Inlägg</h1>
@@ -231,6 +205,9 @@
                         <p id="noposts"></p>
                     </div>
                 </div>
+
+                <!-- KONTAKTSIDA -->
+                <!-- KONTAKTSIDA -->
                 <div id="kontaktPage" class="pageObj">
                     <div class="row">
                         <div class="col-lg-12">
@@ -263,7 +240,7 @@
                                 <img src="images/maillogo.jpeg" alt="E-mail">
                                 <div class="caption">
                                     <h3>E-Mail</h3>
-                                    <a href="www.facebook.com"><p>support@itshappening.com</p></a>
+                                    <p>support@itshappening.com</p>
                                 </div>
                             </div>
                         </div>
@@ -274,64 +251,73 @@
                         </div>
                     </div>
                 </div>
-            
 
-                <div id="rowSkapaUtbildning" class="row pageObj">
-                    <div class="col-xs-12">
-                        <h1  class="page-header">Skapa Utbildning</h1>
+                <!-- skapa utbildnings sida -->
+                <!-- skapa utbildnings sida -->
+                <div id="rowSkapaUtbildning" class="pageObj">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h1  class="page-header">Skapa Utbildning</h1>
+                        </div>
                     </div>
-                    <div class="panel panel-default col-xs-12 paddingfix">
-                        <div class="panel-heading ">
-							<div class="row" id="showErrMessage">
+
+                    <div class="row">
+                        <div class="panel panel-default col-xs-12">
+                            <div class="row" id="showErrMessage">
                                 <div class="panel-title col-xs-12">
                                     <h3 id="errMsg-skapautbildning" ></h3>
                                 </div>
                             </div>
-							
+
                             <div class="row">
-                                <div class="panel-title col-xs-12">
-                                    <div class="form-group"><label for="educationId">UtbildningsID</label>
-										<input type="text" name="educationId" id="educationId">   
-                                    </div>
+                                <div class="col-xs-2">
+                                    <label for="educationId">UtbildningsID</label>
+                                </div>
+
+                                <div class="col-xs-10">
+                                    <input type="text" name="educationId" id="educationId">
                                 </div>
                             </div>
-							
+
                             <div class="row">
-                                <div class="panel-title col-xs-12">
-                                    <div class="form-group"><label for="educationId">Utbildningsnamn</label>
-
-                                        <input type="text" name="educationId" id="educationName">
-
-                                    </div>
-                                    
+                                <div class="col-xs-2">
+                                    <label for="educationId">Utbildningsnamn</label>
                                 </div>
-                                
+                                <div class="col-xs-10">
+                                    <input type="text" name="educationId" id="educationName">
+                                </div>
                             </div>
                             <div class="row">
-                                <div class="panel-title col-xs-12">
-                                    <div class="form-group"><label for="educationStart">Start</label>
+                                <div class="col-xs-2">
+                                    <label for="educationStart">Start</label>
+                                </div>
+
+                                <div class="col-xs-10">
                                     <input type="date" name="educationStart" id="educationStart">
-                                    </div>
-                                    
                                 </div>
+
                             </div>
                             <div class="row">
-                                <div class="panel-title col-xs-8">
-                                    <div class="form-group"><label for="educationEnd">Slut</label>
-                                        <input type="date" name="educationEnd" id="educationEnd">
-                                    </div>
-                                    
+                                <div class="col-xs-2">
+                                    <label for="educationEnd">Slut</label>
+                                </div>
+
+                                <div class="col-xs-10">
+                                    <input type="date" name="educationEnd" id="educationEnd">
                                 </div>
                             </div>
+
                             <div class="row">
-                            <div class="panel-title col-xs-12">
-                            <button id="newEducationBtn" type="button"  class="btn btn-primary skapaUtbildningBtn">Skapa utbildning</button>
-                            </div>
+                                <div class="panel-title col-xs-12">
+                                    <button id="newEducationBtn" type="button"  class="btn btn-primary skapaUtbildningBtn">Skapa utbildning</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- visa "Admins" sida-->
+                <!-- visa "Admins" sida-->
                 <div id="rowAdmins" class="pageObj">
                     <div class="row">
                         <div class="col-xs-12">
@@ -350,7 +336,8 @@
                      </div>
                 </div>
 
-
+                <!-- visa "studenter" sida-->
+                <!-- visa "studenter" sida-->
                 <div id="rowStudenter" class="pageObj">
                     <div class="row">
                         <div class="col-xs-12">
@@ -369,6 +356,8 @@
                      </div>
                 </div>
 
+                <!-- visa "lärare" sida-->
+                <!-- visa "lärare" sida-->
                 <div id="rowLarare" class="pageObj">
 					<!-- Title -->
                     <div class="row">
@@ -400,12 +389,11 @@
 							<table class="table" id="denided-employeestable"></table>
                         </div>
                     </div>
-					
-					
                 </div>
 
 
-
+                <!-- "Alla utbildningar" sida-->
+                <!-- "Alla utbildningar" sida-->
                 <div id="rowEducations" class="pageObj">
                     <div class="row">
                         <div class="col-xs-12">
@@ -419,7 +407,8 @@
                     </div>
                 </div>
 
-
+                <!-- "SÖk utbildning" sida-->
+                <!-- "SÖk utbildning" sida-->
                 <div class="pageObj" id="searchfield">
                     <div class="row">
                         <div class="col-xs-12 col-sm-8">
@@ -446,46 +435,50 @@
                     </div>
 
                     <div class="row">
-                    <div class="col-xs-12">
-                                
-                              
-                        <table class="table" id="searchOutput"> </table>
-                    </div>
+                        <div class="col-xs-12">
+                            <table class="table" id="searchOutput"> </table>
+                        </div>
                     </div>
                 </div>
 
-                    
 				<!-- Mina utbildningar sida -->
-				<div class="pageObj" id="myEducations">    
+				<!-- Mina utbildningar sida -->
+				<div class="pageObj" id="myEducations">
+                    <!-- Page title -->
                     <div class="row">
                         <div class="col-xs-12 col-sm-8">
                             <h2>Mina utbildningar</h2>
                         </div>
                     </div>
-					
+
+                    <!-- My educations table -->
 					<div class="row">
                         <div class="col-xs-12" >
 							<table class="table edTable" style="cursor: pointer;" id="myEducationsTable"></table>
                         </div>
                     </div>
-                </div>	
-					
-					
-                <div class="pageObj" id="educationDetail">    
+                </div>
+
+                <!-- Visa EN UTBILDNINGGS sida -->
+                <!-- Visa EN UTBILDNINGGS sida -->
+                <!-- Visa EN UTBILDNINGGS sida -->
+                <div class="pageObj" id="educationDetail">
                     <div class="row">
                         <div class="col-xs-12 col-sm-8">
                             <h2 id="educationTitle"></h2>
                         </div>
                     </div>
                 </div>
+
+
+
+
+                <!-- page content end -->
             </div>
             <!-- /.container-fluid -->
         </div>
         <!-- /#page-wrapper -->
-
     </div>
 
-
 </body>
-
 </html>

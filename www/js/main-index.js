@@ -6,38 +6,17 @@ var NewsPost = new RestEntity('newspost');
 var Login = new RestEntity('login');
 var sessionid = "";
 
-// Some utility methods for forms
-// var formHelpers = new FormHelpers();
 
-// Load html templates
-// (also see libs/template.jquery.js)
-if(loadTemplate){
-	$.loadTemplates([
-	  'header',
-	  'modal',
-	  'navbar',
-	  'restTestOutput',
-	  'tableFromObject',
-	  'formFromObject'
-	],start);
-}else{
-	start();
-}
+start();
 
 // Start the app
 function start(){
-  // Wait for DOM ready
-  $(()=>{
-  	// Create an admin account
-	var newAdmin = new createAccount("admin@itshappening.com", "123", 200001011010, "teacher", "Ad", "Min");
-	console.log(newAdmin);
-    // Create the main navbar
-    new MainNavbar();
-    // Run the rest tests
-	if(loadTemplate){
-		new RestTests();
-	}
-  });
+  	// Wait for DOM ready
+	$(()=>{
+  		// SKAPA EN TEMPLATE ADMIN KONTO
+		var newAdmin = new createAccount("admin@itshappening.com", "123", 198001011010, "teacher", "Ad", "Min");
+		console.log(newAdmin);
+  	});
 }
 
 

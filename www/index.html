@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>itshappening</title>
-  <meta charset="utf8">
-  <meta name="viewport" content="width=device-width, initial scale=1.0">
+  <meta charset="utf-8">
+
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="css/main.css">
@@ -13,124 +13,117 @@
   <script>var pageName = "index";</script>
 
   <script src="js/libs/jquery.js"></script>
-  <script src="js/libs/template.jquery.js"></script>
+
   <script src="bootstrap/js/bootstrap.min.js"></script>
   <script src="js/classes/rest-entity.class.js"></script>
-  <script src="js/classes/main-navbar.class.js"></script>
+  <script src="js/classes/create-account.class.js"></script>
+   <script src="js/classes/router.class.js"></script>
+
+	<!--
+	 <script src="js/libs/template.jquery.js"></script>
+  <script src="js/classes/rest-tests.class.js"></script>
+    <script src="js/classes/main-navbar.class.js"></script>
   <script src="js/classes/modal.class.js"></script>
   <script src="js/classes/login-modal.class.js"></script>
   <script src="js/classes/register-modal.class.js"></script>
   <script src="js/classes/form-helpers.class.js"></script>
-  <script src="js/classes/create-account.class.js"></script>
-   <script src="js/classes/router.class.js"></script>
-  <script src="js/classes/rest-tests.class.js"></script>
+  -->
   
   <script src="js/main.js"></script>
   <script src="js/main-index.js"></script>
 </head>
 <body>
-<div class="container">
- 
-    <div class="col-xs-12 col-md-6 mainContent col-md-offset-3">
-      <div class="row">
-        <div class="col-xs-12 headline">
-           <img class="rubrik" src="images/itshappeninglogo.png">
-        </div>
-        <div class="col-xs-12 divider"></div>
-        <div class="col-xs-12 formContent">
-		
-			<div id="errorMessage" class="panel panel-danger errMessage">Error</div>
-		
-			<div id="firstView" class="row firstView">
-				<div class="row">
-					<div class="col-xs-12">
-						<h4>Välkommen! Vänligen välj nedan hur du vill gå vidare.</h4>
-					</div>
+	<div class="container">
+		<div class="col-xs-12 col-md-6 mainContent col-md-offset-3">
+			<div class="row">
+				<div class="col-xs-12 headline">
+				   <img class="rubrik" src="images/itshappeninglogo.png">
 				</div>
-				
-				<div class="row">
-					<div class="col-xs-12">
-						<button id="viewLoginFormBtn" class="btn btn-success btn-sm">Logga in</button>
+					<div class="col-xs-12 formContent">
+
+						<div id="errorMessage" class="panel panel-danger errMessage">Error</div>
+
+						<div id="firstView" class="row firstView">
+							<div class="row">
+								<div class="col-xs-12">
+									<h4>Välkommen! Vänligen välj nedan hur du vill gå vidare.</h4>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-xs-12">
+									<button id="viewLoginFormBtn" class="btn btn-success btn-sm">Logga in</button>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12">
+									<button id="viewNewAccountFormBtn" class="btn btn-success btn-sm">Skapa Nytt Konto</button>
+								</div>
+							</div>
+						</div>
+
+						<div id="formInputs" class="formProcess">
+							<h3 id="formTitle"></h3>
+
+							<div class="row margTop">
+								<div class="col-xs-4 col-md-3">
+									<label for="mail"> Mail </label>
+								</div>
+								<div class="col-xs-6 col-md-7">
+									<input name="mail" id="mail" type="text" class="form-control" value="admin@itshappening.com" placeholder="Mail"/>
+								</div>
+								<div class="col-xs-2"></div>
+							</div>
+
+							<div class="row  margTop">
+								<div class="col-xs-4 col-md-3">
+								  <label for="mail">Lösenord </label>
+								</div>
+								  <div class="col-xs-6 col-md-7">
+								  <input name="password" id="password" type="password" class="form-control" value="123" placeholder="Password"/>
+								  </div>
+								  <div class="col-xs-2"></div>
+							</div>
+
+							<div id="personal" class="row margTop">
+								<div class="col-xs-4 col-md-3">
+								  <label for="personal">Personnummer </label>
+								</div>
+								<div class="col-xs-6 col-md-7">
+								  <input name="personal" id="personalInput" type="text" class="form-control" value="199901011515" placeholder="personnummer"/>
+								 </div>
+								<div class="col-xs-2"></div>
+							</div>
+
+							<!-- LOGIN MED STUDENT/EMPLOYEE ALTERNATIV
+							<div class="row">
+								<span class="col-xs-2 user">
+								  <input type="radio" name="usertype" value="Student" checked>
+								  <span> Student </span>
+								</span>
+								<span class="col-xs-3 user">
+								  <input type="radio" name="usertype" value="Employee">
+								  <span> Lärare </span>
+								</span>
+							</div> -->
+
+							<button id="loginAccountBtn" class="btn btn-success btn-sm col-xs-2">Logga in</button>
+							<button id="newAccountBtn" class="btn btn-success btn-sm col-xs-3">Skapa Konto</button>
+						</div>
+
+
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12">
-						<button id="viewNewAccountFormBtn" class="btn btn-success btn-sm">Skapa Nytt Konto</button>
-					</div>
-				</div>
+					<footer class="col-xs-12 footerContent">
+						<div class="col-xs-12"><h3>Kontakt</h3></div>
+						<div class="col-xs-12 divider"></div>
+
+						<div class="col-xs-12">Gatan 7, 342 523, Malmö</div>
+						<div class="col-xs-12">+4633467434</div>
+						<div class="col-xs-12">Kontakt@itshappening.se</div>
+					</footer>
 			</div>
-			
-			<div id="formInputs" class="formProcess">
-				<h3 id="formTitle"></h3>
-				
-				
-				<div class="row margTop">
-					<div class="col-xs-4 col-md-3">
-						<label for="mail"> Mail </label>
-					</div>
-					<div class="col-xs-6 col-md-7">
-						<input name="mail" id="mail" type="text" class="form-control" value="admin@itshappening.com" placeholder="Mail"/>
-					</div>
-					<div class="col-xs-2"></div>
-				</div>
-				
-				<div class="row  margTop">
-					<div class="col-xs-4 col-md-3">
-					  <label for="mail">Lösenord </label>
-					</div>
-					  <div class="col-xs-6 col-md-7">
-					  <input name="password" id="password" type="password" class="form-control" value="123" placeholder="Password"/>
-					  </div>
-					  <div class="col-xs-2"></div>
-				</div>
-				
-				<div id="personal" class="row margTop">
-					<div class="col-xs-4 col-md-3">
-					  <label for="personal">Personnummer </label>
-					</div>
-					<div class="col-xs-6 col-md-7">
-					  <input name="personal" id="personalInput" type="text" class="form-control" value="199901011515" placeholder="personnummer"/>
-					 </div>
-					<div class="col-xs-2"></div>
-				</div>
-				
-				<!--
-				<div class="row">
-					<span class="col-xs-2 user">
-					  <input type="radio" name="usertype" value="Student" checked>
-					  <span> Student </span>
-					</span>
-					<span class="col-xs-3 user">
-					  <input type="radio" name="usertype" value="Employee">
-					  <span> Lärare </span>
-					</span>
-				</div> -->
-				
-				<button id="loginAccountBtn" class="btn btn-success btn-sm col-xs-2">Logga in</button>
-				<button id="newAccountBtn" class="btn btn-success btn-sm col-xs-3">Skapa Konto</button>
-			</div>
-            
-		  
-
-			
-        </div>
-            <div class="col-xs-12 footerContent">
-              <div class="col-xs-12"><h3>Kontakt</h3></div>
-              <div class="col-xs-12 divider"></div>
-            </div>
-            <div class="col-xs-12">Gatan 7, 342 523, Malmö</div>
-            <div class="col-xs-12">+4633467434</div>
-            <div class="col-xs-12">Kontakt@itshappening.se</div>
-      </div> 
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
+		</div>
+	</div>
 
 </body>
 </html>

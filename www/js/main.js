@@ -7,31 +7,13 @@ var Education = new RestEntity('education');
 var Login = new RestEntity('login');
 var sessionid = "";
 
-// Some utility methods for forms
-// var formHelpers = new FormHelpers();
 
-// Load html templates
-// (also see libs/template.jquery.js)
-if(loadTemplate){
-	$.loadTemplates([
-	  'header',
-	  'modal',
-	  'navbar',
-	  'restTestOutput',
-	  'tableFromObject',
-	  'formFromObject'
-	],start);
-}else{
-	start();
-}
+start();
 
 // Start the app
 function start(){
 	isLoggedIn();
-  
 
-	
-  
 	// Wait for DOM ready
 	$(()=>{
 		// Run the rest tests
@@ -53,10 +35,10 @@ function loggedIn(result){
 
 function isLoggedIn(){
 	Login.find(function(result){
-		console.log(result);
+		// console.log(result);
 		sessionid = result.user._id;
 	if(result.status == "logged in"){
-			console.log(result.status);
+			// console.log(result.status);
 			processLogin(true);
 		}else{
 			processLogin(false);
