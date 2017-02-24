@@ -337,24 +337,26 @@ $(document).ready(function() {
 	
 	
 	
-	$("#sokutbildningarbtn").click(function() {
+	addRoute('/sok-utbildningar',function()  {
 		console.log("Sök Utbilnding");
 		$(".pageObj").hide();
 		$("#searchfield").show();
+
+
 	});
 
 
-	$( "#skapautbildningbtn" ).click(function() {
+	addRoute('/skapa-utbildning',function() {
 	  console.log("Skapa Utbildning");
 	  $(".pageObj").hide();
 	  $("#rowSkapaUtbildning").show();
 	});
 
 	// När man som admin trycker på "Admins" i menyn
-	$( "#adminsbtn" ).click(function() {
+	addRoute('/admins',function() {
 		console.log("Admins btn clicked.");
 		$(".pageObj").hide();
-		$("#rowLarare").show();
+		$("#rowAdmins").show();
 
 		findAllEmployees(function(employee){
 		  	console.log(employee);
@@ -373,11 +375,11 @@ $(document).ready(function() {
 		  	};
 			employeeList += "</tbody>";
 			
-		  	$("#employeestable").empty().append(employeeList);
+		  	$("#adminstable").empty().append(employeeList);
 		});
 	});
 
-	$( "#lararebtn" ).click(function() {
+	addRoute('/larare',function() {
 		console.log("Lärare");
 		$(".pageObj").hide();
 		$("#rowLarare").show();
@@ -455,7 +457,7 @@ $(document).ready(function() {
 		});
 	});
 	
-	$( "#studentbtn" ).click(function() {
+	addRoute('/studenter', function() {
 		console.log("Student");
 		$(".pageObj").hide();
 		$("#rowStudenter").show();
@@ -480,25 +482,25 @@ $(document).ready(function() {
 	});
 
 
-	$( "#visabokningarbtn" ).click(function() {
+	addRoute('/bokningar', function() {
 	  console.log("Visa Bokningar");
 	  $(".pageObj").hide();
 	});
 
 
-	$( "#bokasalbtn" ).click(function() {
+	addRoute('/boka-sal', function() {
 	  console.log("Boka Sal");
 	  $(".pageObj").hide();
 	});
 
 
-	$( "#bytlosenordbtn" ).click(function() {
+	addRoute('/byt-losenord', function() {
 	  console.log("Byt Lösenord");
 	  $(".pageObj").hide();
 	});
 
 
-	$( "#redigerauppgifterbtn" ).click(function() {
+	addRoute('/redigera-uppgifter',function() {
 	  console.log("Redigera Uppgifter");
 	  $(".pageObj").hide();
 	});
@@ -508,7 +510,7 @@ $(document).ready(function() {
 		logOut();
 		isLoggedIn();
 	});
-	$( "#kontaktbtn" ).click(function() {
+	addRoute('/kontakta-oss',function() {
 	  console.log("Kontakt sida");
 	  $(".pageObj").hide();
 	  $("#kontaktPage").show();

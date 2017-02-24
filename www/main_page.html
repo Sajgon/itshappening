@@ -121,7 +121,7 @@
                                     <a id="allautbildningarbtn" href="/alla-utbildningar">Alla Utbildningar</a>
                                 </li>
                                 <li>
-                                    <a id="sokutbildningarbtn" href="javascript:void(0)">Sök Utbildning</a>
+                                    <a id="sokutbildningarbtn" href="/sok-utbildningar">Sök Utbildning</a>
                                 </li>
                                 <li>
                                     <a id="minautbildningarbtn" href="/mina-utbildningar">Mina Utbildningar</a>
@@ -133,16 +133,16 @@
                             <a href="javascript:void(0)"><i class="glyphicon glyphicon-user fa-fw"></i> ADMIN<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a id="skapautbildningbtn" href="javascript:void(0)">Skapa Utbildning</a>
+                                    <a id="skapautbildningbtn" href="/skapa-utbildning">Skapa Utbildning</a>
                                 </li>
                                 <li>
-                                    <a id="adminsbtn" href="javascript:void(0)">Admins</a>
+                                    <a id="adminsbtn" href="/admins">Admins</a>
                                 </li>
                                 <li>
-                                    <a id="lararebtn" href="javascript:void(0)">Lärare</a>
+                                    <a id="lararebtn" href="/larare">Lärare</a>
                                 </li>
                                 <li>
-                                    <a id="studentbtn" href="javascript:void(0)">Studenter</a>
+                                    <a id="studentbtn" href="/studenter">Studenter</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -151,10 +151,10 @@
                             <a href="javascript:void(0)"><i class="fa fa-calendar fa-fw"></i> SAL<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a id="visabokningarbtn" href="javascript:void(0)">Visa Bokningar</a>
+                                    <a id="visabokningarbtn" href="/bokningar">Visa Bokningar</a>
                                 </li>
                                 <li>
-                                    <a id="bokasalbtn" href="javascript:void(0)">Boka Sal</a>
+                                    <a id="bokasalbtn" href="/boka-sal">Boka Sal</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -163,16 +163,16 @@
                             <a href="javascript:void(0)"><i class="fa fa-wrench fa-fw"></i> KONTO<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a  id="bytlosenordbtn" href="javascript:void(0)">Byt Lösenord</a>
+                                    <a  id="bytlosenordbtn" href="/byt-losenord">Byt Lösenord</a>
                                 </li>
                                 <li>
-                                    <a id="redigerauppgifterbtn" href="javascript:void(0)">Redigera Uppgifter</a>
+                                    <a id="redigerauppgifterbtn" href="/redigera-uppgifter">Redigera Uppgifter</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li id="kontaktbtn">
-                            <a href="javascript:void(0)"><i class="glyphicon glyphicon-envelope fa-fw"></i> KONTAKT</a>
+                            <a href="/kontakta-oss"><i class="glyphicon glyphicon-envelope fa-fw"></i> KONTAKT</a>
                         </li>
                     </ul>
                 </div>
@@ -332,7 +332,23 @@
                     </div>
                 </div>
 
-
+                <div id="rowAdmins" class="pageObj">
+                    <div class="row">
+                        <div class="col-xs-12">
+                          <h1  class="page-header">Admins</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12" >
+                            <div class="table-responsive">
+                                
+                                <table class="table" id ="adminstable">
+                              </table>
+                            </div>
+                        </div>
+                    
+                     </div>
+                </div>
 
 
                 <div id="rowStudenter" class="pageObj">
