@@ -124,10 +124,9 @@
                                     <a id="sokutbildningarbtn" href="javascript:void(0)">Sök Utbildning</a>
                                 </li>
                                 <li>
-                                    <a id="minautbildningarbtn" href="javascript:void(0)">Mina Utbildningar</a>
+                                    <a id="minautbildningarbtn" href="/mina-utbildningar">Mina Utbildningar</a>
                                 </li>
                             </ul>
-                            <!-- /.nav-second-level -->
                         </li>
 
                         <li id="adminMenu">
@@ -363,6 +362,7 @@
                     </div>
 					
 					<!-- pendingVerification -->
+					<h3>Väntar på verifikation</h3>
 					<div class="row">
                         <div class="col-xs-12" >
 							<table class="table" id="pendingVerification-employeestable"></table>
@@ -370,6 +370,7 @@
                     </div>
 					
 					<!-- verified emplyees -->
+					<h3>Verifierade Anställda</h3>
                     <div class="row">
                         <div class="col-xs-12" >
 							<table class="table" id="verified-employeestable"></table>
@@ -377,6 +378,7 @@
                     </div>
 					
 					<!-- denied emplyees -->
+					<h3>Nekade Anställda</h3>
 					<div class="row">
                         <div class="col-xs-12" >
 							<table class="table" id="denided-employeestable"></table>
@@ -396,15 +398,13 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12" >
-                        <table class="table edTable" style="cursor: pointer;" id="educationtable">
-
-                        </table>
+							<table class="table edTable" style="cursor: pointer;" id="educationtable"></table>
                         </div>
                     </div>
                 </div>
 
 
-                    <div class="pageObj" id="searchfield">
+                <div class="pageObj" id="searchfield">
                     <div class="row">
                         <div class="col-xs-12 col-sm-8">
                             <h2>Sök Utbildning</h2>
@@ -427,8 +427,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
 
                     <div class="row">
@@ -441,15 +439,28 @@
                 </div>
 
                     
+				<!-- Mina utbildningar sida -->
+				<div class="pageObj" id="myEducations">    
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-8">
+                            <h2>Mina utbildningar</h2>
+                        </div>
+                    </div>
+					
+					<div class="row">
+                        <div class="col-xs-12" >
+							<table class="table edTable" style="cursor: pointer;" id="myEducationsTable"></table>
+                        </div>
+                    </div>
+                </div>	
+					
+					
                 <div class="pageObj" id="educationDetail">    
                     <div class="row">
                         <div class="col-xs-12 col-sm-8">
                             <h2 id="educationTitle"></h2>
                         </div>
-
-
                     </div>
-                    <!-- /.col-lg-12 -->
                 </div>
             </div>
             <!-- /.container-fluid -->

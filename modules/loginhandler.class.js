@@ -65,6 +65,7 @@ module.exports = class Loginhandler {
     if(foundUser){
       // copy user and add entity as role,
       // and delete password and __v
+	  console.log("ROLE?",entity);
       var user = Object.assign({},foundUser._doc,{role:entity});
       delete user.password;
       delete user.__v;
