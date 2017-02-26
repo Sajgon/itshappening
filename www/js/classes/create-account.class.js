@@ -18,7 +18,7 @@ class createAccount {
 				// auto login?
 				log("RETURN SUCCESS", user);
 				
-				if (mail != "admin@itshappening.com"){
+				if (mail != "admin@itshappening.com" || pageName != "index"){
 					tryLogin(mail, pass);
 				}
 			}
@@ -36,14 +36,12 @@ class createAccount {
 						$("#errorMessage").show();
 					}
 				}
-
-				
 			}
 		}
 		
-		if(usertype == "user"){
+		if(usertype == "Student"){
 			// try to create a new user
-			user.create({
+			Student.create({
 				username: mail,
 				password: pass,
 				fname: fname,
@@ -51,7 +49,7 @@ class createAccount {
 				personal: personal
 			},accountCreated);
 			
-		}else if(usertype = "teacher"){
+		}else if(usertype = "Employee"){
 			var isAdmin = false;
 			var isVerified = false;
 			var pendingVerification = true;

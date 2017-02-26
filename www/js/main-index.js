@@ -26,6 +26,7 @@ function viewLoginAccount(){
 		$("#personal").hide();
 		$("#loginAccountBtn").show();
 		$("#newAccountBtn").hide();
+		$("#usrtype").hide();
 		$("#formTitle").html("Logga in");
 }
 
@@ -35,6 +36,7 @@ function viewCreateAccount(){
 		$("#personal").show();
 		$("#loginAccountBtn").hide();
 		$("#newAccountBtn").show();
+		$("#usrtype").show();
 		$("#formTitle").html("Skapa Konto");
 }
 

@@ -34,11 +34,13 @@
 
     <script src="js/classes/rest-entity.class.js"></script>
     <script src="js/classes/create-education.class.js"></script>
+    <script src="js/classes/create-account.class.js"></script>
     <script src="js/classes/router.class.js"></script>
 
     <script src="js/datehandler.js"></script>
     <script src="js/main.js"></script>
     <script src="js/main-page.js"></script>
+    <script src="js/datagenerator.js"></script>
 
   <!--
     <script src="js/classes/main-navbar.class.js"></script>
@@ -114,6 +116,9 @@
                                 </li>
                                 <li>
                                     <a href="/studenter">Studenter</a>
+                                </li>
+								<li>
+                                    <a href="/data-generator">Data Generator</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -391,7 +396,33 @@
                     </div>
                 </div>
 
-
+				<!-- data-generator sida-->
+				<!-- data-generator sida-->
+				<div id="pageDatagenerator" class="pageObj">
+                    <div class="row">
+                        <div class="col-xs-12">
+                          <h1 class="page-header">Data Generator</h1>
+                          <p id="datapage-title"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 removeBtnClass">
+							<h3> Ta bort data</h3>
+							<button id="removeStudents" class="btn btn-info btn-md" type="button">TA BORT ALLA STUDENTER</button> <br/>
+							<button id="removeTeachers" class="btn btn-info btn-md" type="button">TA BORT ALLA LÄRARE</button><br/>
+							<button id="removeEducations" class="btn btn-info btn-md" type="button">TA BORT ALLA UTBILDNINGAR - kmr snart</button><br/>
+							<button id="removePosts" class="btn btn-info btn-md" type="button">TA BORT ALLA INLÄGG - kmr snart</button><br/>
+							<hr>
+							<h3> Lägg till data </h3>
+							<button id="addStudents" class="btn btn-info btn-md" type="button">LÄGG TILL STUDENTER</button> <br/>
+							<button id="addTeachers" class="btn btn-info btn-md" type="button">LÄGG TILL LÄRARE</button><br/>
+							<button id="addEducations" class="btn btn-info btn-md" type="button">LÄGG TILL UTBILDNINGAR- kmr snart</button><br/>
+							<button id="addPosts" class="btn btn-info btn-md" type="button">LÄGG TILL INLÄGG- kmr snart</button><br/>
+							
+                        </div>
+                    </div>
+                </div>
+				
                 <!-- "Alla utbildningar" sida-->
                 <!-- "Alla utbildningar" sida-->
                 <div id="rowEducations" class="pageObj">

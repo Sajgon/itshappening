@@ -374,20 +374,45 @@ $(document).ready(function() {
 	});
 
 	addRoute('/larare',function() {
-		console.log("Lärare");
+		console.log("ADMIN > Lärare..");
 		$(".pageObj").hide();
 		$("#rowLarare").show();
 
-		findAllEmployees(function(employee){
-		  	console.log(employee);
+		findAllEmployees(function(employees){
+		  	console.log(employees);
+		  	console.log(employees.length);
 
 			var verifiedemployeestable = false
 			
-			// verified-employeestable
+			// pendingVerification-employeestable
+		  	var employeeList = "<thead><tr><th>Förnamn</th><th>Efternamn</th><th>Personnummer</th><th>Användarnamn</th><th>Pass</th><th>Deny</th></tr></thead>";
+			employeeList += "<tbody>";
+		  	for(var i = 0; i < employees.length; i++){
+				employee = employees[i];
+		  		if(employee.admin == false && employee.verified == false && employee.pendingVerification == true){
+					employeeList += "<tr>";
+					employeeList += "<td>"+employee.fname+"</td>";
+					employeeList += "<td>"+employee.lname+"</td>";
+					employeeList += "<td>"+employee.personal+"</td>";
+					employeeList += "<td>"+employee.username+"</td>";
+					employeeList += '<td><button><i class="fa fa-check"></i></button></td>';
+					employeeList += '<td><button><i class="fa fa-times"></i></button></td>';
+					employeeList += "</tr>";
+					verifiedemployeestable = true;
+				}
+		  	}
+			
+			employeeList += "</tbody>";
+			if(!verifiedemployeestable){employeeList = "<p>Inga anställda i denna listan.</p>"}
+		  	$("#pendingVerification-employeestable").empty().append(employeeList);
+			
+			
+			// verified employeestable
+			verifiedemployeestable = false;
 		  	var employeeList = "<thead><tr><th>Förnamn</th><th>Efternamn</th><th>Personnummer</th><th>Användarnamn</th></tr></thead>";
 			employeeList += "<tbody>";
-		  	for(var i = 0; i < employee.length; i++){
-				emplyee = employee[i];
+		  	for(var j = 0; j < employees.length; j++){
+				employee = employees[j];
 		  		if(employee.admin == false && employee.verified == true && employee.pendingVerification == false){
 					employeeList += "<tr>";
 					employeeList += "<td>"+employee.fname+"</td>";
@@ -396,42 +421,20 @@ $(document).ready(function() {
 					employeeList += "<td>"+employee.username+"</td>";
 					employeeList += "</tr>";
 					verifiedemployeestable = true;
+					console.log("##happens");
 				}
 		  	}
 			employeeList += "</tbody>";
-			if(!verifiedemployeestable){employeeList = "<p>Inga anställda i denna listan.</p>"}
-		  	$("#pendingVerification-employeestable").empty().append(employeeList);
-			
-			
-			verifiedemployeestable = false;
-			
-			// pendingVerification employeestable
-		  	var employeeList = "<thead><tr><th>Förnamn</th><th>Efternamn</th><th>Personnummer</th><th>Användarnamn</th></tr></thead>";
-			employeeList += "<tbody>";
-		  	for(var j = 0; j < employee.length; j++){
-				emplyee = employee[j];
-		  		if(employee.admin == false && employee.verified == false && employee.pendingVerification == true){
-					employeeList += "<tr>";
-					employeeList += "<td>"+employee.fname+"</td>";
-					employeeList += "<td>"+employee.lname+"</td>";
-					employeeList += "<td>"+employee.personal+"</td>";
-					employeeList += "<td>"+employee.username+"</td>";
-					employeeList += "</tr>";
-					verifiedemployeestable = true;
-				}
-		  	};
-			employeeList += "</tbody>";
-			if(!verifiedemployeestable){employeeList = "<p>Inga anställda i denna listan.</p>"}
+			if(verifiedemployeestable == false){employeeList = "<p>Inga anställda i denna listan.</p>"}
 		  	$("#verified-employeestable").empty().append(employeeList);
 			
 			
-			verifiedemployeestable = false;
 			// denied teachers
-			// pendingVerification employeestable
+			verifiedemployeestable = false;
 		  	var employeeList = "<thead><tr><th>Förnamn</th><th>Efternamn</th><th>Personnummer</th><th>Användarnamn</th></tr></thead>";
 			employeeList += "<tbody>";
-		  	for(var k = 0; k < employee.length; k++){
-				emplyee = employee[k];
+		  	for(var k = 0; k < employees.length; k++){
+				employee = employees[k];
 		  		if(employee.admin == false && employee.verified == false && employee.pendingVerification == false){
 					employeeList += "<tr>";
 					employeeList += "<td>"+employee.fname+"</td>";
@@ -475,7 +478,12 @@ $(document).ready(function() {
 		});
 	});
 
-
+	addRoute('/data-generator', function() {
+		$(".pageObj").hide();
+		$("#pageDatagenerator").show();
+	});
+	
+	
 	addRoute('/bokningar', function() {
 	  console.log("Visa Bokningar");
 	  $(".pageObj").hide();
@@ -556,8 +564,6 @@ $(document).ready(function() {
 
 					break;
 				}
-		
-				
 			}
 
 			if(found==true){

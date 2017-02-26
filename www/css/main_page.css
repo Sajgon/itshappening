@@ -13,3 +13,7 @@ a > p {
 .panel-default > .row{
 	margin-bottom: 10px;
 }
+
+.removeBtnClass > button{
+	margin-bottom: 5px;
+}
