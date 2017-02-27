@@ -7,7 +7,7 @@ module.exports = class NewsPost {
       for_education_id: {type: String, required: false},
       title: {type: String, required: true},
       content: {type: String, required: true},
-      date_posted: {type: Number, required: true},
+      date_posted: {type: String, required: true},
       postedby_id: {type: String, required: true}
     };
   }

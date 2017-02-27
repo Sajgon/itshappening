@@ -2,19 +2,21 @@
 $(function() {
 		
 	// REMOVE
+	
+	// REMOVE POSTS
+	$("#removePosts").click(function(){
+		console.log("Removing all posts...");
+		deleteAllPosts();
+		$("#datapage-title").html("Alla inlägg är borttagna!");
+	});
+	
 	// REMOVE STUDENTS
 	$("#removeStudents").click(function(){
 		console.log("Removing all students...");
-		findAllStudents(function(students){
-			
-			for(var i = 0; i < students.length; i++){
-				if(students[i]._id){
-					deleteAccountById(students[i]._id);
-				}
-			}
-			$("#datapage-title").html("Alla studenter är borttagna!");
-		});
+		deleteAllStudents();
+		$("#datapage-title").html("Alla studenter är borttagna!");
 	});
+	
 	// REMOVE TEACHERS
 	$("#removeTeachers").click(function(){
 		console.log("Removing all TEACHERS...");
@@ -27,9 +29,23 @@ $(function() {
 			}
 			$("#datapage-title").html("Alla studenter är borttagna!");
 		});
+		
+	});
+	
+	// REMOVE EDUCATIONS
+	$("#removeEducations").click(function(){
+		console.log("Removing all EDUCATIONS...");
+		deleteAllEducations();
+		$("#datapage-title").html("Alla utbildningar är borttagna!");
 	});
 
 	// ADD
+	$("#addPosts").click(function(){
+		createNewspostData();
+		$("#datapage-title").html("Nya inlägg tillagda i databasen!");
+		printPosts();
+	});
+
 	$("#addStudents").click(function(){
 		createStudentData();
 		$("#datapage-title").html("Nya studenter tillagda i databasen!");
@@ -39,6 +55,19 @@ $(function() {
 		createTeacherData();
 		$("#datapage-title").html("Nya lärare tillagda i databasen!");
 	});
+	
+	$("#addEducations").click(function(){
+		createEducationData();
+		$("#datapage-title").html("Nya utbildningar tillagda i databasen!");
+	});
+	
+	function createNewspostData(){
+		for(var i = 0; i < postData.length;i++){
+			// example: new createNewspost(postTitle, postContent);
+			new createNewspost(postData[i].title, postData[i].content);	
+		}
+		return true;
+	}
 	
 	function createStudentData(){
 		for(var i = 0; i < studentData.length;i++){
@@ -54,10 +83,138 @@ $(function() {
 		}
 		return true;
 	}
+	
+	function createEducationData(){
+		console.log(educationData);
+		console.log(educationData.length);
+		for(var i = 0; i < educationData.length;i++){
+			
+			education = educationData[i];
+			
+			// exempel var newEducation = new createEducation(educationId, educationName, startDate, endDate, sessionid);
+			new createEducation(education.educationId, education.educationName, education.startDate, education.endDate, sessionid);
+		}
+
+		return true;
+	}
+	
 });
 
 
+var postData = [
+	{
+	  "for_all": true,
+	  "title": "Välkommen våren!",
+	  "content": "Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.\n\nSuspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst."
+	}, {
+	  "for_all": true,
+	  "title": "Nya utbildningar!",
+	  "content": "Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.\n\nProin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.\n\nAenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum."
+	}, {
+	  "for_all": true,
+	  "title": "Uppdaterad webbplats!",
+	  "content": "Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.\n\nQuisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus."
+	}, {
+	  "for_all": true,
+	  "title": "6th generation",
+	  "content": "Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam."
+	}, {
+	  "for_all": true,
+	  "title": "Välkommen till nya admin!",
+	  "content": "Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.\n\nMaecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.\n\nCurabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem."
+	}, {
+	  "for_all": true,
+	  "title": "Nya utbildningar!",
+	  "content": "Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque."
+	}, {
+	  "for_all": true,
+	  "title": "Ny funktion!",
+	  "content": "Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.\n\nFusce consequat. Nulla nisl. Nunc nisl.\n\nDuis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum."
+	}, {
+	  "for_all": true,
+	  "title": "Välkommen våren!",
+	  "content": "Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.\n\nQuisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus."
+	}
+]
 
+var educationData = [
+	{
+	  "educationId": "TE2EA",
+	  "educationName": "JAVASCRIPT PROGRAMMING",
+	  "startDate": "21/10/2016",
+	  "endDate": "05/06/2017"
+	}, {
+	  "educationId": "2EDWQ",
+	  "educationName": "HTML PROGRAMMING",
+	  "startDate": "15/11/2016",
+	  "endDate": "06/06/2017"
+	}, {
+	  "educationId": "FQ32Q",
+	  "educationName": "CSS PROGRAMMING",
+	  "startDate": "09/06/2016",
+	  "endDate": "08/06/2017"
+	}, {
+	  "educationId": "FSEF3",
+	  "educationName": "PYTHON PROGRAMMING",
+	  "startDate": "27/11/2016",
+	  "endDate": "05/06/2017"
+	}, {
+	  "educationId": "QD2FQ",
+	  "educationName": "JAVA PROGRAMMING",
+	  "startDate": "18/02/2017",
+	  "endDate": "01/06/2019"
+	}, {
+	  "educationId": "AWDY5",
+	  "educationName": "LUA PROGRAMMING",
+	  "startDate": "01/02/2017",
+	  "endDate": "05/06/2019"
+	}, {
+	  "educationId": "32TRW",
+	  "educationName": "C++ PROGRAMMING",
+	  "startDate": "21/10/2016",
+	  "endDate": "06/06/2017"
+	}, {
+	  "educationId": "G23GS",
+	  "educationName": "ANGULAR 4 PROGRAMMING",
+	  "startDate": "02/11/2016",
+	  "endDate": "05/06/2017"
+	}, {
+	  "educationId": "H54RE",
+	  "educationName": "PHP PROGRAMMING",
+	  "startDate": "16/04/2016",
+	  "endDate": "06/06/2017"
+	}, {
+	  "educationId": "GA42S",
+	  "educationName": "RUBY PROGRAMMING",
+	  "startDate": "28/04/2016",
+	  "endDate": "06/06/2017"
+	}, {
+	  "educationId": "TKGE4",
+	  "educationName": "SQL PROGRAMMING",
+	  "startDate": "22/01/2017",
+	  "endDate": "04/06/2018"
+	}, {
+	  "educationId": "K8D4A",
+	  "educationName": ".NET PROGRAMMING",
+	  "startDate": "11/02/2016",
+	  "endDate": "04/06/2018"
+	}, {
+	  "educationId": "G2WD1",
+	  "educationName": "GO PROGRAMMING",
+	  "startDate": "06/08/2016",
+	  "endDate": "03/06/2017"
+	}, {
+	  "educationId": "12EEA",
+	  "educationName": "HASKELL PROGRAMMING",
+	  "startDate": "23/07/2016",
+	  "endDate": "06/06/2017"
+	}, {
+	  "educationId": "G433W",
+	  "educationName": "ACTIONSCRIPT PROGRAMMING",
+	  "startDate": "04/08/2016",
+	  "endDate": "02/06/2017"
+	}
+]
 
 
 

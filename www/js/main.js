@@ -65,6 +65,8 @@ function processLogin(loggedIn){
 		}	
 	}
 }
+
+// returns a full date from epoch
 function epochToFullDate(epoch){
 	var newdate = new Date(epoch);
 	var getyear = newdate.getFullYear();
@@ -161,8 +163,25 @@ function deleteAllEmployees(){
 	});
 }
 
+function deleteAllEducations(){
+	findAllEducations(function(educations){
+		for(var i = 0; i < educations.length; i++){
+			Education.delete(educations[i]._id, function(result){
+				// education educations[i]._id deleted
+			});
+		}
+	});
+}
 
-
-
+function deleteAllPosts(){
+	findAllPosts(function(posts){
+		console.log(posts);
+		for(var i = 0; i < posts.length; i++){
+			NewsPost.delete(posts[i]._id, function(result){
+				// posts[i]._id deleted
+			});
+		}
+	});
+}
 
 

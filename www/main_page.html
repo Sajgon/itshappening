@@ -34,6 +34,7 @@
 
     <script src="js/classes/rest-entity.class.js"></script>
     <script src="js/classes/create-education.class.js"></script>
+    <script src="js/classes/create-newspost.class.js"></script>
     <script src="js/classes/create-account.class.js"></script>
     <script src="js/classes/router.class.js"></script>
 
@@ -176,17 +177,7 @@
 								</div>
 								<div class="col-xs-4"></div>
 							</div>
-							<div class="row">
-								<div class="btn-group col-xs-4">
-									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										Vem kan se inlägget? <span class="caret"></span>
-									</button>
-									<ul class="dropdown-menu">
-										<li><a href="javascript:void(0)">Alla användare</a></li>
-									</ul>
-								</div>
-								<div id="postFor" class="col-xs-8 postForStyling">>> Alla användare</div>
-							</div>
+
 							<div class="panel-body innehall">
 								<div class="form-group">
 									<label for="postContent">Innehåll</label>
@@ -209,6 +200,8 @@
                     <div class="col-xs-12">
                         <p id="noposts"></p>
                     </div>
+					<div id="postsWall">
+					</div>
                 </div>
 
                 <!-- KONTAKTSIDA -->
@@ -367,7 +360,12 @@
 					<!-- Title -->
                     <div class="row">
                         <div class="col-xs-12">
-                          <h1  class="page-header">Lärare</h1>
+							<h1 class="page-header">Lärare</h1>
+                        </div>
+                    </div>
+					<div class="row">
+                        <div class="col-xs-12">
+							<h1 id="teacherMessage"></h1>
                         </div>
                     </div>
 					
@@ -410,14 +408,14 @@
 							<h3> Ta bort data</h3>
 							<button id="removeStudents" class="btn btn-info btn-md" type="button">TA BORT ALLA STUDENTER</button> <br/>
 							<button id="removeTeachers" class="btn btn-info btn-md" type="button">TA BORT ALLA LÄRARE</button><br/>
-							<button id="removeEducations" class="btn btn-info btn-md" type="button">TA BORT ALLA UTBILDNINGAR - kmr snart</button><br/>
-							<button id="removePosts" class="btn btn-info btn-md" type="button">TA BORT ALLA INLÄGG - kmr snart</button><br/>
+							<button id="removeEducations" class="btn btn-info btn-md" type="button">TA BORT ALLA UTBILDNINGAR</button><br/>
+							<button id="removePosts" class="btn btn-info btn-md" type="button">TA BORT ALLA INLÄGG</button><br/>
 							<hr>
 							<h3> Lägg till data </h3>
 							<button id="addStudents" class="btn btn-info btn-md" type="button">LÄGG TILL STUDENTER</button> <br/>
 							<button id="addTeachers" class="btn btn-info btn-md" type="button">LÄGG TILL LÄRARE</button><br/>
-							<button id="addEducations" class="btn btn-info btn-md" type="button">LÄGG TILL UTBILDNINGAR- kmr snart</button><br/>
-							<button id="addPosts" class="btn btn-info btn-md" type="button">LÄGG TILL INLÄGG- kmr snart</button><br/>
+							<button id="addEducations" class="btn btn-info btn-md" type="button">LÄGG TILL UTBILDNINGAR</button><br/>
+							<button id="addPosts" class="btn btn-info btn-md" type="button">LÄGG TILL INLÄGG</button><br/>
 							
                         </div>
                     </div>
@@ -445,6 +443,8 @@
                         <div class="col-xs-12 col-sm-8">
                             <h2>Sök Utbildning</h2>
                             <div>
+								<p id="searchErrorParagraph"></p>
+								<!--
                                 <div class="input-group col-md-12">
                                     <input type="text" class="form-control input-lg" placeholder="Sök utbildningsnamn" />
                                     <span class="input-group-btn">
@@ -452,7 +452,7 @@
                                             <i class="glyphicon glyphicon-search"></i>
                                         </button>
                                     </span>
-                                </div>
+                                </div> -->
                                 <div  class="input-group col-md-12">
                                     <input id="idInputText" type="text" class="form-control input-lg" placeholder="Sök på utbildningsID" />
                                     <span class="input-group-btn">
@@ -497,6 +497,15 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-8">
                             <h2 id="educationTitle"></h2>
+                            <h4 id="educationCode"></h4>
+                            <h4 id="educationStartDate"></h4>
+                            <h4 id="educationEndDate"></h4>
+							<br/>
+							<h4 id="educationTeachers"></h4>
+							<h4 id="educationStartedBy"></h4>
+							
+							<button id="applyAsStudent" type="button" class="btn btn-success btn-lg">Ansök till utbildning som Student</button>
+							<button id="applyAsTeacher" type="button" class="btn btn-success btn-lg">Ansök till utbildning som Lärare</button>
                         </div>
                     </div>
                 </div>

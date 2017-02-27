@@ -18,7 +18,7 @@ class createAccount {
 				// auto login?
 				log("RETURN SUCCESS", user);
 				
-				if (mail != "admin@itshappening.com" || pageName != "index"){
+				if (mail != "admin@itshappening.com" && pageName == "index"){
 					tryLogin(mail, pass);
 				}
 			}

@@ -6,7 +6,6 @@ class createEducation {
 
     var mem = {}
 	console.log("Called create education class.");
-	console.log(educationid, educationname, start, end, createdby);
 
 	
 	if(!educationid.length == 5){
@@ -14,47 +13,48 @@ class createEducation {
 		$("#errMsg-skapautbildning").append(message);
 		$("#showErrMessage").show();
 
+		console.log("#1 ERROR CREATING EDUCATION");
+		
+	/*
 	}else if(start > end){
 
 		var message = "Starttiden måste vara före sluttiden.";
 		$("#errMsg-skapautbildning").append(message);
 		$("#showErrMessage").show();
-		
+		console.log("#2 ERROR CREATING EDUCATION");
+	*/	
 	} else if(educationid.length && educationname.length && start && end && createdby.length){
-		
-		console.log("yes");
 		// 
 		function educationCreated(education){
 			// the education is created or an error
-			console.log(education);
 			if(!education._error){
 				// education is created what now?
 				log("RETURN SUCCESS", education)
 				
-			}
-			else {
+			}else {
 				// report back to DOM/GUI
 				log("EDUCATION NOT CREATED", education._error)
-				
 			}
 		}
 		
-			Education.create({
-				education_code: educationid,
-				education_name: educationname,
-				start: start,
-				end: end,
-				applyers_teachers: [],
-				applyers_students: [],
-				teachers: [],
-				students: [],
-				admin: createdby
-			}, educationCreated);
+		Education.create({
+			education_code: educationid,
+			education_name: educationname,
+			start: start,
+			end: end,
+			applyers_teachers: [],
+			applyers_students: [],
+			teachers: [],
+			students: [],
+			admin: createdby
+		}, educationCreated);
 		
 	}else{
 		var message = "Please submit the form correctly."
 		$("#errMsg-skapautbildning").append(message);
 		$("#showErrMessage").show();
+		
+		console.log("#3 ERROR CREATING EDUCATION");
 	}
 
     // Log

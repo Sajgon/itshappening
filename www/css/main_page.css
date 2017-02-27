@@ -6,7 +6,7 @@ a > p {
 	display: none;
 }
 
-#adminMenu, #rowSkapaInlagg{
+#adminMenu, #rowSkapaInlagg, #applyAsStudent, #applyAsTeacher{
 	display: none;
 }
 
@@ -17,3 +17,23 @@ a > p {
 .removeBtnClass > button{
 	margin-bottom: 5px;
 }
+
+.GoToEducation{
+	font-size: 120%;
+	color: blue;
+}
+
+.removeEducation{
+	color: red;
+}
+
+.passTeacherBtn > button:hover{
+	background-color: green;
+	border: 1px solid black;
+}
+
+.denyTeacherBtn > button:hover{
+	background-color: red;
+	border: 1px solid black;
+}
+
