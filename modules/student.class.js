@@ -5,6 +5,7 @@ module.exports = class Student extends User {
 		return Object.assign({},super.schema(),{
 			fname: {type: String, required: true},
 			lname: {type: String, required: true},
+			educations: {type: Array, required: true},
 			personal: {type: Number, min:190001010000, max:202001010000, required:true}
 		});
 	}

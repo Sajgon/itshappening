@@ -1,12 +1,13 @@
 console.log("user.class.js loaded");
 module.exports = class User {
 
-  schema(){
-    return {
-      username: {type: String, required: true},
-      password: {type: String, required: true}
-    };
-  }
+	schema(){
+		return {
+			username: {type: String, required: true},
+			password: {type: String, required: true},
+			educations: {type: Array, required: true}
+		}
+	}
 
   
   	putAccess(user,req){

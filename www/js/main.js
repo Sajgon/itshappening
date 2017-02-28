@@ -138,4 +138,9 @@ function deleteAllPosts(){
 	});
 }
 
-
+function findAllEmployees(callback){
+	Employee.find('find/{fname:/.*/}', function(result){
+		//console.log(result);
+		callback(result);
+	});
+}

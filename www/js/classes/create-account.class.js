@@ -46,6 +46,7 @@ class createAccount {
 				password: pass,
 				fname: fname,
 				lname: lname,
+				educations: ["test"],
 				personal: personal
 			},accountCreated);
 			
@@ -64,6 +65,7 @@ class createAccount {
 				password: pass,
 				fname: fname,
 				lname: lname,
+				educations: ["test"],
 				personal: personal,
 				verified: isVerified,
 				pendingVerification: pendingVerification,

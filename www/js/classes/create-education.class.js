@@ -42,11 +42,11 @@ class createEducation {
 			education_name: educationname,
 			start: start,
 			end: end,
-			applyers_teachers: [],
-			applyers_students: [],
-			teachers: [],
-			students: [],
-			admin: createdby
+			admin: createdby,
+			applyers_teachers: ["test"],
+			applyers_students: ["test"],
+			teachers: ["test"],
+			students: ["test"]
 		}, educationCreated);
 		
 	}else{
