@@ -32,13 +32,15 @@
     <script src="/vendor/metisMenu/metisMenu.min.js"></script>  <!-- Metis Menu Plugin JavaScript -->
     <script src="/dist/js/sb-admin-2.js"></script> <!-- Custom Theme JavaScript -->
 
+	<script src="js/datehandler.js"></script>
+	
     <script src="js/classes/rest-entity.class.js"></script>
     <script src="js/classes/create-education.class.js"></script>
     <script src="js/classes/create-newspost.class.js"></script>
     <script src="js/classes/create-account.class.js"></script>
     <script src="js/classes/router.class.js"></script>
 
-    <script src="js/datehandler.js"></script>
+    
     <script src="js/main.js"></script>
     <script src="js/main-page.js"></script>
     <script src="js/datagenerator.js"></script>
@@ -156,7 +158,6 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-
         <!-- Page Content -->
         <!-- Page Content -->
         <!-- Page Content -->
@@ -186,7 +187,7 @@
 								</div>
 							</div>
 
-							<div class="panel-footer datum"><span>Datum</span><span style="float: right">Användarnamn</span></div>
+							<div class="panel-footer datum"><span id="newpostDateExample">Datum</span><span id="newpostusernameExample" style="float: right">Användarnamn</span></div>
 						</div>
                     </div>
                 </div>
@@ -496,16 +497,31 @@
                 <div class="pageObj" id="educationDetail">
                     <div class="row">
                         <div class="col-xs-12 col-sm-8">
+                            <p id="educationMessage"></p>
                             <h2 id="educationTitle"></h2>
                             <h4 id="educationCode"></h4>
                             <h4 id="educationStartDate"></h4>
                             <h4 id="educationEndDate"></h4>
 							<br/>
+							<h4 id="educationStudents"></h4>
 							<h4 id="educationTeachers"></h4>
 							<h4 id="educationStartedBy"></h4>
 							
-							<button id="applyAsStudent" type="button" class="btn btn-success btn-lg">Ansök till utbildning som Student</button>
+							
+							
+							<button id="applyAsStudentBtn" type="button" class="btn btn-success btn-lg">Ansök till utbildning som Student</button>
 							<button id="applyAsTeacher" type="button" class="btn btn-success btn-lg">Ansök till utbildning som Lärare</button>
+							
+							<!-- For Admin -->
+							<table id="applyersStudents"></table>
+							<table id="applyersTeachers"></table>
+							
+							<h3>Statistik</h3>
+							<h4 id="amountApplyers_students"></h4>
+							<h4 id="amountApplyers_teachers"></h4>
+							<h4 id="amount_students"></h4>
+							<h4 id="amount_teachers"></h4>
+							<h4 id="amount_admins"></h4>
                         </div>
                     </div>
                 </div>

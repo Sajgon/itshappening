@@ -6,7 +6,7 @@ a > p {
 	display: none;
 }
 
-#adminMenu, #rowSkapaInlagg, #applyAsStudent, #applyAsTeacher{
+#adminMenu, #rowSkapaInlagg, #applyAsStudent, #applyAsTeacher, #applyersStudents, #applyersTeachers{
 	display: none;
 }
 
@@ -20,7 +20,7 @@ a > p {
 
 .GoToEducation{
 	font-size: 120%;
-	color: blue;
+	color: #4646e6;
 }
 
 .removeEducation{
@@ -37,3 +37,12 @@ a > p {
 	border: 1px solid black;
 }
 
+.dropdown{
+	margin-right: 0 !important;
+}
+.dropdown-toggle{
+		background-color: black;
+}
+.dropdown-toggle:hover{
+	border: 1px solid white;
+}
