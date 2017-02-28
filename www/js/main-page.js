@@ -632,20 +632,33 @@ $(document).ready(function() {
 
 
 	addRoute('/redigera-uppgifter',function() {
-	  console.log("Redigera Uppgifter");
-	  $(".pageObj").hide();
-	  $("#mySettings").show();
-	  
+		console.log("Redigera Uppgifter");
+		$(".pageObj").hide();
+		$("#mySettings").show();
 	  
 		Login.find(function(result){
-		  console.log(result);
-		  user = result.user;
-		  $("#inputNameSettings").val(user.fname);
+			console.log(result);
+			user = result.user;
+			$("#inputNameSettings").val(user.fname);
+			
+			$("#updateFName").on('click', function() {
+				
+				newUserName = $("#inputNameSettings").val();
+				
+				console.log("new username::");
+				console.log(newUserName);
+				
+				user.fname = newUserName;
+				
+				if(user.role == "Student"){
+					Student.update(user._id, user ,function(result){
+						console.log(result);
+					});
+				}
+			});
 		}); 
 	  
-		$("#updateFName").on('click', function() {
-			denyTeacher(this.id);
-		});
+		
 	 
 	  
 	  
@@ -871,7 +884,7 @@ function getEducationByCode(code){
 								if (student._id){
 									
 									// push education code to student
-									if(!student.educations){student.educations = [];}
+									if(!student.educations){student.educations = []}
 									student.educations.push(educationcode);
 									
 									Student.update(student._id, student, function(updatedStudent){
