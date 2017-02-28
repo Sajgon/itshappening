@@ -19,7 +19,7 @@ module.exports = class Owner extends User {
   putAccess(user,req){
 
     // temporarily allow everything
-    // return true;
+    return true;
 
     var searchOrId = req.url.split('owner/')[1];
 

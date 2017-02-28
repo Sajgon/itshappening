@@ -8,6 +8,13 @@ module.exports = class User {
     };
   }
 
+  
+  	putAccess(user,req){
+
+		// temporarily allow everything
+		return true;
+	}
+  
   alterSchema(schema){
 
     schema.pre('save',function(next){

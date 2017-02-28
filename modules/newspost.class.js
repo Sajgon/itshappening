@@ -9,7 +9,7 @@ module.exports = class NewsPost {
       content: {type: String, required: true},
       date_posted: {type: String, required: true},
       postedby_id: {type: String, required: true}
-    };
+    }
   }
 }
 

@@ -407,8 +407,7 @@ $(document).ready(function() {
 	});
 
 	
-	
-	
+
 	
 	
 	addRoute('/sok-utbildningar',function()  {
@@ -635,6 +634,21 @@ $(document).ready(function() {
 	addRoute('/redigera-uppgifter',function() {
 	  console.log("Redigera Uppgifter");
 	  $(".pageObj").hide();
+	  $("#mySettings").show();
+	  
+	  
+		Login.find(function(result){
+		  console.log(result);
+		  user = result.user;
+		  $("#inputNameSettings").val(user.fname);
+		}); 
+	  
+		$("#updateFName").on('click', function() {
+			denyTeacher(this.id);
+		});
+	 
+	  
+	  
 	});
 
 
@@ -861,6 +875,18 @@ function getEducationByCode(code){
 									student.educations.push(educationcode);
 									
 									Student.update(student._id, student, function(updatedStudent){
+										
+										console.log("updatedStudent");
+										console.log(updatedStudent);
+										
+										Student.find(student._id, function(student){
+											console.log(student);
+											if(student){
+												console.log("#student OUTPUT 2# above");
+											}
+										});
+										
+										
 										// push student id to applyersStudents
 										// Lägg till lärare på utbilding
 										if (education._id){
@@ -879,9 +905,10 @@ function getEducationByCode(code){
 												console.log("#EDUCATION OUTPUT 1");
 												console.log(callback);
 											
-												Education.find('find/{education_code:/'+code+'/}', function(result){
-													if(result[0]){
-														education = result[0];
+												Education.find(education._id, function(result){
+													console.log(result);
+													if(result){
+														education = result;
 														console.log("#EDUCATION OUTPUT 2#");
 														console.log(education);
 													}

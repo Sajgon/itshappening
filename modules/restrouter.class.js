@@ -151,7 +151,7 @@ module.exports = class Restrouter {
 
     // Update one instance by id
     this.app.put(this.baseRoute + ':id',(req,res)=>{
-      if(!this.rights(req,res)){return;}
+      //if(!this.rights(req,res)){return;}
       this._class.update({_id:req.params.id},req.body,(err,result)=>{
         this.json(res,err,result);
       });
