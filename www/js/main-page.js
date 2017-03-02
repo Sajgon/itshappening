@@ -25,8 +25,8 @@ $(function() {
 			if(isAdmin){
 				// ADMIN PERMISSION STUFF
 				$("#adminMenu").show();
-				$("#applyersStudentsTitle").show();
-				$("#applyersTeachersTitle").show();
+				//$("#applyersStudentsTitle").show();
+				//$("#applyersTeachersTitle").show();
 				
 			}else{
 				$("#adminMenu").empty();
@@ -634,6 +634,7 @@ $(document).ready(function() {
 			$("#updateFName").on('click', function() {
 				
 					var newusername = $("#inputNameSettings").val();
+					
 					if(user.role == "Student"){
 						
 						Student.find(sessionid, function(student){
@@ -821,6 +822,7 @@ function getEducationByCode(code){
 				
 				if(username){$("#educationStartedBy").html("UTBILDNINGSANSVARIG: " + username)}
 				
+				console.log("education.applyers_students", education.applyers_students);
 				
 				// Boring Data Handler
 				if(education.applyers_students){
@@ -847,22 +849,6 @@ function getEducationByCode(code){
 				
 				
 				
-				// Lärare för utbildning
-				if(result[0].applyers_teachers){
-					$("#educationTeachers").html("LÄRARE: ");
-					$("#educationTeachers").show();
-					for(var u = 0; u < result[0].applyers_teachers.length; u++){
-						if(result[0].applyers_teachers[u] !== "test"){
-							findOneEmployee(result[0].applyers_teachers[u], "username", function(username){
-								$("#educationTeachers").append(username + " ");
-							});
-						}
-					}
-				}else{
-					$("#educationTeachers").html("");
-					$("#educationTeachers").hide();
-				}
-				
 				// DEPENDING ON ROLE
 				roleFunc(function(role){
 					user = role.user;
@@ -884,35 +870,48 @@ function getEducationByCode(code){
 						
 						$("#applyAsStudentBtn").show(); // BUTTON
 						$("#applyAsStudentBtn").on('click', function(){
-							
+							console.log("happennsssss");
 							// push student id to applyersStudents
 							// Lägg till lärare på utbilding
-							if (education._id){
+							if (education.applyers_students){
 								// push teacher._id 
+								var isAlreadyAMember = false;
+								for(var u = 0; u < education.applyers_students.length; u++){
+									if(education.applyers_students[u].indexOf(sessionid)){
+										 isAlreadyAMember = true;
+									}
+								}
 								
-								if(!education.applyers_students){education.applyers_students = []}
-								education.applyers_students.push(sessionid);
+								if(isAlreadyAMember == false){
+									education.applyers_students.push(sessionid);
 								
-								//console.log("education before send");
-								//console.log("applyers_students", education.applyers_students);	// returns 58b4a94fc8f61b06f89b4187
-								
-								// Example: Kitten.update(kittens[0]._id,{age:11},next);
-								Education.update(education._id,{applyers_students:education.applyers_students}, function(callback){
-									$("#educationMessage").html("Bra! Du har ansökt till utbildningen som student! Vänta på besked från Läraren.");
-									$("#applyAsStudentBtn").hide();
+									//console.log("education before send");
+									//console.log("applyers_students", education.applyers_students);	// returns 58b4a94fc8f61b06f89b4187
 									
-									//console.log("#EDUCATION OUTPUT 1");
-									//console.log(callback);
-								
-									Education.find(education._id, function(result){
-										//console.log(result);
-										if(result){
-											education = result;
-											//console.log("#EDUCATION OUTPUT 2#");
-											//console.log(education);
-										}
+									// Example: Kitten.update(kittens[0]._id,{age:11},next);
+									Education.update(education._id,{applyers_students: education.applyers_students}, function(callback){
+										$("#educationMessage").html("Bra! Du har ansökt till utbildningen som student! Vänta på besked från Läraren.");
+										$("#applyAsStudentBtn").hide();
+										
+										//console.log("#EDUCATION OUTPUT 1");
+										//console.log(callback);
+									
+										Education.find(education._id, function(result){
+											//console.log(result);
+											if(result){
+												education = result;
+												//console.log("#EDUCATION OUTPUT 2#");
+												//console.log(education);
+											}
+										});
 									});
-								});
+								}else{
+									$("#educationMessage").html("Tyvärr! Du har redan sökt utbildningen.");
+									$("#applyAsStudentBtn").hide();
+								}
+							
+								
+								
 							}
 						});
 						
@@ -935,7 +934,10 @@ function getEducationByCode(code){
 									var studentList = "<thead><tr><th>Användarnamn</th></tr></thead>";
 							console.log(education.students);
 							
+							
 									// loop students
+									// loop students
+									console.log("education.students", education.students);
 									for(var i = 0; i < education.students.length; i++){
 										if(education.students[i] !== "test"){
 											Student.find(education.students[i], function(student){
@@ -958,12 +960,17 @@ function getEducationByCode(code){
 											studentList += "<td>Inga användare hittades.</td>";
 											studentList += "</tr>";
 											studentList += "</tbody>";
-											$("#educationStudents").empty().append(studentList);
+											$("#educationStudents").html("");
+											$("#educationStudents").append(studentList);
 											$("#educationStudents").show();
 										}
 									}
 									
 									// loop teachers
+									// loop teachers
+									// loop teachers
+									var employeeList = "<thead><tr><th>Användarnamn</th></tr></thead>";
+									employeeList += "<tbody>";
 									for(var i = 0; i < education.teachers.length; i++){
 										if(education.teachers[i] !== "test"){
 											Employee.find(education.teachers[i], function(employee){
@@ -976,8 +983,9 @@ function getEducationByCode(code){
 													employeeList += "<td>"+employee.username+"</td>";
 													employeeList += "</tr>";
 													employeeList += "</tbody>";
-													$("#educationStudents").empty().append(employeeList);
-													$("#educationStudents").show();
+													$("#educationTeachers").html("");
+													$("#educationTeachers").append(employeeList);
+													$("#educationTeachers").show();
 												}
 											}); 
 										}else{
@@ -991,7 +999,10 @@ function getEducationByCode(code){
 										}
 									}
 							
-									// loop
+									// loop applying students
+									// loop applying students
+									var studentList = "<thead><tr><th>Användarnamn</th><th>Godkänn</th><th>Neka</th></tr></thead>";
+									studentList += "<tbody>";
 									for(var i = 0; i < education.applyers_students.length; i++){
 										if(education.applyers_students[i] !== "test"){
 											Student.find(education.applyers_students[i], function(student){
@@ -1006,7 +1017,8 @@ function getEducationByCode(code){
 													studentList += '<td class="educationDenyStudentBtn" id="'+student._id+'"><button><i class="fa fa-times"></i></button></td>';
 													studentList += "</tr>";
 													studentList += "</tbody>";
-													$("#applyersStudents").empty().append(studentList);
+													$("#applyersStudents").html("");
+													$("#applyersStudents").append(studentList);
 													
 													// onclick
 													$(".educationApproveStudentBtn").on('click', function() {
@@ -1037,17 +1049,16 @@ function getEducationByCode(code){
 												
 												Student.update(student._id, {educations:newEdu}, function(updatedResult){
 													console.log("Updated result",updatedResult);
-													if(updatedResult.nModified == 1){
-														$("#educationMessage").html(student.username + " har gått med i utbildningen.");
-													}
+													
 													
 													var pos = education.applyers_students.indexOf(id);
 													education.applyers_students.splice(pos,1);
 										
-													// update education.students
-													var newStudent = education.students.push(id);
+													// update education.
+					
+													education.students.push(id);
 										
-													Education.update(education._id, {applyers_students: education.applyers_students, students: newStudent}, function(updatedEducation){
+													Education.update(education._id, {applyers_students: education.applyers_students, students: education.students}, function(updatedEducation){
 													
 														getEducationByCode(code);
 														$("#educationMessage").html("Bra! Användaren hör nu till utbildningen.");
@@ -1076,7 +1087,7 @@ function getEducationByCode(code){
 									
 									
 									
-									$("#applyersStudents").show();
+									//$("#applyersStudents").show();
 									
 									// Applying Teachers Table
 									var employeeList = "";

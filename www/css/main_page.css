@@ -6,7 +6,7 @@ a > p {
 	display: none;
 }
 
-#adminMenu, #rowSkapaInlagg, #applyAsStudent, #applyAsTeacher, #applyersStudents, #applyersTeachers, #applyersStudentsTitle, #applyersTeachersTitle{
+#adminMenu, #rowSkapaInlagg, #applyAsStudent, #applyAsTeacher{
 	display: none;
 }
 
