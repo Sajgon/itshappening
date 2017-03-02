@@ -12,7 +12,6 @@
     <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> <!-- Custom icon Fonts -->
 
     <link href="/css/main_bootstrap.css" rel="stylesheet" type="text/css"> <!-- Editable css -->
-
     <link href="/css/main_page.css" rel="stylesheet" type="text/css"> <!-- Editable css -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -244,10 +243,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row maps">
                         <div class="col-xs-12">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4506.9119024340935!2d12.990854528107523!3d55.611481669919854!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4653a3f88fcb575b%3A0x258f6dde97c9cb49!2sMinc!5e0!3m2!1ssv!2sse!4v1487155969091" width="100%" height="250" frameborder="0" style="border:100%;" allowfullscreen></iframe>
-                        </div>
+							<!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4506.9119024340935!2d12.990854528107523!3d55.611481669919854!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4653a3f88fcb575b%3A0x258f6dde97c9cb49!2sMinc!5e0!3m2!1ssv!2sse!4v1487155969091" width="100%" height="250" frameborder="0" style="border:100%;" allowfullscreen></iframe>-->
+							<iframe src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJ80VckfijU0YRMPw1cNe3tJw&key=AIzaSyBK9Mf5zx153mflbjh7ixuUks3E0s56Vp0"  width="100%" height="250" frameborder="0" style="border:100%;" allowfullscreen></iframe>
+						</div>
                     </div>
                 </div>
 
@@ -497,14 +497,12 @@
                 <div class="pageObj" id="educationDetail">
                     <div class="row">
                         <div class="col-xs-12 col-sm-8">
-                            <p id="educationMessage"></p>
+                            <p class="label label-success" id="educationMessage"></p>
                             <h2 id="educationTitle"></h2>
                             <h4 id="educationCode"></h4>
                             <h4 id="educationStartDate"></h4>
                             <h4 id="educationEndDate"></h4>
 							<br/>
-							<h4 id="educationStudents"></h4>
-							<h4 id="educationTeachers"></h4>
 							<h4 id="educationStartedBy"></h4>
 							
 							
@@ -512,18 +510,24 @@
 							<button id="applyAsStudentBtn" type="button" class="btn btn-success btn-lg">Ansök till utbildning som Student</button>
 							<button id="applyAsTeacher" type="button" class="btn btn-success btn-lg">Ansök till utbildning som Lärare</button>
 							
+							
+							<h3>Studenter i utbildningen</h3>
+							<table class="table" id="educationStudents"></table>
+							<h3>Lärare i utbildningen</h3>
+							<table class="table" id="educationTeachers"></table>
+							
 							<!-- For Admin -->
 							<h3 id="applyersStudentsTitle">Ansökande studenter</h3>
-							<table id="applyersStudents"></table>
-							<h3 id="applyersTeachersTitle">Ansökande läraree</h3>
-							<table id="applyersTeachers"></table>
+							<table class="table" id="applyersStudents">Inga sökande studenter hittades i utbildningen.</table>
+							<h3 id="applyersTeachersTitle">Ansökande lärare</h3>
+							<table class="table" id="applyersTeachers">Inga sökande lärare hittades i utbildningen.</table>
 							
 							<h3>Statistik</h3>
-							<h4 id="amountApplyers_students"></h4>
-							<h4 id="amountApplyers_teachers"></h4>
-							<h4 id="amount_students"></h4>
-							<h4 id="amount_teachers"></h4>
-							<h4 id="amount_admins"></h4>
+							<p id="amountApplyers_students"></p>
+							<p id="amountApplyers_teachers"></p>
+							<p id="amount_students"></p>
+							<p id="amount_teachers"></p>
+							<p id="amount_admins"></p>
                         </div>
                     </div>
                 </div>
@@ -556,9 +560,7 @@
 
                 <!-- page content end -->
             </div>
-            <!-- /.container-fluid -->
         </div>
-        <!-- /#page-wrapper -->
     </div>
 
 </body>

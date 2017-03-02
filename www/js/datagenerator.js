@@ -43,7 +43,6 @@ $(function() {
 	$("#addPosts").click(function(){
 		createNewspostData();
 		$("#datapage-title").html("Nya inlägg tillagda i databasen!");
-		printPosts();
 	});
 
 	$("#addStudents").click(function(){
@@ -104,7 +103,7 @@ $(function() {
 var postData = [
 	{
 	  "for_all": true,
-	  "title": "Välkommen våren!",
+	  "title": "Introduktion!",
 	  "content": "Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.\n\nSuspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst."
 	}, {
 	  "for_all": true,
@@ -139,7 +138,7 @@ var postData = [
 
 var educationData = [
 	{
-	  "educationId": "TE2EA",
+	  "educationId": "JSPRO",
 	  "educationName": "JAVASCRIPT PROGRAMMING",
 	  "startDate": "21/10/2016",
 	  "endDate": "05/06/2017"
