@@ -13,15 +13,6 @@ start();
 // Start the app
 function start(){
 	isLoggedIn();
-
-	// Wait for DOM ready
-	$(()=>{
-		// Run the rest tests
-		if(loadTemplate){
-			new MainNavbar();  // Create the main navbar
-			new RestTests();
-		}
-	});
 }
 
 

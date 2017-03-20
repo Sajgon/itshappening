@@ -803,24 +803,29 @@ function getEducationByCode(code){
 				// Boring Data Handler
 				if(education.applyers_students){
 					applyers_students_length = education.applyers_students.length;
+					if(education.applyers_students[0] == "test"){applyers_students_length--}//-1 is because "test" is counted
 				}else{applyers_students_length = 0;}
 				
 				if(education.applyers_teachers){
 					applyers_teachers_length = education.applyers_teachers.length;
+					if(education.applyers_teachers[0] == "test"){applyers_teachers_length--}//-1 is because "test" is counted
 				}else{applyers_teachers_length = 0;}
 				
 				if(education.students){
 					students_length = education.students.length;
+					if(education.students[0] == "test"){students_length--}//-1 is because "test" is counted
 				}else{students_length = 0;}
 				
 				if(education.teachers){
 					teachers_length = education.teachers.length;
+					if(education.teachers[0] == "test"){teachers_length--}//-1 is because "test" is counted
 				}else{teachers_length = 0;}
 				
-				$("#amountApplyers_students").html("Ansökande Studenter till utbildningen: "+ (applyers_students_length-1));
-				$("#amountApplyers_teachers").html("Ansökande Lärare till utbildningen: "+ (applyers_teachers_length-1));
-				$("#amount_students").html("Studenter i utbildningen: "+ (students_length-1));
-				$("#amount_teachers").html("Lärare i utbildningen: "+ (teachers_length-1));
+				
+				$("#amountApplyers_students").html("Ansökande Studenter till utbildningen: "+ (applyers_students_length));
+				$("#amountApplyers_teachers").html("Ansökande Lärare till utbildningen: "+ (applyers_teachers_length));
+				$("#amount_students").html("Studenter i utbildningen: "+ (students_length));
+				$("#amount_teachers").html("Lärare i utbildningen: "+ (teachers_length));
 				$("#amount_admins").html("Administratörer i utbildningen: 1");
 				
 			
@@ -976,9 +981,13 @@ function getEducationByCode(code){
                                 }
                             });
 
-                        } else {
+                        }else if(isAlreadyAMember == true){
+							 // you are a student of this education
+                            $("#educationMessage").html("Du är en student i denna utbildning!").show();
+							$("#applyAsStudentBtn").hide();
+                        }else if(isAlreadyAnApplyer == true){
                             // you are a student of this education
-                            $("#educationMessage").html("Du är redan medlem i utbildningen eller har ansökt till den.").show();
+                            $("#educationMessage").html("Du har ansökt till utbildningen som student! Vänligen vänta på att en lärare eller admin ska godkänna dig..").show();
 							$("#applyAsStudentBtn").hide();
                         }
 
@@ -1117,8 +1126,7 @@ function getEducationByCode(code){
 
 									if(studentsToShow.length == 0){
 										studentList = "<p>Inga studenter har ansökt till utbildningen.</p>";
-										$("#applyersStudents").html(studentList);
-										$("#applyersStudents").show();
+										$("#applyersStudents").html(studentList).show();
 									}else{
 										var studentList = "<table><thead><tr><th>Användarnamn</th><th>Godkänn</th><th>Neka</th></tr></thead><tbody>";
 
@@ -1132,8 +1140,7 @@ function getEducationByCode(code){
 										}
 
 										studentList += "</tbody></table";
-										$("#applyersStudents").html(studentList);
-										$("#applyersStudents").show();
+										$("#applyersStudents").html(studentList).show();
 										
 										// onclick
 										$(".educationApproveStudentBtn").on('click', function (){
@@ -1340,14 +1347,9 @@ function getEducationByCode(code){
 											$("#educationStudents").html(studentList);
 											$("#educationStudents").show();
 										}
-									});
-									
-									
-									
+									});	
 								}
 
-
-                               
 
                                 // teachers
                                 // teachers
