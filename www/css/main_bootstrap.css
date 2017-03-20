@@ -1,13 +1,19 @@
 
 
+.username{
+	margin-top: 10px;
+	margin-right: 10px;
+	font-size: 20px;
+}
+
 .navbar.navbar-default{
-	background-image: url("../images/old-weathered-wood-texture.jpg");
+	/*background-image: url("../images/old-weathered-wood-texture.jpg");*/
 	background-size:cover;  
 
-            /* Workaround for some mobile browsers */
-            min-height:100%;   
-
+    /* Workaround for some mobile browsers */
+     min-height:100%;
 }
+
 .sidebar .sidebar-nav.navbar-collapse{
 	background-color: #242424;
 

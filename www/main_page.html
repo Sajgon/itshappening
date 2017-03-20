@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <title>itshappening</title>
 
-
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> <!-- Bootstrap Core CSS -->
     <link href="/vendor/metisMenu/metisMenu.min.css" rel="stylesheet"> <!-- MetisMenu CSS -->
     <link href="/dist/css/sb-admin-2.css" rel="stylesheet"><!-- template CSS -->
@@ -22,7 +21,6 @@
     <![endif]-->
 
     <script>
-        var loadTemplate = false;
         var pageName = "main_page";
     </script>
 
@@ -39,20 +37,10 @@
     <script src="js/classes/create-account.class.js"></script>
     <script src="js/classes/router.class.js"></script>
 
-    
+
     <script src="js/main.js"></script>
     <script src="js/main-page.js"></script>
     <script src="js/datagenerator.js"></script>
-
-  <!--
-    <script src="js/classes/main-navbar.class.js"></script>
-  <script src="js/classes/modal.class.js"></script>
-  <script src="js/classes/login-modal.class.js"></script>
-  <script src="js/classes/register-modal.class.js"></script>
-  <script src="js/classes/form-helpers.class.js"></script>
-
-  <script src="js/classes/rest-tests.class.js"></script>
-  <script src="js/libs/template.jquery.js"></script> -->
 
 </head>
 <body>
@@ -72,17 +60,7 @@
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
-                    
-                <!-- dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
-                        <i class="fa fa-user fa-fw"></i><span id="drowndown-username">-</span> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-messages">
-                        <li><a id="logoutbtn" href="javascript:void(0)"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                </li>
+                <p id="username" class="username">SUP</p>
             </ul>
 
             <div class="navbar-default sidebar defaultborder" role="navigation">
@@ -110,12 +88,8 @@
                                 <li>
                                     <a href="/skapa-utbildning">Skapa Utbildning</a>
                                 </li>
-                                <li>
-                                    <a href="/admins">Admins</a>
-                                </li>
-                                <li>
-                                    <a href="/larare">Lärare</a>
-                                </li>
+                                <li><a href="/admins">Admins</a></li>
+                                <li><a href="/larare">Lärare</a></li>
                                 <li>
                                     <a href="/studenter">Studenter</a>
                                 </li>
@@ -137,21 +111,26 @@
                             </ul>
                         </li>
 						-->
+						<li>
+                            <a href="/kontakta-oss"><i class="glyphicon glyphicon-envelope"></i> KONTAKT</a>
+                        </li>
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> KONTO<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a id="bytlosenordbtn" href="/byt-losenord">Byt Lösenord</a>
                                 </li>
-                                <li>
+								<li>
+                                    <a id="logoutbtn" href="/byt-losenord">Logga ut</a>
+                                </li>
+                              <!--  
+								<li>
                                     <a href="/redigera-uppgifter">Redigera Uppgifter</a>
                                 </li>
+								-->
                             </ul>
-                            <!-- /.nav-second-level -->
                         </li>
-                        <li>
-                            <a href="/kontakta-oss"><i class="glyphicon glyphicon-envelope"></i> KONTAKT</a>
-                        </li>
+                        
                     </ul>
                 </div>
             </div>
@@ -320,15 +299,13 @@
                 <div id="rowAdmins" class="pageObj">
                     <div class="row">
                         <div class="col-xs-12">
-                          <h1  class="page-header">Admins</h1>
+                          <h1 class="page-header">Admins</h1>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12" >
                             <div class="table-responsive">
-                                
-                                <table class="table" id ="adminstable">
-                              </table>
+                                <table class="table" id ="adminstable"></table>
                             </div>
                         </div>
                     
@@ -445,15 +422,6 @@
                             <h2>Sök Utbildning</h2>
                             <div>
 								<p id="searchErrorParagraph"></p>
-								<!--
-                                <div class="input-group col-md-12">
-                                    <input type="text" class="form-control input-lg" placeholder="Sök utbildningsnamn" />
-                                    <span class="input-group-btn">
-                                        <button id="searchNameBtn" class="btn btn-info btn-lg" type="button">
-                                            <i class="glyphicon glyphicon-search"></i>
-                                        </button>
-                                    </span>
-                                </div> -->
                                 <div  class="input-group col-md-12">
                                     <input id="idInputText" type="text" class="form-control input-lg" placeholder="Sök på utbildningsID" />
                                     <span class="input-group-btn">

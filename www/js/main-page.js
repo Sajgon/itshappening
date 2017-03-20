@@ -10,28 +10,26 @@ $(function() {
         // set username in top right corner
         findOneStudent(sessionid, "username", function(username){
             if(username){
-                $("#drowndown-username").html(username);
+                $("#username").html(username + " [STUDENT]");
             }else{
-                //search in emplyee
+                //search in employee
                 findOneEmployee(sessionid, "username", function(username){
                     if(username){
-                        $("#drowndown-username").html(username)
+						// look if you are admin, else teacher
+						isAdmin(sessionid, function(isAdmin){
+							if(isAdmin){
+								// ADMIN PERMISSION STUFF
+								$("#adminMenu").show();
+								$("#username").html(username + " [ADMIN]");
+							}else{
+								$("#adminMenu").empty();
+								$("#username").html(username + " [LÄRARE]");
+							}
+						});
                     }
                 });
             }
         });
-
-		isAdmin(sessionid, function(isAdmin){
-			if(isAdmin){
-				// ADMIN PERMISSION STUFF
-				$("#adminMenu").show();
-				//$("#applyersStudentsTitle").show();
-				//$("#applyersTeachersTitle").show();
-				
-			}else{
-				$("#adminMenu").empty();
-			}
-		});
 	}
 	
 	$("#logoutbtn").click(function(){
@@ -826,7 +824,7 @@ function getEducationByCode(code){
 				$("#amountApplyers_teachers").html("Ansökande Lärare till utbildningen: "+ (applyers_teachers_length));
 				$("#amount_students").html("Studenter i utbildningen: "+ (students_length));
 				$("#amount_teachers").html("Lärare i utbildningen: "+ (teachers_length));
-				$("#amount_admins").html("Administratörer i utbildningen: 1");
+				//$("#amount_admins").html("Administratörer i utbildningen: 1");
 				
 			
 				function educationApproveStudent(id) {
@@ -859,15 +857,16 @@ function getEducationByCode(code){
 
 				function educationDenyStudent(id) {
 					// get teacher by id
-					Student.find(id, function (student) {
+					Student.find(id, function(student) {
 						if (student._id) {
 							var pos = education.applyers_students.indexOf(id);
 							education.applyers_students.splice(pos, 1);
 
+							console.log("new education.applyers_students:", education.applyers_students);
+							
 							Education.update(education._id, {applyers_students: education.applyers_students}, function (updatedEducation) {
 								getEducationByCode(code);
-								$("#educationMessage").html("Studenten fick inte vara med i utbildningen. ").show();
-								$("#"+id).parent().remove();
+								//$("#educationMessage").html("Studenten fick inte vara med i utbildningen. ").show();
 							});
 						}
 					});
@@ -875,7 +874,7 @@ function getEducationByCode(code){
 				
 				function educationApproveTeacher(id) {
 					// get student by id
-					Employee.find(id, function (teacher) {
+					Employee.find(id, function(teacher) {
 						if (teacher._id) {
 							var newEdu = teacher.educations.push(code);
 
@@ -1042,9 +1041,10 @@ function getEducationByCode(code){
                                 // students
                                 $("#educationStudents").empty();
                                 if(education.students[0] == "test"){education.students.shift();}
-								var studentsToShow = [];
 								findAllStudents(function(students){
+									var studentsToShow = [];
 									//console.log(students);
+									// console.log("education.students: ", education.students);
 									for(i = 0; i < students.length; i++){
 										student = students[i];
 										if(education.students.indexOf(student._id) < 0){
@@ -1067,9 +1067,8 @@ function getEducationByCode(code){
 											studentList += "</tr>";
 										}
 
-										studentList += "</tbody></table";
-										$("#educationStudents").html(studentList);
-										$("#educationStudents").show();
+										studentList += "</tbody></table>";
+										$("#educationStudents").html(studentList).show();
 									}
 								});
 
@@ -1077,11 +1076,15 @@ function getEducationByCode(code){
                                 // teachers
                                 // teachers
 								$("#educationTeachers").empty();
-								var teachersToShow = [];
+								if(education.teachers[0] == "test"){education.teachers.shift();}
+								
 								findAllEmployees(function(teachers){
-									//console.log(teachers);
-									for(i = 0; i < teachers.length; i++){
+									//console.log("All teachers: ", teachers);
+									var teachersToShow = [];
+									for(var i = 0; i < teachers.length; i++){
 										teacher = teachers[i];
+										//console.log("education.teachers: ", education.teachers);
+										//console.log("teacher: ", teacher);
 										if(education.teachers.indexOf(teacher._id) < 0){
 											continue;
 										}
@@ -1112,18 +1115,23 @@ function getEducationByCode(code){
 								// applying students
 								// applying students
 								$("#applyersStudents").empty();
-								if(education.students[0] == "test"){education.students.shift();}
-								var studentsToShow = [];
+								if(education.applyers_students[0] == "test"){education.applyers_students.shift();}
 								findAllStudents(function(students){
 									//console.log(students);
-									for(i = 0; i < students.length; i++){
-										student = students[i];
-										if(education.applyers_students.indexOf(student._id) < 0){
-											continue;
+									console.log("applyers:", education.applyers_students);
+									var studentsToShow = [];
+									if(education.applyers_students.length > 0){
+										for(var i = 0; i < students.length; i++){
+											student = students[i];
+											if(education.applyers_students.indexOf(student._id) < 0){
+												continue;
+											}
+											studentsToShow.push(student);
 										}
-										studentsToShow.push(student);
 									}
-
+									
+									
+									console.log("students to print out on the page: ", studentsToShow);
 									if(studentsToShow.length == 0){
 										studentList = "<p>Inga studenter har ansökt till utbildningen.</p>";
 										$("#applyersStudents").html(studentList).show();
@@ -1134,12 +1142,12 @@ function getEducationByCode(code){
 											student = studentsToShow[i];
 											studentList += "<tr>";
 											studentList += "<td>" + student.username + "</td>";
-											studentList += '<td class="educationApproveStudentBtn" id="' + student._id + '"><button><i class="fa fa-check"></i></button></td>';
-											studentList += '<td class="educationDenyStudentBtn" id="' + student._id + '"><button><i class="fa fa-times"></i></button></td>';
+											studentList += '<td><button class="educationApproveStudentBtn" id="' + student._id + '"><i class="fa fa-check"></i></button></td>';
+											studentList += '<td><button class="educationDenyStudentBtn" id="' + student._id + '"><i class="fa fa-times"></i></button></td>';
 											studentList += "</tr>";
 										}
 
-										studentList += "</tbody></table";
+										studentList += "</tbody></table>";
 										$("#applyersStudents").html(studentList).show();
 										
 										// onclick
@@ -1150,7 +1158,7 @@ function getEducationByCode(code){
 
 										// onclick
 										$(".educationDenyStudentBtn").on('click', function (){
-											//console.log("happening...");
+											console.log("click deny student...");
 											educationDenyStudent(this.id);
 										});
 									}
@@ -1161,13 +1169,14 @@ function getEducationByCode(code){
 								// APPLYING TEACHERS
 								// APPLYING TEACHERS
 								$("#applyersStudents").empty();
-								if(education.teachers[0] == "test"){education.students.shift();}
-								var teachersToShow = [];
+								if(education.applyers_teachers[0] == "test"){education.applyers_teachers.shift();}
 								findAllEmployees(function(teachers){
+									var teachersToShow = [];
 									//console.log(teachers);
-									for(i = 0; i < teachers.length; i++){
+									// console.log("applyers_teachers: ", education.applyers_teachers);
+									for(var i = 0; i < teachers.length; i++){
 										teacher = teachers[i];
-										if(education.applyers_students.indexOf(teacher._id) < 0){
+										if(education.applyers_teachers.indexOf(teacher._id) < 0){
 											continue;
 										}
 										teachersToShow.push(teacher);
@@ -1175,8 +1184,7 @@ function getEducationByCode(code){
 
 									if(teachersToShow.length == 0){
 										employeeList = "<p>Inga studenter har ansökt till utbildningen.</p>";
-										$("#applyersTeachers").html(employeeList);
-										$("#applyersTeachers").show();
+										$("#applyersTeachers").html(employeeList).show();
 									}else{
 										var employeeList = "<table><thead><tr><th>Användarnamn</th><th>Godkänn</th><th>Neka</th></tr></thead><tbody>";
 
@@ -1184,14 +1192,13 @@ function getEducationByCode(code){
 											teacher = teachersToShow[i];
 											employeeList += "<tr>";
 											employeeList += "<td>" + teacher.username + "</td>";
-											employeeList += '<td class="educationApproveTeacherBtn" id="' + teacher._id + '"><button><i class="fa fa-check"></i></button></td>';
-											employeeList += '<td class="educationDenyTeacherBtn" id="' + teacher._id + '"><button><i class="fa fa-times"></i></button></td>';
+											employeeList += '<td><button class="educationApproveTeacherBtn" id="' + teacher._id + '"><i class="fa fa-check"></i></button></td>';
+											employeeList += '<td><button class="educationDenyTeacherBtn" id="' + teacher._id + '"><i class="fa fa-times"></i></button></td>';
 											employeeList += "</tr>";
 										}
 
 										employeeList += "</tbody></table>";
-										$("#applyersTeachers").html(employeeList);
-										$("#applyersTeachers").show();
+										$("#applyersTeachers").html(employeeList).show();
 										
 										// onclick
 										$(".educationApproveTeacherBtn").on('click', function (){
@@ -1267,7 +1274,7 @@ function getEducationByCode(code){
 									var studentsToShow = [];
 									findAllStudents(function(students){
 										// console.log(students);
-										for(i = 0; i < students.length; i++){
+										for(var i = 0; i < students.length; i++){
 											student = students[i];
 											if(education.applyers_students.indexOf(student._id) < 0){
 												continue;
@@ -1294,9 +1301,8 @@ function getEducationByCode(code){
 											}
 
 											studentList += "</tbody></table>";
-											$("#applyersStudents").html(studentList);
+											$("#applyersStudents").html(studentList).show();
 											$("#applyersStudentsTitle").show();
-											$("#applyersStudents").show();
 											
 											// onclick
 											$(".educationApproveStudentBtn").on('click', function (){
@@ -1385,10 +1391,6 @@ function getEducationByCode(code){
 										$("#educationTeachers").show();
 									}
 								});
-
-								
-							
-								
 								
                        	 	}//you are teacher end
 						});
