@@ -33,6 +33,12 @@ $(function() {
 			}
 		});
 	}
+	
+	$("#logoutbtn").click(function(){
+		logOut();
+		isLoggedIn();
+	});
+	
 });
 
 
@@ -48,7 +54,7 @@ function findAllStudents(callback){
 
 function findAllEducations(callback){
 	Education.find('find/{admin:/.*/}', function(result){
-		console.log(result);
+		//console.log(result);
 		callback(result);
 	});
 }
@@ -138,19 +144,11 @@ function printPosts(posts){
 }
 
 function getPost(post){
-	//console.log("post", post);
-	// content = post.content;
-	// fulldate = humanDate(post.date_posted);
-
-	//findOneStudent(post.postedby_id, "username", function(username){
 
 	findOneEmployee(post.postedby_id, "username", function(username){
 		printPost(post, username);
 	});
-		//}else{
-		//	printPost(post, username);
-		//}
-	//});
+
 }
 
 function printPost(post, username){
@@ -168,13 +166,13 @@ function printPost(post, username){
 
 function logOut(){
 	Login.delete("",function(result){
-		console.log(result)
+		//console.log(result)
 	})
 }
 
 function findStudentByUsername(username){
 	Student.find('find/{username:/'+username+'/}', function(result){
-		console.log(result);
+		//console.log(result);
 	});
 }
 
@@ -235,7 +233,7 @@ $(document).ready(function() {
 
 	// Visa alla utbildningar
 	addRoute('/alla-utbildningar',function() {
-		console.log("Alla utbildningar");
+		//console.log("Alla utbildningar");
 		$(".pageObj").hide();
 		$("#rowEducations").show();
 
@@ -284,16 +282,16 @@ $(document).ready(function() {
 							// go to a specific education 
 							$(".GoToEducation").on('click', function() {
 								var educationCodeId = $(this).attr('id');
-								console.log("educationCodeId: ", educationCodeId);
+								// console.log("educationCodeId: ", educationCodeId);
 								getEducationByCode(educationCodeId);
 							});
 							
 							// Remove education button only for admins
 							$(".removeEducation").on('click', function() {
-								console.log("##happens");
-								console.log(this.id);
+								// console.log("##happens");
+								// console.log(this.id);
 								Education.delete(this.id, function(){
-									console.log("Education has been removed.");
+									//console.log("Education has been removed.");
 									viewEducations();
 								});
 							});
@@ -316,7 +314,7 @@ $(document).ready(function() {
 	
 	//Mina utbildningar
 	addRoute('/mina-utbildningar',function() {
-		console.log("Mina utbildningar");
+		// console.log("Mina utbildningar");
 		$(".pageObj").hide();
 		$("#myEducations").show();
 
@@ -331,7 +329,7 @@ $(document).ready(function() {
 				$("#myEducationsTable").empty();
 				if(educations.length > 1){
 					for(var i = 0; i < educations.length; i++){
-						console.log(educations[i]);
+						// console.log(educations[i]);
 						if(educations[i] !== "test"){
 							
 							Education.find('find/{education_code:/'+educations[i]+'/}', function(result){
@@ -401,32 +399,27 @@ $(document).ready(function() {
 	});
 
 	
-
-	
-	
 	addRoute('/sok-utbildningar',function()  {
-		console.log("Sök Utbilnding");
+		//console.log("Sök Utbilnding");
 		$(".pageObj").hide();
 		$("#searchfield").show();
-
-
 	});
 
 
 	addRoute('/skapa-utbildning',function() {
-	  console.log("Skapa Utbildning");
+	  // console.log("Skapa Utbildning");
 	  $(".pageObj").hide();
 	  $("#rowSkapaUtbildning").show();
 	});
 
 	// När man som admin trycker på "Admins" i menyn
 	addRoute('/admins',function() {
-		console.log("Admins btn clicked.");
+		//console.log("Admins btn clicked.");
 		$(".pageObj").hide();
 		$("#rowAdmins").show();
 
 		findAllEmployees(function(employee){
-		  	console.log(employee);
+		  	//console.log(employee);
 
 		  	var employeeList = "<thead><tr><th>Förnamn</th><th>Efternamn</th><th>Personnummer</th><th>Användarnamn</th></tr></thead>";
 			employeeList += "<tbody>";
@@ -448,7 +441,7 @@ $(document).ready(function() {
 
 	// ADMIN > LÄRARE PAGE
 	addRoute('/larare',function() {
-		console.log("ADMIN > Lärare..");
+		// console.log("ADMIN > Lärare..");
 		$(".pageObj").hide();
 		$("#rowLarare").show();
 
@@ -491,11 +484,11 @@ $(document).ready(function() {
 				function approveTeacher(id){
 					// get teacher by id
 					Employee.find(id, function(result){
-						console.log(result);
+						//console.log(result);
 						if (result._id){
 							Employee.update(result._id, {verified:true,pendingVerification:false}, function(updatedResult){
-								console.log("updatedResult...");
-								console.log(updatedResult);
+								//console.log("updatedResult...");
+								// console.log(updatedResult);
 								$("#teacherMessage").html(result.username + " has been approved.");
 								loadAllTeachers();
 							});
@@ -506,7 +499,7 @@ $(document).ready(function() {
 				function denyTeacher(id){
 					// get teacher by id
 					Employee.find(id, function(result){
-						console.log(result);
+						//console.log(result);
 						if (result){
 							Employee.update(result._id, {verified:false,pendingVerification:false}, function(updatedResult){
 								$("#teacherMessage").html(result.username + " has been denied.");
@@ -531,7 +524,7 @@ $(document).ready(function() {
 						employeeList += "<td>"+employee.username+"</td>";
 						employeeList += "</tr>";
 						verifiedemployeestable = true;
-						console.log("##happens");
+						//console.log("##happens");
 					}
 				}
 				employeeList += "</tbody>";
@@ -570,7 +563,7 @@ $(document).ready(function() {
 	});
 	
 	addRoute('/studenter', function() {
-		console.log("Student");
+		//console.log("Student");
 		$(".pageObj").hide();
 		$("#rowStudenter").show();
 
@@ -612,12 +605,14 @@ $(document).ready(function() {
 	addRoute('/boka-sal', function() {
 	  //console.log("Boka Sal");
 	  $(".pageObj").hide();
+	  alert("TYVÄRR DENNA FUNKTIONALITET FUNGERAR INTE.");
 	});
 
 
 	addRoute('/byt-losenord', function() {
-	  //console.log("Byt Lösenord");
-	  $(".pageObj").hide();
+		//console.log("Byt Lösenord");
+		$(".pageObj").hide();
+		alert("TYVÄRR DENNA FUNKTIONALITET FUNGERAR INTE.");
 	});
 
 
@@ -634,38 +629,24 @@ $(document).ready(function() {
 			$("#updateFName").on('click', function() {
 				
 					var newusername = $("#inputNameSettings").val();
-					
+					// console.log(user.role);
 					if(user.role == "Student"){
-						
-						Student.find(sessionid, function(student){
-							Student.update(sessionid, {fname:newusername}, function(updatedResult){
-								$("#inputNameSettings").val(newusername);
-								$("#settingsMessage").html("Ditt förnamn har blivit uppdaterat till " + newusername + ".");
-							});
+						Student.update(sessionid, {fname: newusername}, function(updatedResult){
+							$("#inputNameSettings").val(newusername);
+							$("#settingsMessage").html("Ditt förnamn har blivit uppdaterat till '" + newusername + "'.").show();
 						});
 					}else if(user.role == "Employee"){
-						
-						Employee.find(sessionid, function(employee){
+						Employee.update(sessionid, {fname: newusername}, function(updatedResult){
+							// console.log(updatedResult);
+							$("#inputNameSettings").val(newusername);
+							$("#settingsMessage").html("Ditt förnamn har blivit uppdaterat till " + newusername + ".").show();
 							
-							// example: Owner.update(owners[0]._id,{age:80},next);
-							Employee.update(sessionid, {fname:newusername}, function(updatedResult){
-								$("#inputNameSettings").val(newusername);
-								$("#settingsMessage").html("Ditt förnamn har blivit uppdaterat till " + newusername + ".");
-								
-							});
 						});
-						
-						
 					}
 			});
 		});
 	});
 
-
-	$("#logoutbtn").click(function(){
-		logOut();
-		isLoggedIn();
-	});
 	addRoute('/kontakta-oss',function() {
 	  //console.log("Kontakt sida");
 	  $(".pageObj").hide();
@@ -700,20 +681,18 @@ $(document).ready(function() {
 		function viewEducationByName(education){
 			//console.log(education);
 
-			var educationList = "<thead><tr><th>UtbildningsID</th><th>Utbildningsnamn</th><th>Startar</th><th>Slutar</th></tr></thead>";
+			var educationList = "<thead><tr><th>UtbildningsID</th><th>Utbildningsnamn</th><th>Startar</th><th>Slutar</th></tr></thead><tbody>";
 			var found = false;
 
 			for(var i = 0; i < education.length; i++){
 				//console.log(nameInputText, education[i].education_name);
 				if(nameInputText == education[i].education_name){
-					educationList += "<tbody>";
 					educationList += "<tr>";
 					educationList += "<td>"+education[i].education_code+"</td>";
 					educationList += "<td>"+education[i].education_name+"</td>";
 					educationList += "<td>"+education[i].start+"</td>";
 					educationList += "<td>"+education[i].end+"</td>";
 					educationList += "</tr>";
-					educationList += "</tbody>";
 					found=true;
 
 					break;
@@ -721,6 +700,7 @@ $(document).ready(function() {
 			}
 
 			if(found==true){
+				educationList += "</tbody>";
 				$("#searchOutput").empty().append(educationList);
 			}else{
 				//console.log("hittar ingen utbildning")
@@ -791,13 +771,10 @@ function setAdminByUsername(username){
 	Employee.find('find/{username:/'+username+'/}', function(result){
 		//console.log(result);
 		if (result[0]){
-
 			//result[0].admin = true;
 			Employee.update(result[0]._id, {admin: true}, function(updatedResult){
-				console.log(updatedResult);
+				// console.log(updatedResult);
 			});
-
-			//console.log(result[0]);
 		}
 	});
 }
@@ -808,7 +785,6 @@ function getEducationByCode(code){
 		if(result[0]){
 		
 			education = result[0];
-			//console.log("onclick education:", education);
 			educationcode = code;
 			educationid = education._id;
 			findOneEmployee(result[0].admin, "username", function(username){
@@ -822,7 +798,7 @@ function getEducationByCode(code){
 				
 				if(username){$("#educationStartedBy").html("UTBILDNINGSANSVARIG: " + username)}
 				
-				console.log("education.applyers_students", education.applyers_students);
+				//console.log("education.applyers_students", education.applyers_students);
 				
 				// Boring Data Handler
 				if(education.applyers_students){
@@ -847,49 +823,136 @@ function getEducationByCode(code){
 				$("#amount_teachers").html("Lärare i utbildningen: "+ (teachers_length-1));
 				$("#amount_admins").html("Administratörer i utbildningen: 1");
 				
+			
+				function educationApproveStudent(id) {
+					// get student by id
+					Student.find(id, function (student) {
+						if (student._id) {
+							var newEdu = student.educations.push(code);
+
+							Student.update(student._id, {educations: newEdu}, function (updatedResult) {
+
+								var pos = education.applyers_students.indexOf(id);
+								education.applyers_students.splice(pos, 1);
+
+								// update education.
+								education.students.push(id);
+
+								Education.update(education._id, {
+									applyers_students: education.applyers_students,
+									students: education.students
+								}, function (updatedEducation) {
+									
+									getEducationByCode(code);
+									$("#educationMessage").html("Bra! Användaren hör nu till utbildningen.").show();
+									$("#"+id).parent().remove();
+								});
+							});
+						}
+					});
+				}
+
+				function educationDenyStudent(id) {
+					// get teacher by id
+					Student.find(id, function (student) {
+						if (student._id) {
+							var pos = education.applyers_students.indexOf(id);
+							education.applyers_students.splice(pos, 1);
+
+							Education.update(education._id, {applyers_students: education.applyers_students}, function (updatedEducation) {
+								getEducationByCode(code);
+								$("#educationMessage").html("Studenten fick inte vara med i utbildningen. ").show();
+								$("#"+id).parent().remove();
+							});
+						}
+					});
+				}
 				
+				function educationApproveTeacher(id) {
+					// get student by id
+					Employee.find(id, function (teacher) {
+						if (teacher._id) {
+							var newEdu = teacher.educations.push(code);
+
+							Employee.update(teacher._id, {educations: newEdu}, function (updatedResult) {
+
+								var pos = education.applyers_teachers.indexOf(id);
+								education.applyers_teachers.splice(pos, 1);
+
+								// update education.
+								education.teachers.push(id);
+
+								Education.update(education._id, {
+									applyers_teachers: education.applyers_teachers,
+									teachers: education.teachers
+								}, function (updatedEducation) {
+									$("#"+id).parent().remove();
+									getEducationByCode(code);
+								});
+							});
+						}
+					});
+				}
 				
+				function educationDenyTeacher(id) {
+					// get teacher by id
+					Employee.find(id, function(teacher) {
+						if (teacher._id) {
+							var pos = education.applyers_teachers.indexOf(id);
+							education.applyers_teachers.splice(pos, 1);
+
+							Education.update(education._id, {applyers_teachers: education.applyers_teachers}, function (updatedEducation) {
+								$("#"+id).parent().remove();
+								getEducationByCode(code);
+							});
+						}
+					});
+				}
+				
+
 				// DEPENDING ON ROLE
 				roleFunc(function(role){
+					
 					user = role.user;
 					
 					$("#applyAsStudentBtn").hide();
 					$("#applyAsTeacher").hide();
+					$("#educationMessage").hide();
 				
+					// YOU ARE STUDENT
 					if(user.role == "Student") {
-                        // YOU ARE STUDENT
-                        // YOU ARE STUDENT
-                        // YOU ARE STUDENT
+                        // ## YOU ARE STUDENT
+                        // ## YOU ARE STUDENT
+                        // ## YOU ARE STUDENT
 
                         $("#applyersStudentsTitle").hide();
                         $("#applyersStudents").hide();
                         $("#applyersTeachersTitle").hide();
                         $("#applyersTeachers").hide();
-
-                        // console.log("You are a student..");
-                        //console.log(user);
+                        $("#educationStudentsTitle").hide();	// dölj studenter i utbildningen
+                        $("#educationStudents").hide();			// dölj studenter i utbildningen
 
                         var isAlreadyAMember = false;
                         for (var u = 0; u < education.students.length; u++) {
                             if (education.students[u] !== "test" && education.students[u] == sessionid) {
                                 isAlreadyAMember = true;
-                                console.log("You are already a member of this education.");
+                               // console.log("You are already a member of this education.");
                             }
                         }
 
                         var isAlreadyAnApplyer = false;
                         for (var u = 0; u < education.applyers_students.length; u++) {
-                            console.log(education.applyers_students);
+                            //console.log(education.applyers_students);
                             if (education.applyers_students[u] !== "test" && education.applyers_students[u] == sessionid) {
                                 isAlreadyAnApplyer = true;
-                                console.log("You are already a member of this education.");
+                                //console.log("You are already a member of this education.");
                             }
                         }
 
                         if (isAlreadyAMember == false && isAlreadyAnApplyer == false) {
                             $("#applyAsStudentBtn").show(); // BUTTON
                             $("#applyAsStudentBtn").on('click', function () {
-                                console.log("You are applying as a student..");
+                                // console.log("You are applying as a student..");
                                 // push student id to applyersStudents
                                 // Lägg till lärare på utbilding
 
@@ -897,366 +960,272 @@ function getEducationByCode(code){
                                     // push teacher._id
 
                                     education.applyers_students.push(sessionid);
-
-                                    //console.log("education before send");
-                                    //console.log("applyers_students", education.applyers_students);	// returns 58b4a94fc8f61b06f89b4187
-
-
-                                    console.log("You are not a member of this education.");
-
-                                    // Example: Kitten.update(kittens[0]._id,{age:11},next);
+                                    // console.log("You are not a member of this education.");
+									
                                     Education.update(education._id, {applyers_students: education.applyers_students}, function (callback) {
-                                        $("#educationMessage").html("Bra! Du har ansökt till utbildningen som student! Vänta på besked från Läraren.");
+                                        $("#educationMessage").html("Bra! Du har ansökt till utbildningen som student! Vänta på besked från Läraren.").show();
                                         $("#applyAsStudentBtn").hide();
-
-                                        //console.log("#EDUCATION OUTPUT 1");
-                                        //console.log(callback);
 
                                         Education.find(education._id, function (result) {
                                             //console.log(result);
-                                            if (result) {
+                                            if(result){
                                                 education = result;
-                                                //console.log("#EDUCATION OUTPUT 2#");
-                                                //console.log(education);
                                             }
                                         });
                                     });
-
                                 }
                             });
 
                         } else {
                             // you are a student of this education
-                            $("#educationMessage").html("Du är medlem i utbildningen eller har ansökt till den.");
+                            $("#educationMessage").html("Du är redan medlem i utbildningen eller har ansökt till den.").show();
+							$("#applyAsStudentBtn").hide();
                         }
 
-                        // loop teachers
-                        // loop teachers
-                        // loop teachers
-                        anyTeacher = false;
-                        var employeeList = "<table class='table'><thead><tr><th>Användarnamn</th></tr></thead><tbody>";
-                        if (education.teachers.length > 1) {
-                            for (var i = 0; i < education.teachers.length; i++) {
-                                Employee.find(education.teachers[i], function (employee) {
-                                    //console.log("##HAPPENS#");
-                                    //console.log(student);
-                                    if (employee._id) {
+						// teachers
+						// teachers
+						// teachers
+						$("#educationTeachers").empty();
+						var teachersToShow = [];
+						findAllEmployees(function(teachers){
+							// console.log(teachers);
+							for(i = 0; i < teachers.length; i++){
+								teacher = teachers[i];
+								if(education.teachers.indexOf(teacher._id) < 0){
+									continue;
+								}
+								teachersToShow.push(teacher);
+							}
 
-                                        employeeList += "<tr>";
-                                        employeeList += "<td>" + employee.username + "</td>";
-                                        employeeList += "</tr>";
-                                        anyTeacher = true;
-                                    }
+							if(teachersToShow.length == 0){
+								studentList = "<p>Inga lärare finns med i utbildningen.</p>";
+								$("#educationTeachers").html(studentList);
+								$("#educationTeachers").show();
+							}else{
+								var studentList = "<table class='table'><thead><tr><th>Användarnamn</th></tr></thead><tbody>";
 
-                                    if (i == education.teachers.length) {
-                                        if (anyTeacher) {
-                                            employeeList += "</tbody></table>";
-                                            $("#educationTeachers").html(employeeList);
-                                            $("#educationTeachers").show();
-                                        } else {
-                                            $("#educationTeachers").empty();
-                                            $("#educationTeachers").html("<p>Inga studenter i denna utbildningen.</p>");
-                                            $("#educationTeachers").show();
-                                        }
-                                    }
+								for(var i = 0; i < teachersToShow.length; i++){
+									teacher = teachersToShow[i];
+									studentList += "<tr>";
+									studentList += "<td>" + teacher.username + "</td>";
+									studentList += "</tr>";
+								}
 
-                                });
-                            }
-                        }else {
-                            $("#educationTeachers").empty();
-                            $("#educationTeachers").html("<p>Inga studenter i denna utbildningen.</p>");
-                            $("#educationTeachers").show();
-                        }
+								studentList += "</tbody></table>";
+								$("#educationTeachers").html(studentList);
+								$("#educationTeachers").show();
+							}
+						});
 
+						
 
+					// YOU ARE ADMIN or teacher
+					}else if(user.role == "Employee"){
+						isAdmin(sessionid, function(isAdmin){
+							if(isAdmin){	// returns true or false
+								// ## YOU ARE ADMIN
+								// ## YOU ARE ADMIN
+								// ## YOU ARE ADMIN
+								// console.log("You are entering an education as an Admin.");
 
+								// students
+                                // students
+                                // students
+                                $("#educationStudents").empty();
+                                if(education.students[0] == "test"){education.students.shift();}
+								var studentsToShow = [];
+								findAllStudents(function(students){
+									//console.log(students);
+									for(i = 0; i < students.length; i++){
+										student = students[i];
+										if(education.students.indexOf(student._id) < 0){
+											continue;
+										}
+										studentsToShow.push(student);
+									}
 
-                        // loop students
-                        // loop students
-                        $("#educationStudents").empty();
-						var anyStudent = false;
-                        var studentList = "<table><thead><tr><th>Användarnamn</th></tr></thead><tbody>";
-                        if(education.students.length) {
-                            for (var i = 0; i < education.students.length; i++) {
-								Student.find(education.students[i], function (student) {
-									//console.log("##HAPPENS#");
-									//console.log(student);
-									if (student._id) {
+									if(studentsToShow.length == 0){
+										studentList = "<p>Inga studenter finns med i utbildningen.</p>";
+										$("#educationStudents").html(studentList);
+										$("#educationStudents").show();
+									}else{
+										var studentList = "<table class='table'><thead><tr><th>Användarnamn</th></tr></thead><tbody>";
 
-										studentList += "<tr>";
-										studentList += "<td>" + student.username + "</td>";
-										studentList += "</tr>";
-										anyStudent = true;
+										for(var i = 0; i < studentsToShow.length; i++){
+											student = studentsToShow[i];
+											studentList += "<tr>";
+											studentList += "<td>" + student.username + "</td>";
+											studentList += "</tr>";
+										}
+
+										studentList += "</tbody></table";
+										$("#educationStudents").html(studentList);
+										$("#educationStudents").show();
 									}
 								});
-                            }
-                        }
 
-                        if(anyStudent){
-                            studentList += "</tbody></table>";
-                            $("#educationStudents").html(studentList);
-                            $("#educationStudents").show();
-						}else{
-                            $("#educationStudents").empty();
-                            $("#educationStudents").html("<p>Inga studenter i denna utbildningen.</p>");
-                            $("#educationStudents").show();
-						}
+                                // teachers
+                                // teachers
+                                // teachers
+								$("#educationTeachers").empty();
+								var teachersToShow = [];
+								findAllEmployees(function(teachers){
+									//console.log(teachers);
+									for(i = 0; i < teachers.length; i++){
+										teacher = teachers[i];
+										if(education.teachers.indexOf(teacher._id) < 0){
+											continue;
+										}
+										teachersToShow.push(teacher);
+									}
 
+									if(teachersToShow.length == 0){
+										studentList = "<p>Inga lärare finns med i utbildningen.</p>";
+										$("#educationTeachers").html(studentList);
+										$("#educationTeachers").show();
+									}else{
+										var studentList = "<table class='table'><thead><tr><th>Användarnamn</th></tr></thead><tbody>";
 
+										for(var i = 0; i < teachersToShow.length; i++){
+											teacher = teachersToShow[i];
+											studentList += "<tr>";
+											studentList += "<td>" + teacher.username + "</td>";
+											studentList += "</tr>";
+										}
 
+										studentList += "</tbody></table>";
+										$("#educationTeachers").html(studentList);
+										$("#educationTeachers").show();
+									}
+								});
 
+								// applying students
+								// applying students
+								// applying students
+								$("#applyersStudents").empty();
+								if(education.students[0] == "test"){education.students.shift();}
+								var studentsToShow = [];
+								findAllStudents(function(students){
+									//console.log(students);
+									for(i = 0; i < students.length; i++){
+										student = students[i];
+										if(education.applyers_students.indexOf(student._id) < 0){
+											continue;
+										}
+										studentsToShow.push(student);
+									}
 
-					}else if(user.role == "Employee"){
-						isAdmin(sessionid, function(callback){
-							
-							if(callback){
-								// YOU ARE ADMIN
-								// YOU ARE ADMIN
-								// YOU ARE ADMIN
-								console.log("YOU ARE ADMIN");
+									if(studentsToShow.length == 0){
+										studentList = "<p>Inga studenter har ansökt till utbildningen.</p>";
+										$("#applyersStudents").html(studentList);
+										$("#applyersStudents").show();
+									}else{
+										var studentList = "<table><thead><tr><th>Användarnamn</th><th>Godkänn</th><th>Neka</th></tr></thead><tbody>";
+
+										for(var i = 0; i < studentsToShow.length; i++){
+											student = studentsToShow[i];
+											studentList += "<tr>";
+											studentList += "<td>" + student.username + "</td>";
+											studentList += '<td class="educationApproveStudentBtn" id="' + student._id + '"><button><i class="fa fa-check"></i></button></td>';
+											studentList += '<td class="educationDenyStudentBtn" id="' + student._id + '"><button><i class="fa fa-times"></i></button></td>';
+											studentList += "</tr>";
+										}
+
+										studentList += "</tbody></table";
+										$("#applyersStudents").html(studentList);
+										$("#applyersStudents").show();
+										
+										// onclick
+										$(".educationApproveStudentBtn").on('click', function (){
+											//console.log("happening...");
+											educationApproveStudent(this.id);
+										});
+
+										// onclick
+										$(".educationDenyStudentBtn").on('click', function (){
+											//console.log("happening...");
+											educationDenyStudent(this.id);
+										});
+									}
+								});
 								
-								// Applying Students
-								// Lägg till student för utbilding
-								if (education._id) {
 
-                                    // loop students
-                                    // loop students
-                                    var anystudents = false;
-                                    $("#educationStudents").empty();
-                                    var studentList = "<table class='table'><thead><tr><th>Användarnamn</th></tr></thead><tbody>";
-                                    anystudent = false;
-                                    if (education.students > 1) {
-                                        for (var i = 0; i < education.students.length; i++) {
-                                            Student.find(education.students[i], function (student) {
+								// APPLYING TEACHERS
+								// APPLYING TEACHERS
+								// APPLYING TEACHERS
+								$("#applyersStudents").empty();
+								if(education.teachers[0] == "test"){education.students.shift();}
+								var teachersToShow = [];
+								findAllEmployees(function(teachers){
+									//console.log(teachers);
+									for(i = 0; i < teachers.length; i++){
+										teacher = teachers[i];
+										if(education.applyers_students.indexOf(teacher._id) < 0){
+											continue;
+										}
+										teachersToShow.push(teacher);
+									}
 
-                                                //console.log(student);
-                                                if (student._id) {
+									if(teachersToShow.length == 0){
+										employeeList = "<p>Inga studenter har ansökt till utbildningen.</p>";
+										$("#applyersTeachers").html(employeeList);
+										$("#applyersTeachers").show();
+									}else{
+										var employeeList = "<table><thead><tr><th>Användarnamn</th><th>Godkänn</th><th>Neka</th></tr></thead><tbody>";
 
-                                                    studentList += "<tr>";
-                                                    studentList += "<td>" + student.username + "</td>";
-                                                    studentList += "</tr>";
+										for(var i = 0; i < teachersToShow.length; i++){
+											teacher = teachersToShow[i];
+											employeeList += "<tr>";
+											employeeList += "<td>" + teacher.username + "</td>";
+											employeeList += '<td class="educationApproveTeacherBtn" id="' + teacher._id + '"><button><i class="fa fa-check"></i></button></td>';
+											employeeList += '<td class="educationDenyTeacherBtn" id="' + teacher._id + '"><button><i class="fa fa-times"></i></button></td>';
+											employeeList += "</tr>";
+										}
 
-                                                    anystudent = true;
+										employeeList += "</tbody></table>";
+										$("#applyersTeachers").html(employeeList);
+										$("#applyersTeachers").show();
+										
+										// onclick
+										$(".educationApproveTeacherBtn").on('click', function (){
+											//console.log("happening...");
+											educationApproveTeacher(this.id);
+										});
 
-                                                }
+										// onclick
+										$(".educationDenyTeacherBtn").on('click', function (){
+											//console.log("happening...");
+											educationDenyTeacher(this.id);
+										});
+									}
+								});
 
-                                                if (i == education.students.length) {
-
-                                                    if (anystudent) {
-                                                        studentList += "</tbody>";
-                                                        studentList += "</table>";
-                                                        $("#educationStudents").html(studentList);
-                                                        $("#educationStudents").show();
-                                                    } else {
-                                                        studentList = "<p>Inga studenter finns med i utbildningen..</p>";
-                                                        $("#educationStudents").html(studentList);
-                                                        $("#educationStudents").show();
-                                                    }
-                                                }
-                                            });
-                                        }
-                                    } else {
-                                        studentList = "<p>Inga studenter finns med i utbildningen...</p>";
-                                        $("#educationStudents").html(studentList);
-                                        $("#educationStudents").show();
-                                    }
-
-
-                                    // loop teachers
-                                    // loop teachers
-                                    // loop teachers
-                                    anystudent = false;
-                                    var employeeList = "<table class='table'><thead><tr><th>Användarnamn</th></tr></thead><tbody>";
-                                    for (var i = 0; i < education.teachers.length; i++) {
-                                        Employee.find(education.teachers[i], function (employee) {
-                                            //console.log("##HAPPENS#");
-                                            //console.log(student);
-                                            if (employee._id) {
-
-                                                employeeList += "<tr>";
-                                                employeeList += "<td>" + employee.username + "</td>";
-                                                employeeList += "</tr>";
-
-                                                anystudent = true;
-                                            }
-                                        });
-                                    }
-
-                                    if (anystudent) {
-                                        employeeList += "</tbody></table>";
-                                        $("#educationTeachers").html(employeeList);
-                                        $("#educationTeachers").show();
-                                    } else {
-                                        employeeList = "<p>Inga lärare finns med i utbildningen.</p>";
-                                        $("#educationTeachers").empty().append(employeeList);
-                                        $("#educationTeachers").show();
-                                    }
-
-
-                                    // applying students
-                                    // applying students
-                                    anystudent = false;
-                                    var studentList = "<table><thead><tr><th>Användarnamn</th><th>Godkänn</th><th>Neka</th></tr></thead><tbody>";
-                                    if (education.applyers_students.length > 1) {
-                                        for (var i = 0; i < education.applyers_students.length; i++) {
-                                            if (education.applyers_students[i] !== "test") {
-                                                console.log(education.applyers_students[i]);
-                                                Student.find(education.applyers_students[i], function (student) {
-                                                    //console.log("##HAPPENS#");
-                                                    //console.log(student);
-
-                                                    if (student._id) {
-
-                                                        studentList += "<tr>";
-                                                        studentList += "<td>" + student.username + "</td>";
-                                                        studentList += '<td class="educationApproveStudentBtn" id="' + student._id + '"><button><i class="fa fa-check"></i></button></td>';
-                                                        studentList += '<td class="educationDenyStudentBtn" id="' + student._id + '"><button><i class="fa fa-times"></i></button></td>';
-                                                        studentList += "</tr>";
-                                                        anystudent = true;
-                                                    }
-
-                                                    if (i == education.applyers_students.length) {
-                                                        console.log("happens");
-                                                        if (anystudent == true) {
-                                                            studentList += "</tbody></table>";
-                                                            $("#applyersStudents").html(studentList);
-
-                                                            // onclick
-                                                            $(".educationApproveStudentBtn").on('click', function () {
-                                                                //console.log("happening...");
-                                                                educationApproveStudent(this.id);
-                                                            });
-
-                                                            // onclick
-                                                            $(".educationDenyStudentBtn").on('click', function () {
-                                                                //console.log("happening...");
-                                                                educationDenyStudent(this.id);
-                                                            });
-                                                        } else {
-                                                            $("#applyersStudents").html("<p>Inga ansökande studenter.</p>");
-                                                        }
-                                                    }
-
-
-                                                });
-                                            }
-                                        }
-                                    } else {
-                                        $("#applyersStudents").html("<p>Inga ansökande studenter.</p>").show();
-                                    }
-
-
-                                    function educationApproveStudent(id){
-                                        // get teacher by id
-                                        console.log("id", id);
-                                        Student.find(id, function (student) {
-                                            console.log("Approving", student);
-                                            if (student._id) {
-                                                console.log("FOUND STUDENT", id, code)
-                                                var newEdu = student.educations.push(code);
-
-                                                Student.update(student._id, {educations: newEdu}, function (updatedResult) {
-                                                    console.log("Updated result", updatedResult);
-
-
-                                                    var pos = education.applyers_students.indexOf(id);
-                                                    education.applyers_students.splice(pos, 1);
-
-                                                    // update education.
-
-                                                    education.students.push(id);
-
-                                                    Education.update(education._id, {
-                                                        applyers_students: education.applyers_students,
-                                                        students: education.students
-                                                    }, function (updatedEducation) {
-
-                                                        getEducationByCode(code);
-                                                        $("#educationMessage").html("Bra! Användaren hör nu till utbildningen.");
-
-                                                    });
-                                                });
-                                            }
-                                        });
-                                    }
-
-
-                                    function educationDenyStudent(id) {
-                                        // get teacher by id
-                                        Student.find(id, function (student) {
-                                            if (student._id) {
-                                                var pos = education.applyers_students.indexOf(id);
-                                                education.applyers_students.splice(pos, 1);
-
-                                                Education.update(education._id, {applyers_students: education.applyers_students}, function (updatedEducation) {
-                                                    getEducationByCode(code);
-                                                    $("#educationMessage").html("Bra! Användaren hör nu till utbildningen.");
-                                                });
-                                            }
-                                        });
-                                    }
-
-									// APPLYING TEACHERS
-                                    var anystudents = false;
-                                    var employeeList = "<table><thead><tr><th>Användarnamn</th><th>Godkänn</th><th>Neka</th></tr></thead><tbody>";
-                                    if (education.applyers_teachers > 1)
-                                        for (var i = 0; i < education.applyers_teachers.length; i++) {
-                                            if (education.applyers_teachers[i] !== "test") {
-                                                Employee.find(education.applyers_teachers[i], function (employee) {
-                                                    if (employee._id) {
-                                                        employeeList += "<tr>";
-                                                        employeeList += "<td>" + employee.username + "</td>";
-                                                        employeeList += '<td class="educationApproveTeacherBtn" id="' + employee._id + '"><button><i class="fa fa-check"></i></button></td>';
-                                                        employeeList += '<td class="educationDenyTeacherBtn" id="' + employee._id + '"><button><i class="fa fa-times"></i></button></td>';
-                                                        employeeList += "</tr>";
-                                                        anystudents = true;
-                                                    }
-
-                                                    if(i == education.applyers_teachers.length){
-                                                        if(anystudents){
-                                                            //
-                                                            employeeList += "</tbody></table>";
-                                                            $("#applyersTeachers").html(employeeList);
-                                                        }else{
-                                                            employeeList = "Inga sökande lärare hittades i utbildningen."
-                                                            $("#applyersTeachers").html(employeeList);
-                                                        }
-													}
-                                                });
-                                            }
-                                        }
-                                	}else {
-                                  	  	employeeList = "Inga sökande lärare hittades i utbildningen."
-                                   		$("#applyersTeachers").html(employeeList);
-                               		}
-
-									$("#applyersTeachers").show();
-									
-
-								
 							}else{
-								// YOU ARE TEACHER
-								// YOU ARE TEACHER
-								// YOU ARE TEACHER
-								// YOU ARE TEACHER
-
-$("#applyersTeachersTitle").hide();
+								// ## YOU ARE TEACHER
+								// ## YOU ARE TEACHER
+								// ## YOU ARE TEACHER
+								//console.log("You are entering an education as a teacher ");
+								
+								$("#educationStudentsTitle").hide();
+								$("#educationStudents").hide();
+								$("#applyersTeachersTitle").hide();	// du kan bara se ansökande lärare om du är lärare för utbildningen
+								$("#applyersTeachers").hide();		// du kan bara se ansökande lärare om du är lärare för utbildningen
+								$("#applyersStudentsTitle").hide();	// du kan bara se ansökande studenter om du är lärare för utbildningen
+								$("#applyersStudents").hide();		// du kan bara se ansökande studenter om du är lärare för utbildningen
 
                                 var isAlreadyATeacher = false;
-                                console.log("education students:", education.students);
                                 for (var u = 0; u < education.students.length; u++) {
                                     if (education.teachers[u] !== "test" && education.teachers[u] == sessionid) {
-                                        isAlreadyAMember = true;
-                                        console.log("You are already a teacher of this education.");
+                                        isAlreadyATeacher = true;
+                                       // console.log("You are already a teacher of this education.");
                                     }
                                 }
 
                                 var isAlreadyAnApplyer = false;
-                                console.log("Applying teachers:", education.applyers_teachers);
                                 for (var u = 0; u < education.applyers_teachers.length; u++) {
                                     if (education.applyers_teachers[u] !== "test" && education.applyers_teachers[u] == sessionid) {
                                         isAlreadyAnApplyer = true;
-                                        console.log("You are already a member of this education.");
+                                       // console.log("You are already a member of this education.");
                                     }
                                 }
 
@@ -1277,199 +1246,148 @@ $("#applyersTeachersTitle").hide();
                                             education.applyers_teachers.push(sessionid);
 
                                             Education.update(education._id, {applyers_teachers: education.applyers_teachers}, function(updatedEducation){
-                                                $("#educationMessage").html("Bra! Du har ansökt till utbildningen som lärare! Vänta på besked från Admin.");
+                                                $("#educationMessage").html("Bra! Du har ansökt till utbildningen som lärare! Vänta på besked från Admin.").show();
+                                                $("#applyAsTeacher").hide();
                                             });
                                         }
                                     });
-                                }
+                                }else if(isAlreadyATeacher == true){
+									// applying students
+									// applying students
+									// applying students
+									$("#applyersStudents").empty();
+									if(education.students[0] == "test"){ education.students.shift();}
+									var studentsToShow = [];
+									findAllStudents(function(students){
+										// console.log(students);
+										for(i = 0; i < students.length; i++){
+											student = students[i];
+											if(education.applyers_students.indexOf(student._id) < 0){
+												continue;
+											}
+											studentsToShow.push(student);
+										}
 
-                                function educationApproveStudent(id) {
-                                    // get teacher by id
-                                    console.log("id", id);
-                                    Student.find(id, function (student) {
-                                        console.log("Approving", student);
-                                        if (student._id) {
-                                            console.log("FOUND STUDENT", id, code)
-                                            var newEdu = student.educations.push(code);
+										if(studentsToShow.length == 0){
+											studentList = "<p>Inga studenter har ansökt till utbildningen.</p>";
+											
+											$("#applyersStudents").html(studentList);
+											$("#applyersStudentsTitle").show();
+											$("#applyersStudents").show();
+										}else{
+											var studentList = "<table><thead><tr><th>Användarnamn</th><th>Godkänn</th><th>Neka</th></tr></thead><tbody>";
 
-                                            Student.update(student._id, {educations: newEdu}, function (updatedResult) {
-                                                console.log("Updated result", updatedResult);
+											for(var i = 0; i < studentsToShow.length; i++){
+												student = studentsToShow[i];
+												studentList += "<tr>";
+												studentList += "<td>" + student.username + "</td>";
+												studentList += '<td class="educationApproveStudentBtn" id="' + student._id + '"><button><i class="fa fa-check"></i></button></td>';
+												studentList += '<td class="educationDenyStudentBtn" id="' + student._id + '"><button><i class="fa fa-times"></i></button></td>';
+												studentList += "</tr>";
+											}
 
+											studentList += "</tbody></table>";
+											$("#applyersStudents").html(studentList);
+											$("#applyersStudentsTitle").show();
+											$("#applyersStudents").show();
+											
+											// onclick
+											$(".educationApproveStudentBtn").on('click', function (){
+												// console.log("happening...");
+												educationApproveStudent(this.id);
+											});
 
-                                                var pos = education.applyers_students.indexOf(id);
-                                                education.applyers_students.splice(pos, 1);
-
-                                                // update education.
-
-                                                education.students.push(id);
-
-                                                Education.update(education._id, {
-                                                    applyers_students: education.applyers_students,
-                                                    students: education.students
-                                                }, function (updatedEducation) {
-
-                                                    getEducationByCode(code);
-                                                    $("#educationMessage").html("Bra! Användaren hör nu till utbildningen.");
-
-                                                });
-                                            });
-                                        }
-                                    });
-                                }
-
-
-                                function educationDenyStudent(id) {
-                                    // get teacher by id
-                                    Student.find(id, function (student) {
-                                        if (student._id) {
-                                            var pos = education.applyers_students.indexOf(id);
-                                            education.applyers_students.splice(pos, 1);
-
-                                            Education.update(education._id, {applyers_students: education.applyers_students}, function (updatedEducation) {
-                                                getEducationByCode(code);
-                                                $("#educationMessage").html("Bra! Användaren hör nu till utbildningen.");
-                                            });
-                                        }
-                                    });
-                                }
-
-
-
-                                // loop students
-                                // loop students
-                                var anystudents = false;
-                                $("#educationStudents").empty();
-                                 anystudent = false;
-                                console.log("education.........");
-                                console.log(education);
-
-                                if(education.students[0] == "test"){
-                                    education.students.shift();
-								}
-
-
-                                    var studentsToShow = [];
-                                    findAllStudents(function(students){
-                                        console.log(students);
-                                        for(i = 0; i < students.length; i++){
-                                            student = students[i];
-                                            if(education.students.indexOf(student._id) < 0){
-                                                continue;
-                                            }
-                                            studentsToShow.push(student);
-                                        }
-
-                                        if(studentsToShow.length == 0){
-                                            studentList = "<p>Inga studenter finns med i utbildningen..</p>";
-                                            $("#educationStudents").html(studentList);
-                                            $("#educationStudents").show();
-                                        }else{
-                                            var studentList = "<table class='table'><thead><tr><th>Användarnamn</th></tr></thead><tbody>";
-
-                                            for(var i = 0; i < studentsToShow.length; i++){
-                                                student = studentsToShow[i];
-                                                studentList += "<tr>";
-                                                studentList += "<td>" + student.username + "</td>";
-                                                studentList += "</tr>";
-                                            }
-
-                                            studentList += "</tbody></table";
-                                            $("#educationStudents").html(studentList);
-                                            $("#educationStudents").show();
-                                        }
-                                    });
-
-
-
-                                // loop teachers
-                                // loop teachers
-                                // loop teachers
-                                anystudent = false;
-                                var employeeList = "<table class='table'><thead><tr><th>Användarnamn</th></tr></thead><tbody>";
-                                for (var i = 0; i < education.teachers.length; i++) {
-                                    Employee.find(education.teachers[i], function (employee) {
-                                        //console.log("##HAPPENS#");
-                                        //console.log(student);
-                                        if (employee._id) {
-
-                                            employeeList += "<tr>";
-                                            employeeList += "<td>" + employee.username + "</td>";
-                                            employeeList += "</tr>";
-
-                                            anystudent = true;
-                                        }
-                                    });
-                                }
-
-                                if (anystudent) {
-                                    employeeList += "</tbody></table>";
-                                    $("#educationTeachers").html(employeeList);
-                                    $("#educationTeachers").show();
-                                } else {
-                                    employeeList = "<p>Inga lärare finns med i utbildningen.</p>";
-                                    $("#educationTeachers").empty().append(employeeList);
-                                    $("#educationTeachers").show();
-                                }
-
-
-								// applying students
-								// applying students
-								anystudent = false;
-								var studentList = "<table><thead><tr><th>Användarnamn</th><th>Godkänn</th><th>Neka</th></tr></thead><tbody>";
-								if (education.applyers_students.length > 1) {
-									for (var i = 0; i < education.applyers_students.length; i++) {
-										if (education.applyers_students[i] !== "test") {
-											console.log(education.applyers_students[i]);
-											Student.find(education.applyers_students[i], function (student) {
-												//console.log("##HAPPENS#");
-												//console.log(student);
-
-												if (student._id) {
-
-													studentList += "<tr>";
-													studentList += "<td>" + student.username + "</td>";
-													studentList += '<td class="educationApproveStudentBtn" id="' + student._id + '"><button><i class="fa fa-check"></i></button></td>';
-													studentList += '<td class="educationDenyStudentBtn" id="' + student._id + '"><button><i class="fa fa-times"></i></button></td>';
-													studentList += "</tr>";
-													anystudent = true;
-												}
-
-												if (i == education.applyers_students.length) {
-													console.log("happens");
-													if (anystudent == true) {
-														studentList += "</tbody></table>";
-														$("#applyersStudents").html(studentList);
-
-														// onclick
-														$(".educationApproveStudentBtn").on('click', function () {
-															//console.log("happening...");
-															console.log(this.id);
-															educationApproveStudent(this.id);
-														});
-
-														// onclick
-														$(".educationDenyStudentBtn").on('click', function () {
-															//console.log("happening...");
-															educationDenyStudent(this.id);
-														});
-													} else {
-														$("#applyersStudents").html("<p>Inga ansökande studenter.</p>");
-													}
-												}
-
-
+											// onclick
+											$(".educationDenyStudentBtn").on('click', function (){
+												//console.log("happening...");
+												educationDenyStudent(this.id);
 											});
 										}
-									}
-								} else {
-									$("#applyersStudents").html("<p>Inga ansökande studenter.</p>").show();
+									});
+									
+									
+									// students
+									// students
+									// students
+									$("#educationStudents").empty();
+									if(education.students[0] == "test"){education.students.shift();}
+									var studentsToShow = [];
+									findAllStudents(function(students){
+										// console.log(students);
+										for(i = 0; i < students.length; i++){
+											student = students[i];
+											if(education.students.indexOf(student._id) < 0){
+												continue;
+											}
+											studentsToShow.push(student);
+										}
+
+										if(studentsToShow.length == 0){
+											studentList = "<p>Inga studenter finns med i utbildningen.</p>";
+											$("#educationStudents").html(studentList);
+											$("#educationStudents").show();
+										}else{
+											var studentList = "<table class='table'><thead><tr><th>Användarnamn</th></tr></thead><tbody>";
+
+											for(var i = 0; i < studentsToShow.length; i++){
+												student = studentsToShow[i];
+												studentList += "<tr>";
+												studentList += "<td>" + student.username + "</td>";
+												studentList += "</tr>";
+											}
+
+											studentList += "</tbody></table>";
+											$("#educationStudents").html(studentList);
+											$("#educationStudents").show();
+										}
+									});
+									
+									
+									
 								}
 
 
+                               
 
+                                // teachers
+                                // teachers
+                                // teachers
+								$("#educationTeachers").empty();
+								var teachersToShow = [];
+								findAllEmployees(function(teachers){
+									// console.log(teachers);
+									for(i = 0; i < teachers.length; i++){
+										teacher = teachers[i];
+										if(education.teachers.indexOf(teacher._id) < 0){
+											continue;
+										}
+										teachersToShow.push(teacher);
+									}
 
+									if(teachersToShow.length == 0){
+										studentList = "<p>Inga lärare finns med i utbildningen.</p>";
+										$("#educationTeachers").html(studentList);
+										$("#educationTeachers").show();
+									}else{
+										var studentList = "<table class='table'><thead><tr><th>Användarnamn</th></tr></thead><tbody>";
 
+										for(var i = 0; i < teachersToShow.length; i++){
+											teacher = teachersToShow[i];
+											studentList += "<tr>";
+											studentList += "<td>" + teacher.username + "</td>";
+											studentList += "</tr>";
+										}
 
+										studentList += "</tbody></table>";
+										$("#educationTeachers").html(studentList);
+										$("#educationTeachers").show();
+									}
+								});
+
+								
+							
+								
+								
                        	 	}//you are teacher end
 						});
 					}
@@ -1497,31 +1415,6 @@ function isAdmin(id, callback){
 
 function roleFunc(callback){
 	Login.find(callback);   
-	/*
-	function findStudent(student){
-		if (student._id){
-			// return role of student
-			callback(student.role);
-		}else{
-			// Look for an employee
-			Employee.find(id, findEmployee);   
-		}
-	}
-	
-	function findEmployee(employee){
-		console.log("#####");
-		console.log(employee);
-		if (employee.role){
-			// return role of employee 
-			callback(employee.role);
-		}else if(employee.admin == true){
-			callback("admin");
-		}else{
-			// not found.
-			callback(false);
-		}
-	}
-	*/
 }
 
 function getMyData(callback){
@@ -1539,7 +1432,7 @@ function getMyData(callback){
 	}
 	
 	function findEmployee(employee){
-		console.log(employee);
+		// console.log(employee);
 		if (employee._id){
 			// return employee 
 			callback(employee);
@@ -1549,4 +1442,10 @@ function getMyData(callback){
 		}
 	}
 }
+
+
+
+
+
+
 

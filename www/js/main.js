@@ -28,7 +28,7 @@ function start(){
 
 // not used
 function loggedIn(result){
-	console.log(result);
+	//console.log(result);
 	processLogin(true);
 }
 
@@ -75,7 +75,7 @@ function deleteAccountById(id){
 	Student.find(id, findStudent);     
 	
 	function findStudent(student){
-		console.log(student);
+		//console.log(student);
 		if (student._id){
 			// Delete a student
 			Student.delete(student._id,accountDeleted);
@@ -86,18 +86,18 @@ function deleteAccountById(id){
 	}
 	
 	function findEmployee(employee){
-		console.log(employee);
+		//console.log(employee);
 		if (employee._id){
 			// Delete a student
 			Employee.delete(employee._id, accountDeleted);
 		}else{
 			// _id not found.
-			console.log("The user ID you tried to delete does not exist.");
+			//console.log("The user ID you tried to delete does not exist.");
 		}
 	}
 	
 	function accountDeleted(result){
-		console.log("The account has been deleted succefully.");
+		//console.log("The account has been deleted succefully.");
 	}
 }
 
@@ -129,7 +129,7 @@ function deleteAllEducations(){
 
 function deleteAllPosts(){
 	findAllPosts(function(posts){
-		console.log(posts);
+		//console.log(posts);
 		for(var i = 0; i < posts.length; i++){
 			NewsPost.delete(posts[i]._id, function(result){
 				// posts[i]._id deleted
