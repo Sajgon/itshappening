@@ -60,7 +60,7 @@
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
-                <p id="username" class="username">SUP</p>
+                <p id="username" class="username"></p>
             </ul>
 
             <div class="navbar-default sidebar defaultborder" role="navigation">
@@ -70,32 +70,20 @@
                         <li>
                             <a href="javascript:void(0)"><i class="fa fa-graduation-cap fa-fw"></i> UTBILDING<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="/alla-utbildningar">Alla Utbildningar</a>
-                                </li>
-                                <li>
-                                    <a href="/sok-utbildningar">Sök Utbildning</a>
-                                </li>
-                                <li>
-                                    <a href="/mina-utbildningar">Mina Utbildningar</a>
-                                </li>
+                                <li><a href="/alla-utbildningar">Alla Utbildningar</a></li>
+                                <li><a href="/sok-utbildningar">Sök Utbildning</a></li>
+                                <li><a href="/mina-utbildningar">Mina Utbildningar</a></li>
                             </ul>
                         </li>
 
                         <li id="adminMenu">
                             <a href="javascript:void(0)"><i class="glyphicon glyphicon-user fa-fw"></i> ADMIN<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="/skapa-utbildning">Skapa Utbildning</a>
-                                </li>
+                                <li><a href="/skapa-utbildning">Skapa Utbildning</a></li>
                                 <li><a href="/admins">Admins</a></li>
                                 <li><a href="/larare">Lärare</a></li>
-                                <li>
-                                    <a href="/studenter">Studenter</a>
-                                </li>
-								<li>
-                                    <a href="/data-generator">Data Generator</a>
-                                </li>
+                                <li><a href="/studenter">Studenter</a></li>
+								<li> <a href="/data-generator">Data Generator</a></li>
                             </ul>
                         </li>
 						<!-- 
@@ -117,13 +105,11 @@
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> KONTO<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
+								<li><a id="logoutbtn" href="/byt-losenord">Logga ut</a></li>
+                              <!--  
+								<li>
                                     <a id="bytlosenordbtn" href="/byt-losenord">Byt Lösenord</a>
                                 </li>
-								<li>
-                                    <a id="logoutbtn" href="/byt-losenord">Logga ut</a>
-                                </li>
-                              <!--  
 								<li>
                                     <a href="/redigera-uppgifter">Redigera Uppgifter</a>
                                 </li>
